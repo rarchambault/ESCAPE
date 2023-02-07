@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ESCAPE.iml" filepath="$PROJECT_DIR$/.idea/modules/ESCAPE.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ESCAPE.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ESCAPE.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ESCAPE.test.iml" filepath="$PROJECT_DIR$/.idea/modules/ESCAPE.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ca.mcgill.ecse428.ESCAPE.iml" filepath="$PROJECT_DIR$/.idea/modules/ca.mcgill.ecse428.ESCAPE.iml" />
     </modules>
   </component>
 </project>
