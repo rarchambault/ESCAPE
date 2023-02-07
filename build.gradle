@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.0.2'
 	id 'io.spring.dependency-management' version '1.1.0'
+	id 'jacoco'
 }
 
 group = 'ca.mcgill.ecse428'
@@ -13,10 +14,36 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// Nice API docs
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+	testLogging {
+		exceptionFormat "full"
+	}
+	// Generate the coverage report whenever the tests are run
+	finalizedBy 'jacocoTestReport'
+}
+
+tasks.named('jacocoTestReport') {
+	// The tests must be run before the coverage report can be generated
+	dependsOn 'test'
+}
+
+// Enforce minimum instruction coverage goal
+jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			limit {
+				minimum = 0.8
+			}
+		}
+	}
 }
