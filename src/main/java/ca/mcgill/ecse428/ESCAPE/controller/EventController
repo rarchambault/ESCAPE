@@ -1,0 +1,40 @@
+package ca.mcgill.ecse428.ESCAPE.controller;
+
+import mcgill.model.Event
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/events")
+public class EventController {
+
+    @Autowired
+    private EventService eventService;
+
+    @PostMapping("/{eventId}/delete")
+    public String deleteEvent(@PathVariable("eventId") Long eventId, Model model) {
+        Event event = eventService.findEventById(eventId);
+
+        if (event == null) {
+            model.addAttribute("errorMessage", "Event not found.");
+            return "error";
+        }
+
+        eventService.deleteEvent(event);
+
+        return "redirect:/events";
+    }
+
+    @GetMapping
+    public String showEvents(Model model) {
+        List<Event> events = eventService.getAllEvents();
+        model.addAttribute("events", events);
+        return "view-events";
+    }
+
+
+}

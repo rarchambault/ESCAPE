@@ -1,3 +1,5 @@
+package ca.mcgill.ecse428.ESCAPE.model;
+
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
@@ -181,7 +183,7 @@ public class Event
   /* Code from template association_GetOne_relatedSpecialization */
   public Ticket getTicket_OneTicket()
   {
-    return (Ticket)ticket.get(0);
+    return (Ticket)tickets.get(0);
   } 
   /* Code from template association_set_specialization_reqCommonCode */  /* Code from template association_SetOneToMany_relatedSpecialization */
   public boolean setUserProfile_UserProfile(UserProfile aUserProfile)
@@ -396,6 +398,6 @@ public class Event
             "eventId" + ":" + getEventId()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "userProfile = "+(getUserProfile()!=null?Integer.toHexString(System.identityHashCode(getUserProfile())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "userProfile = "+(getUserProfile()!=null?Integer.toHexString(System.identityHashCode(getUserProfile())):"null") + System.getProperties().getProperty("line.separator") +
-            "  " + "ticket = "+(getTicket()!=null?Integer.toHexString(System.identityHashCode(getTicket())):"null");
+            "  " + "ticket = "+(getTicket(eventId)!=null?Integer.toHexString(System.identityHashCode(getTicket(eventId))):"null");
   }
 }
