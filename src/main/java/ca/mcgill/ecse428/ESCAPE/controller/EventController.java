@@ -3,6 +3,8 @@ package ca.mcgill.ecse428.ESCAPE.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import ca.mcgill.ecse428.ESCAPE.dto.EventRequestDto;
+import ca.mcgill.ecse428.ESCAPE.dto.EventResponseDto;
 import ca.mcgill.ecse428.ESCAPE.model.Event;
 import ca.mcgill.ecse428.ESCAPE.service.EventService;
 
@@ -22,9 +27,9 @@ public class EventController {
 
     // create event
  	@PostMapping("/event")
- 	public String createEvent(@RequestBody EventRequestDto request) {
- 		AdminResponseDto response = adminService.createAdmin(request.getPersonEmail());
- 		return new ResponseEntity<AdminResponseDto>(response, HttpStatus.CREATED);
+ 	public ResponseEntity<EventResponseDto> createEvent(@RequestBody EventRequestDto request) {
+ 		EventResponseDto response = eventService.createEvent(request);
+ 		return new ResponseEntity<EventResponseDto>(response, HttpStatus.CREATED);
  	}
     
     @PostMapping("/{eventId}/delete")
