@@ -3,17 +3,17 @@ package ca.mcgill.ecse428.ESCAPE.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import ca.mcgill.ecse428.ESCAPE.model.Event;
 import ca.mcgill.ecse428.ESCAPE.service.EventService;
 
-@Controller
+@RestController
 @RequestMapping("/events")
 public class EventController {
 
@@ -28,22 +28,16 @@ public class EventController {
  	}
     
     @PostMapping("/{eventId}/delete")
-    public String deleteEvent(@PathVariable("eventId") Long eventId, Model model) {
-        Event event = eventService.findEventById(eventId);
+    public String deleteEvent(@PathVariable("eventId") int eventId, Model model) {
 
-        if (event == null) {
-            model.addAttribute("errorMessage", "Event not found.");
-            return "error";
-        }
-
-        eventService.deleteEvent(event);
+        eventService.deleteEvent(eventId);
 
         return "redirect:/events";
     }
 
     @GetMapping
     public String showEvents(Model model) {
-        List<Event> events = eventService.getAllEvents();
+        Iterable<Event> events = eventService.getAllEvents();
         model.addAttribute("events", events);
         return "view-events";
     }
