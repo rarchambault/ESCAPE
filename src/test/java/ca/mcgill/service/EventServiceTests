@@ -1,0 +1,95 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.MockBeans;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.web.context.WebApplicationContext;
+
+@ExtendWith(SpringExtension.class)
+@WebMvcTest(EventController.class)
+class EventControllerTests {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    private EventService eventService;
+
+    @Test
+    void testShowEvents() throws Exception {
+        Event event1 = new Event("Event 1", LocalDate.of(2023, 3, 1), LocalTime.of(10, 0), "Location 1");
+        Event event2 = new Event("Event 2", LocalDate.of(2023, 3, 2), LocalTime.of(11, 0), "Location 2");
+        List<Event> events = Arrays.asList(event1, event2);
+        Mockito.when(eventService.getAllEvents()).thenReturn(events);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/events"))
+               .andExpect(MockMvcResultMatchers.status().isOk())
+               .andExpect(MockMvcResultMatchers.model().attribute("events", events))
+               .andExpect(MockMvcResultMatchers.view().name("view-events"));
+    }
+}
+
+@SpringBootTest
+class EventServiceTests {
+
+    @Autowired
+    private EventService eventService;
+
+    @MockBean
+    private EventRepository eventRepository;
+
+    @Test
+    void testGetAllEvents() {
+        Event event1 = new Event("Event 1", LocalDate.of(2023, 3, 1), LocalTime.of(10, 0), "Location 1");
+        Event event2 = new Event("Event 2", LocalDate.of(2023, 3, 2), LocalTime.of(11, 0), "Location 2");
+        List<Event> events = Arrays.asList(event1, event2);
+        Mockito.when(eventRepository.findAll()).thenReturn(events);
+
+        List<Event> result = eventService.getAllEvents();
+
+        Mockito.verify(eventRepository, Mockito.times(1)).findAll();
+        assertEquals(events, result);
+    }
+}
+
+@Test
+void testDeleteEvent() throws Exception {
+    long eventId = 1L;
+    mockMvc.perform(MockMvcRequestBuilders.post("/events/{id}/delete", eventId))
+           .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+           .andExpect(MockMvcResultMatchers.redirectedUrl("/events"));
+
+    Mockito.verify(eventService, Mockito.times(1)).deleteEvent(eventId);
+}
+}
+
+@SpringBootTest
+class EventServiceTests {
+
+@MockBean
+private EventRepository eventRepository;
+
+@Test
+void testDeleteEvent() {
+    long eventId = 1L;
+    Event event = new Event("Event 1", LocalDate.of(2023, 3, 1), LocalTime.of(10, 0), "Location 1");
+    Mockito.when(eventRepository.findById(eventId)).thenReturn(Optional.of(event));
+
+    eventService.deleteEvent(eventId);
+
+    Mockito.verify(eventRepository, Mockito.times(1)).findById(eventId);
+    Mockito.verify(eventRepository, Mockito.times(1)).delete(event);
+}
+}
