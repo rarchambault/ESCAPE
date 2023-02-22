@@ -1,10 +1,12 @@
-/*PLEASE DO NOT EDIT THIS CODE*/
+package ca.mcgill.ecse428.ESCAPE.model;/*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 
+import javax.persistence.*;
 
 // line 52 "model.ump"
 // line 122 "model.ump"
+@Entity
 public class Ticket
 {
 
@@ -13,10 +15,14 @@ public class Ticket
   //------------------------
 
   //Ticket Attributes
+  @Id
   private int ticketId;
 
   //Ticket Associations
+  @ManyToOne
   private UserProfile userProfile;
+
+  @ManyToOne
   private Event event;
 
   //------------------------

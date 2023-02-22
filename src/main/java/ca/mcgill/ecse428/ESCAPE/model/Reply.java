@@ -1,10 +1,14 @@
-/*PLEASE DO NOT EDIT THIS CODE*/
+package ca.mcgill.ecse428.ESCAPE.model;/*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 // line 27 "model.ump"
 // line 101 "model.ump"
+@Entity
 public class Reply
 {
 
@@ -14,9 +18,11 @@ public class Reply
 
   //Reply Attributes
   private String content;
+  @Id
   private int replyId;
 
   //Reply Associations
+  @ManyToOne(optional = false)
   private Post post;
 
   //------------------------
@@ -63,12 +69,7 @@ public class Reply
   {
     return replyId;
   }
-  /* Code from template association_GetOne_relatedSpecialization */
-  public Post getPost_OnePost()
-  {
-    return (Post)post;
-  } 
-  /* Code from template association_GetOne */
+
   public Post getPost()
   {
     return post;
@@ -78,25 +79,7 @@ public class Reply
   {
     post = null;
   }
-  /* Code from template association_set_specialization_reqCommonCode */  /* Code from template association_SetOneToMany_relatedSpecialization */
-  public boolean setPost_Post(Post aPost)
-  {
-    boolean wasSet = false;
-    if (aPost == null)
-    {
-      return wasSet;
-    }
 
-    Post existingPost = (Post)post;
-    post = aPost;
-    if (existingPost != null && !existingPost.equals(aPost))
-    {
-      existingPost.removeReply(this);
-    }
-    post.addReply(this);
-    wasSet = true;
-    return wasSet;
-  }
   /* Code from template association_SetOneToMany */
   public boolean setPost(Post aPost)
   {

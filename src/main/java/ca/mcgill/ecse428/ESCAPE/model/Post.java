@@ -1,11 +1,13 @@
-/*PLEASE DO NOT EDIT THIS CODE*/
+package ca.mcgill.ecse428.ESCAPE.model;/*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 
+import javax.persistence.*;
 import java.util.*;
 
 // line 19 "model.ump"
 // line 94 "model.ump"
+@Entity
 public class Post
 {
 
@@ -15,11 +17,17 @@ public class Post
 
   //Post Attributes
   private String content;
+  @Id
   private int postId;
 
   //Post Associations
+  @OneToMany(cascade= {CascadeType.ALL})
+  @JoinColumn(name="replies")
   private List<Reply> replies;
+  @OneToOne(optional = false)
   private UserProfile userProfile;
+  @OneToMany(cascade= {CascadeType.ALL})
+  @JoinColumn(name="feeds")
   private List<Feed> feeds;
 
   //------------------------
@@ -118,26 +126,6 @@ public class Post
   {
     userProfile = null;
   }
-  /* Code from template association_GetMany_relatedSpecialization */
-  public Reply getReply_Reply(int index)
-  {
-    Reply aReply = (Reply)replies.get(index);
-    return aReply;
-  }
-
-  /* required for Java 7. */
-  @SuppressWarnings("unchecked")
-  public List<Reply> getReplies_Reply()
-  {
-    List<? extends Reply> newReplies = Collections.unmodifiableList(replies);
-    return (List<Reply>)newReplies;
-  }
-  /* Code from template association_GetMany */
-  public Feed getFeed(int index)
-  {
-    Feed aFeed = feeds.get(index);
-    return aFeed;
-  }
 
   public List<Feed> getFeeds()
   {
@@ -161,25 +149,6 @@ public class Post
   {
     int index = feeds.indexOf(aFeed);
     return index;
-  }
-  /* Code from template association_set_specialization_reqCommonCode */  /* Code from template association_SetOneToMany_relatedSpecialization */
-  public boolean setUserProfile_UserProfile(UserProfile aUserProfile)
-  {
-    boolean wasSet = false;
-    if (aUserProfile == null)
-    {
-      return wasSet;
-    }
-
-    UserProfile existingUserProfile = (UserProfile)userProfile;
-    userProfile = aUserProfile;
-    if (existingUserProfile != null && !existingUserProfile.equals(aUserProfile))
-    {
-      existingUserProfile.removePost(this);
-    }
-    userProfile.addPost(this);
-    wasSet = true;
-    return wasSet;
   }
   /* Code from template association_MinimumNumberOfMethod */
   public static int minimumNumberOfReplies()
@@ -273,79 +242,7 @@ public class Post
     wasSet = true;
     return wasSet;
   }
-  /* Code from template association_set_specialization_reqCommonCode */  /* Code from template association_MinimumNumberOfMethod_relatedSpecialization */
-  public static int minimumNumberOfReplies_Reply()
-  {
-    return 0;
-  }
-  /* Code from template association_AddManyToOne_relatedSpecialization */
-  public Reply addReply(String aContent, int aReplyId)
-  {
-    return new Reply(aContent, aReplyId, this);
-  }
 
-  public boolean addReply(Reply aReply)
-  {
-    boolean wasAdded = false;
-    if (replies.contains(aReply)) { return false; }
-    if (replies.contains(aReply)) { return false; }
-    Post existingPost = aReply.getPost();
-    boolean isNewPost = existingPost != null && !this.equals(existingPost);
-    if (isNewPost)
-    {
-      aReply.setPost(this);
-    }
-    else
-    {
-      replies.add(aReply);
-    }
-    wasAdded = true;
-    return wasAdded;
-  }
-
-  public boolean removeReply(Reply aReply)
-  {
-    boolean wasRemoved = false;
-    //Unable to remove aReply, as it must always have a post
-    if (!this.equals(aReply.getPost()))
-    {
-      replies.remove(aReply);
-      wasRemoved = true;
-    }
-    return wasRemoved;
-  }
-  /* Code from template association_AddIndexControlFunctions_relatedSpecialization */
-  public boolean addReplyAt(Reply aReply, int index)
-  {  
-    boolean wasAdded = false;
-    if(addReply(aReply))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfReplies()) { index = numberOfReplies() - 1; }
-      replies.remove(aReply);
-      replies.add(index, aReply);
-      wasAdded = true;
-    }
-    return wasAdded;
-  }
-
-  public boolean addOrMoveReplyAt(Reply aReply, int index)
-  {
-    boolean wasAdded = false;
-    if(replies.contains(aReply))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfReplies()) { index = numberOfReplies() - 1; }
-      replies.remove(aReply);
-      replies.add(index, aReply);
-      wasAdded = true;
-    } 
-    else 
-    {
-      wasAdded = addReplyAt(aReply, index);
-    }
-    return wasAdded;
-  }
   /* Code from template association_MinimumNumberOfMethod */
   public static int minimumNumberOfFeeds()
   {

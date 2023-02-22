@@ -1,11 +1,13 @@
-/*PLEASE DO NOT EDIT THIS CODE*/
+package ca.mcgill.ecse428.ESCAPE.model;/*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 
+import javax.persistence.*;
 import java.util.*;
 
 // line 46 "model.ump"
 // line 116 "model.ump"
+@Entity
 public class Feed
 {
 
@@ -14,9 +16,12 @@ public class Feed
   //------------------------
 
   //Feed Attributes
+  @Id
   private int feedId;
 
   //Feed Associations
+  @OneToMany(cascade= {CascadeType.ALL})
+  @JoinColumn(name="posts")
   private List<Post> posts;
 
   //------------------------
