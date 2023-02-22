@@ -4,22 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6ae04748-9ebf-4ab0-a7d9-37e6a63dfb28" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/javax.persistence-api-2.2.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.bin" afterDir="false" />
+    <list default="true" id="e59dcd4e-e848-4992-bbdf-74b7b7c2a6bc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/controller/EventController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/controller/UserProfileController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/dao/AdminRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/dao/UserProfileRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/dto/EventRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/dto/EventResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/exception/EventException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/repository/Event Repository" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/repository/EventRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/service/EventService" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/service/EventService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/service/UserProfileService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/view-events" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ca/mcgill/service/EventServiceTests" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/ca.mcgill.ecse428.ESCAPE.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.buildship.core.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/.settings/org.eclipse.buildship.core.prefs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Admin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Attendee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Attendee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Event.java" afterDir="false" />
@@ -30,7 +36,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Reply.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Reply.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Ticket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/UserProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/UserProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

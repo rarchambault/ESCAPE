@@ -1,8 +1,8 @@
-package ca.mcgill.ecse428.ESCAPE.model;/*PLEASE DO NOT EDIT THIS CODE*/
+package ca.mcgill.ecse428.ESCAPE.model;
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
-import org.apache.catalina.User;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.util.*;
 
 // line 34 "model.ump"
@@ -30,8 +30,8 @@ public class Event {
   @JoinColumn(name="photoGalleries")
   private List<PhotoGallery> photoGalleries;
   @OneToMany(cascade= {CascadeType.ALL})
-  @JoinColumn(name="userProfiles")
-  private List<UserProfile> userProfiles;
+  @JoinColumn(name="attendees")
+  private List<Attendee> attendees;
 
   //------------------------
   // CONSTRUCTOR
@@ -44,7 +44,7 @@ public class Event {
     eventId = aEventId;
     tickets = new ArrayList<Ticket>();
     photoGalleries = new ArrayList<PhotoGallery>();
-    userProfiles = new ArrayList<UserProfile>();
+    attendees = new ArrayList<Attendee>();
   }
 
   public Event() {}
@@ -154,34 +154,34 @@ public class Event {
     return index;
   }
 
-  public UserProfile getUserProfile(int index) {
-    UserProfile aUserProfile = userProfiles.get(index);
-    return aUserProfile;
+  public Attendee getAttendee(int index) {
+    Attendee aAttendee = attendees.get(index);
+    return aAttendee;
   }
 
-  public List<UserProfile> getUserProfiles() {
-    List<UserProfile> newUserProfiles = Collections.unmodifiableList(userProfiles);
-    return newUserProfiles;
+  public List<Attendee> getAttendees() {
+    List<Attendee> newAttendees = Collections.unmodifiableList(attendees);
+    return newAttendees;
   }
 
-  public int numberOfUserProfiles() {
-    int number = userProfiles.size();
+  public int numberOfAttendees() {
+    int number = attendees.size();
     return number;
   }
 
-  public boolean hasUserProfiles() {
-    boolean has = userProfiles.size() > 0;
+  public boolean hasUAttendees() {
+    boolean has = attendees.size() > 0;
     return has;
   }
 
-  public int indexOfUserProfile(UserProfile aUserProfile) {
-    int index = userProfiles.indexOf(aUserProfile);
+  public int indexOfAttendee(Attendee aAttendee) {
+    int index = attendees.indexOf(aAttendee);
     return index;
   }
 
   /* Code from template association_GetMany_clear */
-  protected void clear_userProfiles() {
-    userProfiles.clear();
+  protected void clear_attendees() {
+    attendees.clear();
   }
 
   /* Code from template association_MinimumNumberOfMethod */
@@ -190,8 +190,8 @@ public class Event {
   }
 
   /* Code from template association_AddManyToOne */
-  public Ticket addTicket(int aTicketId, UserProfile aUserProfile) {
-    return new Ticket(aTicketId, aUserProfile, this);
+  public Ticket addTicket(int aTicketId, Attendee aAttendee) {
+    return new Ticket(aTicketId, aAttendee, this);
   }
 
   public boolean addTicket(Ticket aTicket) {
@@ -328,19 +328,19 @@ public class Event {
 
   //String aName, String aEmail, String aPassword, String aPhoto, int aUserId
 
-  public boolean addUserProfile(UserProfile aUserProfile) {
+  public boolean addAttendee(Attendee aAttendee) {
     boolean wasAdded = false;
-    if (userProfiles.contains(aUserProfile)) {
+    if (attendees.contains(aAttendee)) {
       return false;
     }
-    userProfiles.add(aUserProfile);
+    attendees.add(aAttendee);
     wasAdded = true;
     return wasAdded;
   }
 
-  public boolean removeUserProfile(UserProfile aUserProfile) {
+  public boolean removeAttendee(Attendee aAttendee) {
     boolean wasRemoved = false;
-    userProfiles.remove(aUserProfile);
+    attendees.remove(aAttendee);
     wasRemoved = true;
     return wasRemoved;
   }
@@ -355,8 +355,8 @@ public class Event {
       PhotoGallery aPhotoGallery = photoGalleries.get(i - 1);
       aPhotoGallery.delete();
     }
-    for (int i = userProfiles.size(); i > 0; i--) {
-      UserProfile aUserProfile = userProfiles.get(i - 1);
+    for (int i = attendees.size(); i > 0; i--) {
+      UserProfile aUserProfile = attendees.get(i - 1);
       aUserProfile.delete();
     }
   }

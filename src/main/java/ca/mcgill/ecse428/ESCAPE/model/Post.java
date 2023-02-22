@@ -1,8 +1,8 @@
-package ca.mcgill.ecse428.ESCAPE.model;/*PLEASE DO NOT EDIT THIS CODE*/
+package ca.mcgill.ecse428.ESCAPE.model;
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 import java.util.*;
 
 // line 19 "model.ump"
@@ -25,7 +25,7 @@ public class Post
   @JoinColumn(name="replies")
   private List<Reply> replies;
   @OneToOne(optional = false)
-  private UserProfile userProfile;
+  private Attendee attendee;
   @OneToMany(cascade= {CascadeType.ALL})
   @JoinColumn(name="feeds")
   private List<Feed> feeds;
@@ -34,18 +34,20 @@ public class Post
   // CONSTRUCTOR
   //------------------------
 
-  public Post(String aContent, int aPostId, UserProfile aUserProfile)
+  public Post(String aContent, int aPostId, Attendee aAttendee)
   {
     content = aContent;
     postId = aPostId;
     replies = new ArrayList<Reply>();
-    boolean didAddUserProfile = setUserProfile(aUserProfile);
-    if (!didAddUserProfile)
+    boolean didAddAttendee = setAttendee(aAttendee);
+    if (!didAddAttendee)
     {
-      throw new RuntimeException("Unable to create post due to userProfile. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+      throw new RuntimeException("Unable to create post due to attendee. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
     feeds = new ArrayList<Feed>();
   }
+
+  public Post() {}
 
   //------------------------
   // INTERFACE
@@ -76,11 +78,6 @@ public class Post
   {
     return postId;
   }
-  /* Code from template association_GetOne_relatedSpecialization */
-  public UserProfile getUserProfile_OneUserProfile()
-  {
-    return (UserProfile)userProfile;
-  } 
   /* Code from template association_GetMany */
   public Reply getReply(int index)
   {
@@ -117,14 +114,14 @@ public class Post
     replies.clear();
   }
   /* Code from template association_GetOne */
-  public UserProfile getUserProfile()
+  public Attendee getAttendee()
   {
-    return userProfile;
+    return attendee;
   }
   /* Code from template association_GetOne_clear */
-  protected void clear_userProfile()
+  protected void clear_attendee()
   {
-    userProfile = null;
+    attendee = null;
   }
 
   public List<Feed> getFeeds()
@@ -224,21 +221,21 @@ public class Post
     return wasAdded;
   }
   /* Code from template association_SetOneToMany */
-  public boolean setUserProfile(UserProfile aUserProfile)
+  public boolean setAttendee(Attendee aAttendee)
   {
     boolean wasSet = false;
-    if (aUserProfile == null)
+    if (aAttendee == null)
     {
       return wasSet;
     }
 
-    UserProfile existingUserProfile = userProfile;
-    userProfile = aUserProfile;
-    if (existingUserProfile != null && !existingUserProfile.equals(aUserProfile))
+    Attendee existingAttendee = attendee;
+    attendee = aAttendee;
+    if (existingAttendee != null && !existingAttendee.equals(aAttendee))
     {
-      existingUserProfile.removePost(this);
+      existingAttendee.removePost(this);
     }
-    userProfile.addPost(this);
+    attendee.addPost(this);
     wasSet = true;
     return wasSet;
   }
@@ -333,11 +330,11 @@ public class Post
       Reply aReply = replies.get(i - 1);
       aReply.delete();
     }
-    UserProfile placeholderUserProfile = userProfile;
-    this.userProfile = null;
-    if(placeholderUserProfile != null)
+    Attendee placeholderAttendee = attendee;
+    this.attendee = null;
+    if(placeholderAttendee != null)
     {
-      placeholderUserProfile.removePost(this);
+      placeholderAttendee.removePost(this);
     }
     ArrayList<Feed> copyOfFeeds = new ArrayList<Feed>(feeds);
     feeds.clear();
@@ -353,7 +350,7 @@ public class Post
     return super.toString() + "["+
             "content" + ":" + getContent()+ "," +
             "postId" + ":" + getPostId()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "userProfile = "+(getUserProfile()!=null?Integer.toHexString(System.identityHashCode(getUserProfile())):"null") + System.getProperties().getProperty("line.separator") +
-            "  " + "userProfile = "+(getUserProfile()!=null?Integer.toHexString(System.identityHashCode(getUserProfile())):"null");
+            "  " + "userProfile = "+(getAttendee()!=null?Integer.toHexString(System.identityHashCode(getAttendee())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "userProfile = "+(getAttendee()!=null?Integer.toHexString(System.identityHashCode(getAttendee())):"null");
   }
 }

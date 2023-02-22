@@ -1,8 +1,10 @@
-package ca.mcgill.ecse428.ESCAPE.model;/*PLEASE DO NOT EDIT THIS CODE*/
+package ca.mcgill.ecse428.ESCAPE.model;
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 
-import javax.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 // line 52 "model.ump"
 // line 122 "model.ump"
@@ -20,19 +22,19 @@ public class Ticket
 
   //Ticket Associations
   @ManyToOne
-  private UserProfile userProfile;
+  private Attendee attendee;
 
-  @ManyToOne
+  @ManyToOne(optional = false)
   private Event event;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Ticket(int aTicketId, UserProfile aUserProfile, Event aEvent)
+  public Ticket(int aTicketId, Attendee aAttendee, Event aEvent)
   {
     ticketId = aTicketId;
-    boolean didAddUserProfile = setUserProfile(aUserProfile);
+    boolean didAddUserProfile = setAttendee(aAttendee);
     if (!didAddUserProfile)
     {
       throw new RuntimeException("Unable to create ticket due to userProfile. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
@@ -43,6 +45,8 @@ public class Ticket
       throw new RuntimeException("Unable to create ticket due to event. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
   }
+
+  public Ticket() {}
 
   //------------------------
   // INTERFACE
@@ -61,9 +65,9 @@ public class Ticket
     return ticketId;
   }
   /* Code from template association_GetOne */
-  public UserProfile getUserProfile()
+  public Attendee getAttendee()
   {
-    return userProfile;
+    return attendee;
   }
   /* Code from template association_GetOne_relatedSpecialization */
   public Event getEvent_OneEvent()
@@ -81,21 +85,21 @@ public class Ticket
     event = null;
   }
   /* Code from template association_SetOneToMany */
-  public boolean setUserProfile(UserProfile aUserProfile)
+  public boolean setAttendee(Attendee aAttendee)
   {
     boolean wasSet = false;
-    if (aUserProfile == null)
+    if (aAttendee == null)
     {
       return wasSet;
     }
 
-    UserProfile existingUserProfile = userProfile;
-    userProfile = aUserProfile;
-    if (existingUserProfile != null && !existingUserProfile.equals(aUserProfile))
+    Attendee existingAttendee = attendee;
+    attendee = aAttendee;
+    if (existingAttendee != null && !existingAttendee.equals(aAttendee))
     {
-      existingUserProfile.removeTicket(this);
+      existingAttendee.removeTicket(this);
     }
-    userProfile.addTicket(this);
+    attendee.addTicket(this);
     wasSet = true;
     return wasSet;
   }
@@ -121,11 +125,11 @@ public class Ticket
 
   public void delete()
   {
-    UserProfile placeholderUserProfile = userProfile;
-    this.userProfile = null;
-    if(placeholderUserProfile != null)
+    Attendee placeholderAttendee= attendee;
+    this.attendee = null;
+    if(placeholderAttendee != null)
     {
-      placeholderUserProfile.removeTicket(this);
+      placeholderAttendee.removeTicket(this);
     }
     Event placeholderEvent = event;
     this.event = null;
@@ -140,7 +144,7 @@ public class Ticket
   {
     return super.toString() + "["+
             "ticketId" + ":" + getTicketId()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "userProfile = "+(getUserProfile()!=null?Integer.toHexString(System.identityHashCode(getUserProfile())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "userProfile = "+(getAttendee()!=null?Integer.toHexString(System.identityHashCode(getAttendee())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "event = "+(getEvent()!=null?Integer.toHexString(System.identityHashCode(getEvent())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "event = "+(getEvent()!=null?Integer.toHexString(System.identityHashCode(getEvent())):"null");
   }

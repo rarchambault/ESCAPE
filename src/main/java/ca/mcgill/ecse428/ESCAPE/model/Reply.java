@@ -1,10 +1,10 @@
-package ca.mcgill.ecse428.ESCAPE.model;/*PLEASE DO NOT EDIT THIS CODE*/
+package ca.mcgill.ecse428.ESCAPE.model;
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 // line 27 "model.ump"
 // line 101 "model.ump"
@@ -39,6 +39,8 @@ public class Reply
       throw new RuntimeException("Unable to create reply due to post. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
   }
+
+  public Reply() {}
 
   //------------------------
   // INTERFACE

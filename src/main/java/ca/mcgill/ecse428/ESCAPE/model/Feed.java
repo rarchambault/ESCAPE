@@ -1,8 +1,8 @@
-package ca.mcgill.ecse428.ESCAPE.model;/*PLEASE DO NOT EDIT THIS CODE*/
+package ca.mcgill.ecse428.ESCAPE.model;
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.*;
 
 // line 46 "model.ump"
@@ -33,6 +33,8 @@ public class Feed
     feedId = aFeedId;
     posts = new ArrayList<Post>();
   }
+
+  public Feed() {}
 
   //------------------------
   // INTERFACE
