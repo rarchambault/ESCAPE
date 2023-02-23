@@ -1,25 +1,28 @@
 package ca.mcgill.ecse428.ESCAPE.model;
-
-/*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
+import jakarta.persistence.*;
 
 import java.util.*;
 
+@Entity
 // line 68 "model.ump"
 // line 136 "model.ump"
 public class PhotoGallery
 {
-
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
   //PhotoGallery Attributes
+  @Id
   private int galleryId;
 
   //PhotoGallery Associations
+  @ManyToOne(optional = false)
   private Event event;
+  @OneToMany(cascade= {CascadeType.ALL})
+  @JoinColumn(name="photos")
   private List<Photo> photos;
 
   //------------------------
@@ -36,6 +39,8 @@ public class PhotoGallery
     }
     photos = new ArrayList<Photo>();
   }
+
+  public PhotoGallery() {}
 
   //------------------------
   // INTERFACE
