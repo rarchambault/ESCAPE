@@ -26,9 +26,6 @@ public class Post
   private List<Reply> replies;
   @OneToOne(optional = false)
   private Attendee attendee;
-  @OneToMany(cascade= {CascadeType.ALL})
-  @JoinColumn(name="feeds")
-  private List<Feed> feeds;
 
   //------------------------
   // CONSTRUCTOR
@@ -44,7 +41,6 @@ public class Post
     {
       throw new RuntimeException("Unable to create post due to attendee. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
-    feeds = new ArrayList<Feed>();
   }
 
   public Post() {}
@@ -124,29 +120,6 @@ public class Post
     attendee = null;
   }
 
-  public List<Feed> getFeeds()
-  {
-    List<Feed> newFeeds = Collections.unmodifiableList(feeds);
-    return newFeeds;
-  }
-
-  public int numberOfFeeds()
-  {
-    int number = feeds.size();
-    return number;
-  }
-
-  public boolean hasFeeds()
-  {
-    boolean has = feeds.size() > 0;
-    return has;
-  }
-
-  public int indexOfFeed(Feed aFeed)
-  {
-    int index = feeds.indexOf(aFeed);
-    return index;
-  }
   /* Code from template association_MinimumNumberOfMethod */
   public static int minimumNumberOfReplies()
   {
@@ -240,89 +213,6 @@ public class Post
     return wasSet;
   }
 
-  /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfFeeds()
-  {
-    return 0;
-  }
-  /* Code from template association_AddManyToManyMethod */
-  public boolean addFeed(Feed aFeed)
-  {
-    boolean wasAdded = false;
-    if (feeds.contains(aFeed)) { return false; }
-    feeds.add(aFeed);
-    if (aFeed.indexOfPost(this) != -1)
-    {
-      wasAdded = true;
-    }
-    else
-    {
-      wasAdded = aFeed.addPost(this);
-      if (!wasAdded)
-      {
-        feeds.remove(aFeed);
-      }
-    }
-    return wasAdded;
-  }
-  /* Code from template association_RemoveMany */
-  public boolean removeFeed(Feed aFeed)
-  {
-    boolean wasRemoved = false;
-    if (!feeds.contains(aFeed))
-    {
-      return wasRemoved;
-    }
-
-    int oldIndex = feeds.indexOf(aFeed);
-    feeds.remove(oldIndex);
-    if (aFeed.indexOfPost(this) == -1)
-    {
-      wasRemoved = true;
-    }
-    else
-    {
-      wasRemoved = aFeed.removePost(this);
-      if (!wasRemoved)
-      {
-        feeds.add(oldIndex,aFeed);
-      }
-    }
-    return wasRemoved;
-  }
-  /* Code from template association_AddIndexControlFunctions */
-  public boolean addFeedAt(Feed aFeed, int index)
-  {  
-    boolean wasAdded = false;
-    if(addFeed(aFeed))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfFeeds()) { index = numberOfFeeds() - 1; }
-      feeds.remove(aFeed);
-      feeds.add(index, aFeed);
-      wasAdded = true;
-    }
-    return wasAdded;
-  }
-
-  public boolean addOrMoveFeedAt(Feed aFeed, int index)
-  {
-    boolean wasAdded = false;
-    if(feeds.contains(aFeed))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfFeeds()) { index = numberOfFeeds() - 1; }
-      feeds.remove(aFeed);
-      feeds.add(index, aFeed);
-      wasAdded = true;
-    } 
-    else 
-    {
-      wasAdded = addFeedAt(aFeed, index);
-    }
-    return wasAdded;
-  }
-
   public void delete()
   {
     for(int i=replies.size(); i > 0; i--)
@@ -335,12 +225,6 @@ public class Post
     if(placeholderAttendee != null)
     {
       placeholderAttendee.removePost(this);
-    }
-    ArrayList<Feed> copyOfFeeds = new ArrayList<Feed>(feeds);
-    feeds.clear();
-    for(Feed aFeed : copyOfFeeds)
-    {
-      aFeed.removePost(this);
     }
   }
 

@@ -235,9 +235,9 @@ public class Attendee extends UserProfile
   }
 
   /* Code from template association_AddManyToOne */
-  public Ticket addTicket(int aTicketId, Event aEvent)
+  public Ticket addTicket(int aTicketId, double aPrice, String aName, Event aEvent)
   {
-    return new Ticket(aTicketId, this, aEvent);
+    return new Ticket(aTicketId, aPrice, aName, this, aEvent);
   }
 
   public boolean addTicket(Ticket aTicket)

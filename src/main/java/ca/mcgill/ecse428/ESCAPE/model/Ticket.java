@@ -19,6 +19,8 @@ public class Ticket
   //Ticket Attributes
   @Id
   private int ticketId;
+  private String name;
+  private double price;
 
   //Ticket Associations
   @ManyToOne
@@ -31,9 +33,11 @@ public class Ticket
   // CONSTRUCTOR
   //------------------------
 
-  public Ticket(int aTicketId, Attendee aAttendee, Event aEvent)
+  public Ticket(int aTicketId, double aPrice, String aName, Attendee aAttendee, Event aEvent)
   {
     ticketId = aTicketId;
+    price = aPrice;
+    name = aName;
     boolean didAddUserProfile = setAttendee(aAttendee);
     if (!didAddUserProfile)
     {
@@ -58,6 +62,32 @@ public class Ticket
     ticketId = aTicketId;
     wasSet = true;
     return wasSet;
+  }
+
+  public double getPrice()
+  {
+    return price;
+  }
+
+  public boolean setPrice(double aPrice)
+  {
+    boolean wasSet = false;
+    price = aPrice;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public boolean setName(String aName)
+  {
+    boolean wasSet = false;
+    name = aName;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public String getName()
+  {
+    return name;
   }
 
   public int getTicketId()

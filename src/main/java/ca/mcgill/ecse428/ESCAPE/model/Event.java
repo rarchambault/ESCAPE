@@ -20,7 +20,7 @@ public class Event {
   private String description;
   private double ticketPrice;
   @Id
-  private int eventId;
+  private int id;
 
   //Event Associations
   @OneToMany(cascade= {CascadeType.ALL})
@@ -41,7 +41,7 @@ public class Event {
     name = aName;
     description = aDescription;
     ticketPrice = aTicketPrice;
-    eventId = aEventId;
+    id = aEventId;
     tickets = new ArrayList<Ticket>();
     photoGalleries = new ArrayList<PhotoGallery>();
     attendees = new ArrayList<Attendee>();
@@ -76,7 +76,7 @@ public class Event {
 
   public boolean setEventId(int aEventId) {
     boolean wasSet = false;
-    eventId = aEventId;
+    id = aEventId;
     wasSet = true;
     return wasSet;
   }
@@ -93,8 +93,8 @@ public class Event {
     return ticketPrice;
   }
 
-  public int getEventId() {
-    return eventId;
+  public int getId() {
+    return id;
   }
 
   /* Code from template association_GetMany */
@@ -190,8 +190,8 @@ public class Event {
   }
 
   /* Code from template association_AddManyToOne */
-  public Ticket addTicket(int aTicketId, Attendee aAttendee) {
-    return new Ticket(aTicketId, aAttendee, this);
+  public Ticket addTicket(int aTicketId, double aPrice, String aName, Attendee aAttendee) {
+    return new Ticket(aTicketId, aPrice, aName, aAttendee, this);
   }
 
   public boolean addTicket(Ticket aTicket) {
