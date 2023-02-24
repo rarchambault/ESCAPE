@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
@@ -16,7 +14,10 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 
+import ca.mcgill.ecse428.ESCAPE.dto.EventRequestDto;
+import ca.mcgill.ecse428.ESCAPE.dto.EventResponseDto;
 import ca.mcgill.ecse428.ESCAPE.exception.EventException;
+import ca.mcgill.ecse428.ESCAPE.model.Event;
 import ca.mcgill.ecse428.ESCAPE.repository.EventRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,14 +33,64 @@ public class EventServiceTests {
 
 	@Test
 	public void testGetEventById() {
+		// Tell the mocked repository how to behave
+		final int id = 1;
+		final Event party = new Event();
+		party.setEventId(id);
+		when(eventRepo.findEventById(id)).thenAnswer((InvocationOnMock invocation) -> party);
+
+		// Test that the service behaves properly
+		Event event = eventService.getEventById(id);
+
+		assertNotNull(event);
+		assertEquals(id, event.getId());
 	}
 
 	@Test
 	public void testGetEventByInvalidId() {
+		final int invalidId = 99;
+
+		// Mock: if asking for a event with invalid ID, return null
+		when(eventRepo.findEventById(invalidId)).thenAnswer((InvocationOnMock invocation) -> null);
+
+		// call method, and obtain resulting exception
+		EventException ex = assertThrows(EventException.class,
+				() -> eventService.getEventById(invalidId));
+
+		// check results
+		assertEquals("Event not found.", ex.getMessage());
+		assertEquals(HttpStatus.NOT_FOUND, ex.getStatus());
 	}
 
 	@Test
 	public void testCreateEvent() {
+		// Mock: just return the event with no modification
+		when(eventRepo.save(any(Event.class))).thenAnswer((InvocationOnMock invocation) -> invocation.getArgument(0));
+
+		// test set up - create an event request
+		EventRequestDto eventRequest = new EventRequestDto();
+		String description = "an event description";
+		String name = "Party";
+		int price = 14;
+		eventRequest.setDescription(description);
+		eventRequest.setName(name);
+		eventRequest.setTicketPrice(price);
+
+		// call method
+		EventResponseDto returnedEvent = eventService.createEvent(eventRequest);
+
+		// check results
+		assertNotNull(returnedEvent);
+		assertEquals(name, returnedEvent.getName());
+		assertEquals(description, returnedEvent.getDescription());
+		assertEquals(price, returnedEvent.getTicketPrice());
+		// Check that the service actually saved the event
+		// verify(eventRepo, times(1)).save();
+	}
+	
+	@Test
+	public void testGetAllEvents() {
+		
 	}
 
 	// test delete event
