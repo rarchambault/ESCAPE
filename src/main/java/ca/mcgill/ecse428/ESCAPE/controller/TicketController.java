@@ -1,5 +1,4 @@
 package ca.mcgill.ecse428.ESCAPE.controller;
-TicketService
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -11,6 +11,9 @@ import ca.mcgill.ecse428.ESCAPE.dto.TicketRequestDto;
 import ca.mcgill.ecse428.ESCAPE.dto.TicketResponseDto;
 import ca.mcgill.ecse428.ESCAPE.exception.TicketException;
 import ca.mcgill.ecse428.ESCAPE.model.Ticket;
+import ca.mcgill.ecse428.ESCAPE.model.UserProfile;
+import ca.mcgill.ecse428.ESCAPE.model.Attendee;
+import ca.mcgill.ecse428.ESCAPE.model.Event;
 import ca.mcgill.ecse428.ESCAPE.repository.TicketRepository;
 
 @Service
@@ -27,18 +30,18 @@ public class TicketService {
     }
 
     public Ticket getTicketById(int ticketId) throws TicketException {
-        Optional<Ticket> optionalTicket = ticketRepository.findTicketByTicketId(ticketId);
+        Optional<Ticket> optionalTicket = ticketRepository.findById(ticketId);
         if (optionalTicket.isPresent()) {
             return optionalTicket.get();
         } else {
-            throw new TicketException(HttpStatus.NOT_FOUND, "Ticket not found with id: " + id);
+            throw new TicketException(HttpStatus.NOT_FOUND, "Ticket not found with id: " + ticketId);
         }
     }
 
     public TicketResponseDto createTicket(TicketRequestDto request) {
-    	UserProfile creator = null;
+    	Attendee creator = null;
         Event event = null;
-    	Ticket Ticket = new Ticket(request.getTicketId(), request.getName(), request.getPrice(), 0, event);
+    	Ticket Ticket = new Ticket(request.getTicketId(), request.getPrice(), request.getName(),creator, event);
     	ticketRepository.save(Ticket);
     	return new TicketResponseDto(Ticket);
     }
