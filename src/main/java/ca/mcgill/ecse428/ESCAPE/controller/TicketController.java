@@ -1,5 +1,5 @@
 package ca.mcgill.ecse428.ESCAPE.controller;
-
+TicketService
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,38 +13,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import ca.mcgill.ecse428.ESCAPE.dto.EventRequestDto;
-import ca.mcgill.ecse428.ESCAPE.dto.EventResponseDto;
-import ca.mcgill.ecse428.ESCAPE.model.Event;
-import ca.mcgill.ecse428.ESCAPE.service.EventService;
+import ca.mcgill.ecse428.ESCAPE.dto.TicketRequestDto;
+import ca.mcgill.ecse428.ESCAPE.dto.TicketResponseDto;
+import ca.mcgill.ecse428.ESCAPE.model.Ticket;
+import ca.mcgill.ecse428.ESCAPE.service.TicketService;
 
 @RestController
-@RequestMapping("/events")
-public class EventController {
+@RequestMapping("/Tickets")
+public class TicketController {
 
     @Autowired
-    private EventService eventService;
+    private TicketService TicketService;
 
-    // create event
- 	@PostMapping("/event")
- 	public ResponseEntity<EventResponseDto> createEvent(@RequestBody EventRequestDto request) {
- 		EventResponseDto response = eventService.createEvent(request);
- 		return new ResponseEntity<EventResponseDto>(response, HttpStatus.CREATED);
+    // create Ticket
+ 	@PostMapping("/Ticket")
+ 	public ResponseEntity<TicketResponseDto> createTicket(@RequestBody TicketRequestDto request) {
+ 		TicketResponseDto response = TicketService.createTicket(request);
+ 		return new ResponseEntity<TicketResponseDto>(response, HttpStatus.CREATED);
  	}
     
-    @PostMapping("/{eventId}/delete")
-    public String deleteEvent(@PathVariable("eventId") int eventId, Model model) {
+    @PostMapping("/{TicketId}/delete")
+    public String deleteTicket(@PathVariable("TicketId") int TicketId, Model model) {
 
-        eventService.deleteEvent(eventId);
+        TicketService.deleteTicket(TicketId);
 
-        return "redirect:/events";
+        return "redirect:/Tickets";
     }
 
     @GetMapping
-    public String showEvents(Model model) {
-        Iterable<Event> events = eventService.getAllEvents();
-        model.addAttribute("events", events);
-        return "view-events";
+    public String showTickets(Model model) {
+        Iterable<Ticket> Tickets = TicketService.getAllTickets();
+        model.addAttribute("Tickets", Tickets);
+        return "view-Tickets";
     }
 
 
