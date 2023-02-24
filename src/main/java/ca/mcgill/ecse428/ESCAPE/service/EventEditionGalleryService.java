@@ -18,10 +18,9 @@ public class EventEditionGalleryService {
     @Autowired
     private EventEditionGalleryRepository photoGalleryRepository;
 
-    public Iterable<PhotoGallery> getAllPhotoGalleries() {
+    public Iterable<PhotoGallery> getAllPhotos() {
         return photoGalleryRepository.findAll();
     }
-
 
     public PhotoGallery getGalleriesById(int id) throws EventException {
         Optional<PhotoGallery> optionalGallery = photoGalleryRepository.findById(id);
