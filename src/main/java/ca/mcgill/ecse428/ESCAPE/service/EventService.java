@@ -29,11 +29,11 @@ public class EventService {
     }
 
     public Event getEventById(int id) throws EventException {
-        Optional<Event> optionalEvent = eventRepository.findById(id);
-        if (optionalEvent.isPresent()) {
-            return optionalEvent.get();
+        Event event = eventRepository.findEventById(id);
+        if (event != null) {
+            return event;
         } else {
-            throw new EventException(HttpStatus.NOT_FOUND, "Event not found with id: " + id);
+            throw new EventException(HttpStatus.NOT_FOUND, "Event not found.");
         }
     }
 
@@ -47,21 +47,21 @@ public class EventService {
     }
 
     public void updateEvent(int id, Event event) throws EventException {
-        Optional<Event> optionalEvent = eventRepository.findById(id);
-        if (optionalEvent.isPresent()) {
+        Event optionalEvent = eventRepository.findEventById(id);
+        if (optionalEvent != null) {
             event.setEventId(id);
             eventRepository.save(event);
         } else {
-            throw new EventException(HttpStatus.NOT_FOUND, "Event not found with id: " + id);
+            throw new EventException(HttpStatus.NOT_FOUND, "Event not found.");
         }
     }
 
     public void deleteEvent(int id) throws EventException {
-        Optional<Event> optionalEvent = eventRepository.findById(id);
-        if (optionalEvent.isPresent()) {
-            eventRepository.delete(optionalEvent.get());
+        Event event = eventRepository.findEventById(id);
+        if (event != null) {
+            eventRepository.delete(event);
         } else {
-            throw new EventException(HttpStatus.NOT_FOUND, "Event not found with id: " + id);
+            throw new EventException(HttpStatus.NOT_FOUND, "Event not found.");
         }
     }
 }

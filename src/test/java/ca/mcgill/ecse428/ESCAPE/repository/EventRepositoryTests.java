@@ -19,6 +19,7 @@ public class EventRepositoryTests {
     // TO DO add these when the repos have been made
     //private PhotoGalleryRepository photoGalleryRepository;
     //private TicketRepository ticketRepository;
+    @Autowired
     private AttendeeRepository attendeeRepository;
 
     @AfterEach

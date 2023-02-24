@@ -34,9 +34,8 @@ public class EventServiceTests {
 	@Test
 	public void testGetEventById() {
 		// Tell the mocked repository how to behave
-		final int id = 1;
 		final Event party = new Event();
-		party.setEventId(id);
+		int id = party.getId();
 		when(eventRepo.findEventById(id)).thenAnswer((InvocationOnMock invocation) -> party);
 
 		// Test that the service behaves properly
