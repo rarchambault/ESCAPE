@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import ca.mcgill.ecse428.ESCAPE.model.Reply;
+import ca.mcgill.ecse428.ESCAPE.model.Post;
+
 import ca.mcgill.ecse428.ESCAPE.service.ReplyService;
 
 @RestController
@@ -28,7 +30,15 @@ public class ReplyController {
 
     @PostMapping("/")
     public ResponseEntity<Reply> addReply(@RequestBody Reply reply) {
+
+    // Uncomment when post stuff has been implemented 
+    // public ResponseEntity<Reply> addReply(@RequestBody Reply reply, @RequestParam("postId") int postId) {
+
+        // Uncomment when post stuff has been implemented
+        // Reply newReply = replyService.addReply(reply, postId);
+
         Reply newReply = replyService.addReply(reply);
+
         if (newReply == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -58,5 +68,4 @@ public class ReplyController {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }

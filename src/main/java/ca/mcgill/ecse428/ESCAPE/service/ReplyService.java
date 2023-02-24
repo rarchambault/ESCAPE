@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import ca.mcgill.ecse428.ESCAPE.model.Reply;
 import ca.mcgill.ecse428.ESCAPE.repository.ReplyRepository;
 
+
 @Service
 public class ReplyService {
 
@@ -26,6 +27,20 @@ public class ReplyService {
     public Reply addReply(Reply reply) {
         return replyRepository.save(reply);
     }
+
+    // Uncomment and change as needed when PostRepository is implemented 
+
+    // @Autowired
+    // private PostRepository postRepository;
+
+    // public Reply addReply(Reply reply, int postId) {
+    //     Post post = postRepository.findById(postId).orElse(null);
+    //     if (post == null) {
+    //         return null;
+    //     }
+    //     reply.setPost(post);
+    //     return replyRepository.save(reply);
+    // }
 
     public List<Reply> getAllReplies() {
         return (List<Reply>) replyRepository.findAll();
