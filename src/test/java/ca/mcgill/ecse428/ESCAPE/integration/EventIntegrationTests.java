@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 
 import ca.mcgill.ecse428.ESCAPE.dto.EventResponseDto;
+import ca.mcgill.ecse428.ESCAPE.model.Event;
 import ca.mcgill.ecse428.ESCAPE.repository.EventRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT) // set random port
@@ -41,7 +42,13 @@ public class EventIntegrationTests {
 	}
 
 	private int testCreateEvent() {
-		return 0;
+		Event event = new Event();
+        event.setName("Test Event");
+        event.setDescription("Test Description");
+        event.setName("Test name");
+        event.setTicketPrice(12);
+        event.setEventId(21);
+        return event.getId();
 	}
 
 	private void testGetEvent(int id) {
@@ -77,7 +84,7 @@ public class EventIntegrationTests {
 		client.delete("/event/" + id);
 		try {
 			client.getForEntity("/event/" + id, EventResponseDto.class);
-			fail("Person was found!");
+			fail("Event was found!");
 		} catch (RestClientException | IllegalArgumentException e) {
 		}
 	}
