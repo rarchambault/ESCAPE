@@ -1,12 +1,14 @@
 package ca.mcgill.ecse428.ESCAPE.model;
-
-/*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 // line 52 "model.ump"
 // line 122 "model.ump"
+@Entity
 public class Ticket
 {
 
@@ -15,20 +17,28 @@ public class Ticket
   //------------------------
 
   //Ticket Attributes
+  @Id
   private int ticketId;
+  private String name;
+  private double price;
 
   //Ticket Associations
-  private UserProfile userProfile;
+  @ManyToOne
+  private Attendee attendee;
+
+  @ManyToOne(optional = false)
   private Event event;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Ticket(int aTicketId, UserProfile aUserProfile, Event aEvent)
+  public Ticket(int aTicketId, double aPrice, String aName, Attendee aAttendee, Event aEvent)
   {
     ticketId = aTicketId;
-    boolean didAddUserProfile = setUserProfile(aUserProfile);
+    price = aPrice;
+    name = aName;
+    boolean didAddUserProfile = setAttendee(aAttendee);
     if (!didAddUserProfile)
     {
       throw new RuntimeException("Unable to create ticket due to userProfile. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
@@ -39,6 +49,8 @@ public class Ticket
       throw new RuntimeException("Unable to create ticket due to event. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
   }
+
+  public Ticket() {}
 
   //------------------------
   // INTERFACE
@@ -52,14 +64,40 @@ public class Ticket
     return wasSet;
   }
 
+  public double getPrice()
+  {
+    return price;
+  }
+
+  public boolean setPrice(double aPrice)
+  {
+    boolean wasSet = false;
+    price = aPrice;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public boolean setName(String aName)
+  {
+    boolean wasSet = false;
+    name = aName;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public String getName()
+  {
+    return name;
+  }
+
   public int getTicketId()
   {
     return ticketId;
   }
   /* Code from template association_GetOne */
-  public UserProfile getUserProfile()
+  public Attendee getAttendee()
   {
-    return userProfile;
+    return attendee;
   }
   /* Code from template association_GetOne_relatedSpecialization */
   public Event getEvent_OneEvent()
@@ -77,21 +115,21 @@ public class Ticket
     event = null;
   }
   /* Code from template association_SetOneToMany */
-  public boolean setUserProfile(UserProfile aUserProfile)
+  public boolean setAttendee(Attendee aAttendee)
   {
     boolean wasSet = false;
-    if (aUserProfile == null)
+    if (aAttendee == null)
     {
       return wasSet;
     }
 
-    UserProfile existingUserProfile = userProfile;
-    userProfile = aUserProfile;
-    if (existingUserProfile != null && !existingUserProfile.equals(aUserProfile))
+    Attendee existingAttendee = attendee;
+    attendee = aAttendee;
+    if (existingAttendee != null && !existingAttendee.equals(aAttendee))
     {
-      existingUserProfile.removeTicket(this);
+      existingAttendee.removeTicket(this);
     }
-    userProfile.addTicket(this);
+    attendee.addTicket(this);
     wasSet = true;
     return wasSet;
   }
@@ -117,11 +155,11 @@ public class Ticket
 
   public void delete()
   {
-    UserProfile placeholderUserProfile = userProfile;
-    this.userProfile = null;
-    if(placeholderUserProfile != null)
+    Attendee placeholderAttendee= attendee;
+    this.attendee = null;
+    if(placeholderAttendee != null)
     {
-      placeholderUserProfile.removeTicket(this);
+      placeholderAttendee.removeTicket(this);
     }
     Event placeholderEvent = event;
     this.event = null;
@@ -136,7 +174,7 @@ public class Ticket
   {
     return super.toString() + "["+
             "ticketId" + ":" + getTicketId()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "userProfile = "+(getUserProfile()!=null?Integer.toHexString(System.identityHashCode(getUserProfile())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "userProfile = "+(getAttendee()!=null?Integer.toHexString(System.identityHashCode(getAttendee())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "event = "+(getEvent()!=null?Integer.toHexString(System.identityHashCode(getEvent())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "event = "+(getEvent()!=null?Integer.toHexString(System.identityHashCode(getEvent())):"null");
   }

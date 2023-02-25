@@ -1,18 +1,16 @@
 package ca.mcgill.ecse428.ESCAPE.dto;
 
 
-import ca.mcgill.ecse428.ESCAPE.model.Photo;
-
 import java.util.List;
 
-public class EventEditionGalleryRequestDto {
+public class PhotoRequestDto {
     private int galleryId;
     private int eventId;
-    private List<PhotoDto> photos;
+    private List<PhotoResponseDto> photos;
 
-    public EventEditionGalleryRequestDto() {}
+    public PhotoRequestDto() {}
 
-    public EventEditionGalleryRequestDto(int galleryId, int eventId, List<PhotoDto> photos) {
+    public PhotoRequestDto(int galleryId, int eventId, List<PhotoResponseDto> photos) {
         this.galleryId = galleryId;
         this.eventId = eventId;
         this.photos = photos;
@@ -35,11 +33,11 @@ public class EventEditionGalleryRequestDto {
         this.eventId = eventId;
     }
 
-    public List<PhotoDto> getPhotos() {
+    public List<PhotoResponseDto> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(List<PhotoDto> photos) {
+    public void setPhotos(List<PhotoResponseDto> photos) {
         this.photos = photos;
     }
 }
