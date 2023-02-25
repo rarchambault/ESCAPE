@@ -16,7 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 
-import ca.mcgill.ecse428.ESCAPE.dto.TicketResponseDto;
+import ca.mcgill.ecse428.ESCAPE.dto.*;
 import ca.mcgill.ecse428.ESCAPE.model.Ticket;
 import ca.mcgill.ecse428.ESCAPE.repository.TicketRepository;
 import ca.mcgill.ecse428.ESCAPE.model.Attendee;
@@ -58,7 +58,7 @@ public class TicketIntegrationTests {
 	private void testGetTicket(int id) {
 
 		// call method: get the ticket by their id
-		ResponseEntity<TicketDto> response = client.getForEntity("/ticket/" + id, TicketDto.class);
+		ResponseEntity<TicketRequestDto> response = client.getForEntity("/ticket/" + id, TicketRequestDto.class);
 
 		// check response
 		assertNotNull(response);
@@ -69,7 +69,7 @@ public class TicketIntegrationTests {
 
 	@Test
 	public void testCreateInvalidTicket() {
-		ResponseEntity<String> response = client.postForEntity("/ticket", new TicketDto("   "), String.class);
+		ResponseEntity<String> response = client.postForEntity("/ticket", new TicketResponseDto("   "), String.class);
 		assertNotNull(response);
 		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode(), "Response has correct status");
 	}
