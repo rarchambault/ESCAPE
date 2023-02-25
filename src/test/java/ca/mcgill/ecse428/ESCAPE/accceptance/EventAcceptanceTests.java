@@ -192,7 +192,7 @@ public class EventAcceptanceTests {
 
     }
 
-    //EI016
+    //EID016
     @Test
     public void adminDeletesEventCapacity_EventNoLongerHasCapacity(){
         //arrange
@@ -214,7 +214,7 @@ public class EventAcceptanceTests {
         
     }
 
-    //EI018
+    //EID018
     @Test
     public void attendeeViewsEvent_EventIsDisplayedInList(){
         // Arrange
