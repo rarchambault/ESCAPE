@@ -22,12 +22,12 @@ public class PhotoService {
         return photoRepository.findAll();
     }
 
-    public Photo getPhotosById(int id) throws EscapeException {
+    public Photo getPhotoById(int id) throws EscapeException {
         Optional<Photo> optionalPhoto = photoRepository.findById(id);
         if (optionalPhoto.isPresent()) {
             return optionalPhoto.get();
         } else {
-            throw new EscapeException(HttpStatus.NOT_FOUND, "Gallery not found with id: " + id);
+            throw new EscapeException(HttpStatus.NOT_FOUND, "Photo not found with id: " + id);
         }
     }
 

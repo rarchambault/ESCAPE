@@ -19,17 +19,17 @@ import java.util.ArrayList;
 public class PhotoController {
 
     @Autowired
-    PhotoService eventEditionGalleryService;
+    PhotoService photoService;
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<Iterable<PhotoResponseDto>> getAllPhotos(){
-        Iterable<Photo> photos = eventEditionGalleryService.getAllPhotos();
-        ArrayList<PhotoResponseDto> eventEditionGalleryResponses = new ArrayList<PhotoResponseDto>();
+        Iterable<Photo> photos = photoService.getAllPhotos();
+        ArrayList<PhotoResponseDto> photoResponses = new ArrayList<PhotoResponseDto>();
         for (var photo : photos) {
-            eventEditionGalleryResponses.add(new PhotoResponseDto(photo));
+            photoResponses.add(new PhotoResponseDto(photo));
         }
 
-        return new ResponseEntity<Iterable<PhotoResponseDto>>(eventEditionGalleryResponses, HttpStatus.OK);
+        return new ResponseEntity<Iterable<PhotoResponseDto>>(photoResponses, HttpStatus.OK);
     }
 
 

@@ -5,15 +5,20 @@ import ca.mcgill.ecse428.ESCAPE.model.Photo;
 import java.util.List;
 
 public class PhotoResponseDto {
+    private int photoId;
     private int galleryId;
     private int eventId;
-    private List<PhotoResponseDto> photos;
 
-    public PhotoResponseDto(Photo photos) {
-        this.galleryId = photos.getPhotoGallery().getGalleryId();
-        this.eventId = photos.getPhotoGallery().getEvent().getId();
+
+    public PhotoResponseDto(Photo photo) {
+        this.photoId = photo.getPhotoId();
+        this.galleryId = photo.getPhotoGallery().getGalleryId();
+        this.eventId = photo.getPhotoGallery().getEvent().getId();
     }
 
+    public int getPhotoId() { return this.photoId; }
+
+    public void setPhotoId(int photoId) { this.photoId = photoId; }
     public int getGalleryId() {
         return this.galleryId;
     }
@@ -22,7 +27,4 @@ public class PhotoResponseDto {
         return this.eventId;
     }
 
-    public List<PhotoResponseDto> getPhotos() {
-        return this.photos;
-    }
 }
