@@ -1,7 +1,5 @@
 package ca.mcgill.ecse428.ESCAPE.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,12 +38,13 @@ public class EventController {
         return "redirect:/events";
     }
 
-    @GetMapping
-    public String showEvents(Model model) {
-        Iterable<Event> events = eventService.getAllEvents();
-        model.addAttribute("events", events);
-        return "view-events";
-    }
+    @GetMapping("/event/{id}")
+	public ResponseEntity<EventResponseDto> getEventByID(@PathVariable int id) {
+    	System.out.println(id);
+		Event event = eventService.getEventById(id);
+		return new ResponseEntity<EventResponseDto>(new EventResponseDto(event),
+				HttpStatus.OK);
+	}
 
 
 }

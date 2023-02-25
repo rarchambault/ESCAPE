@@ -42,13 +42,28 @@ public class EventIntegrationTests {
 	}
 
 	private int testCreateEvent() {
+		// set up event
 		Event event = new Event();
-        event.setName("Test Event");
+        String name = "Test Event";
+		event.setName(name);
         event.setDescription("Test Description");
         event.setName("Test name");
         event.setTicketPrice(12);
-        event.setEventId(21);
-        return event.getId();
+        
+        // save event in repository
+        eventRepo.save(event);
+
+		// call method: create a new admin
+		ResponseEntity<EventDto> response = client.postForEntity("/event", new EventDto(name), EventDto.class);
+
+		// check response
+		assertNotNull(response);
+		assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
+		assertNotNull(response.getBody(), "Response has body");
+		assertEquals(name, response.getBody().name, "Response has correct email");
+		assertTrue(response.getBody().id > 0, "Response has valid ID");
+
+		return response.getBody().id;
 	}
 
 	private void testGetEvent(int id) {
