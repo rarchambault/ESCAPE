@@ -1,9 +1,17 @@
-    import com.fasterxml.jackson.databind.ObjectMapper;
-    import org.junit.jupiter.api.Test;
+package ca.mcgill.integration;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import ca.mcgill.ecse428.ESCAPE.EscapeApplication;
+import ca.mcgill.ecse428.ESCAPE.model.Event;
+import ca.mcgill.ecse428.ESCAPE.repository.EventRepository;
+
+import org.junit.jupiter.api.Test;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
     import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-    import org.springframework.http.MediaType;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
     import org.springframework.test.web.servlet.MockMvc;
     import org.springframework.test.web.servlet.ResultActions;
     import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -13,7 +21,7 @@
 
     import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-    @DataJpaTest
+    @SpringBootTest(classes = EscapeApplication.class)
     @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
     public class EventIntegrationTests {
 
@@ -31,9 +39,8 @@
         private Event createEvent() {
             Event event = new Event();
             event.setName("Test Event");
-            event.setLocation("Test Location");
             event.setDate("2023-02-20");
-            event.setTime("12:00 PM");
+            event.setTicketPrice(30);
             event.setDescription("Test Description");
             return event;
         }
@@ -52,13 +59,11 @@
             Event event = createEvent();
             createEventRequest(event);
 
-            Event savedEvent = eventRepository.findById(1L).orElse(null);
+            Event savedEvent = eventRepository.findById(1).orElse(null);
             assert savedEvent != null;
             assert savedEvent.getName().equals(event.getName());
-            assert savedEvent.getLocation().equals(event.getLocation());
-            assert savedEvent.getDate().equals(event.getDate());
-            assert savedEvent.getTime().equals(event.getTime());
             assert savedEvent.getDescription().equals(event.getDescription());
+            assert Double.compare(savedEvent.getTicketPrice(), event.getTicketPrice()) == 0;
         }
 
         @Test
@@ -71,9 +76,7 @@
             mockMvc.perform(MockMvcRequestBuilders.get("/events/1"))
                     .andExpect(status().isOk())
                     .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(event.getName()))
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.location").value(event.getLocation()))
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.date").value(event.getDate()))
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.time").value(event.getTime()))
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.time").value(event.getTicketPrice()))
                     .andExpect(MockMvcResultMatchers.jsonPath("$.description").value(event.getDescription()));
         }
 
@@ -86,9 +89,8 @@
 
             Event updatedEvent = new Event();
             updatedEvent.setName("Updated Test Event");
-            updatedEvent.setLocation("Updated Test Location");
             updatedEvent.setDate("2023-02-21");
-            updatedEvent.setTime("1:00 PM");
+            updatedEvent.setTicketPrice(30);
             updatedEvent.setDescription("Updated Test Description");
 
             mockMvc.perform(MockMvcRequestBuilders.put("/events/1")
@@ -96,25 +98,21 @@
                     .content(objectMapper.writeValueAsString(updatedEvent)))
                     .andExpect(status().isOk());
 
-            Event savedEvent = eventRepository.findById(1L).orElse(null);
+            Event savedEvent = eventRepository.findEventById(1);
             assert savedEvent != null;
             assert savedEvent.getName().equals(updatedEvent.getName());
-            assert savedEvent.getLocation().equals(updatedEvent.getLocation());
-            assert savedEvent.getDate().equals(updatedEvent.getDate());
-            assert savedEvent.getTime().equals(updatedEvent.getTime());
-                updatedEvent.setDescription("Updated Test Description");
+            assert Double.compare(savedEvent.getTicketPrice(), updatedEvent.getTicketPrice()) == 0;
+            updatedEvent.setDescription("Updated Test Description");
 
         mockMvc.perform(MockMvcRequestBuilders.put("/events/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(updatedEvent)))
                 .andExpect(status().isOk());
 
-        Event savedEvent = eventRepository.findById(1L).orElse(null);
+        event = eventRepository.findEventById(1);
         assert savedEvent != null;
         assert savedEvent.getName().equals(updatedEvent.getName());
-        assert savedEvent.getLocation().equals(updatedEvent.getLocation());
-        assert savedEvent.getDate().equals(updatedEvent.getDate());
-        assert savedEvent.getTime().equals(updatedEvent.getTime());
+        assert Double.compare(savedEvent.getTicketPrice(), updatedEvent.getTicketPrice()) == 0;
         assert savedEvent.getDescription().equals(updatedEvent.getDescription());
     }
 
@@ -128,7 +126,7 @@
         mockMvc.perform(MockMvcRequestBuilders.delete("/events/1"))
                 .andExpect(status().isOk());
 
-        assert eventRepository.findById(1L).orElse(null) == null;
+        assert eventRepository.findEventById(1) != null;
     }
 }
         

@@ -360,4 +360,7 @@ public class Event {
       aUserProfile.delete();
     }
   }
+
+public void setDate(String string) {
+}
 }
