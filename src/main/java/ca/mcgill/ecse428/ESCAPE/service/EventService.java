@@ -16,7 +16,6 @@ import ca.mcgill.ecse428.ESCAPE.repository.EventRepository;
 @Service
 public class EventService {
     private final EventRepository eventRepository;
-    //private final UserProfileRepository userProfileRepository;
 
     @Autowired
     public EventService(EventRepository eventRepository) {

@@ -1,5 +1,7 @@
 package ca.mcgill.ecse428.ESCAPE.dto;
 
+import java.time.LocalDateTime;
+
 public class EventRequestDto {
 
 	// attributes
@@ -8,7 +10,7 @@ public class EventRequestDto {
 	private double ticketPrice;
 	private int userId;
 	private int capacity;
-	private String startTime;
+	private LocalDateTime startTime;
 	
 	public int getUserId() {
 		return userId;
@@ -40,10 +42,10 @@ public class EventRequestDto {
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
-	public String getStartTime() {
+	public LocalDateTime getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(String startTime) {
+	public void setStartTime(LocalDateTime startTime) {
 		this.startTime = startTime;
 	}
 }

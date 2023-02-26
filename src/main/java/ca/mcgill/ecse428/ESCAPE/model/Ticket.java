@@ -2,9 +2,11 @@ package ca.mcgill.ecse428.ESCAPE.model;
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 // line 52 "model.ump"
 // line 122 "model.ump"
@@ -23,8 +25,8 @@ public class Ticket
   private double price;
 
   //Ticket Associations
-  @ManyToOne
-  private Attendee attendee;
+  @ManyToMany
+  private List<Attendee> attendees;
 
   @ManyToOne(optional = false)
   private Event event;
@@ -38,11 +40,7 @@ public class Ticket
     ticketId = aTicketId;
     price = aPrice;
     name = aName;
-    boolean didAddUserProfile = setAttendee(aAttendee);
-    if (!didAddUserProfile)
-    {
-      throw new RuntimeException("Unable to create ticket due to userProfile. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
+    attendees = new ArrayList<Attendee>();
     boolean didAddEvent = setEvent(aEvent);
     if (!didAddEvent)
     {
@@ -94,44 +92,42 @@ public class Ticket
   {
     return ticketId;
   }
-  /* Code from template association_GetOne */
-  public Attendee getAttendee()
+
+  public boolean addAttendee(Attendee aAttendee)
   {
-    return attendee;
+    boolean wasAdded = false;
+    if (attendees.contains(aAttendee)) { return false; }
+    attendees.add(aAttendee);
+    aAttendee.addTicket(this);
+    wasAdded = true;
+    return wasAdded;
   }
-  /* Code from template association_GetOne_relatedSpecialization */
-  public Event getEvent_OneEvent()
+
+  public boolean removeAttendee(Attendee aAttendee)
   {
-    return (Event)event;
-  } 
+    boolean wasRemoved = false;
+    aAttendee.delete();
+    attendees.remove(aAttendee);
+    wasRemoved = true;
+    return wasRemoved;
+  }
+
+  public Attendee getAttendee(int index)
+  {
+    Attendee aAttendee = attendees.get(index);
+    return aAttendee;
+  }
+
+  public List<Attendee> getAttendees()
+  {
+    List<Attendee> newAttendees = Collections.unmodifiableList(attendees);
+    return attendees;
+  }
+
   /* Code from template association_GetOne */
   public Event getEvent()
   {
     return event;
-  }
-  /* Code from template association_GetOne_clear */
-  protected void clear_event()
-  {
-    event = null;
-  }
-  /* Code from template association_SetOneToMany */
-  public boolean setAttendee(Attendee aAttendee)
-  {
-    boolean wasSet = false;
-    if (aAttendee == null)
-    {
-      return wasSet;
-    }
-
-    Attendee existingAttendee = attendee;
-    attendee = aAttendee;
-    if (existingAttendee != null && !existingAttendee.equals(aAttendee))
-    {
-      existingAttendee.removeTicket(this);
-    }
-    attendee.addTicket(this);
-    wasSet = true;
-    return wasSet;
   }
   /* Code from template association_set_specialization_reqCommonCode */  /* Code from template association_SetOneToMany */
   public boolean setEvent(Event aEvent)
@@ -155,11 +151,10 @@ public class Ticket
 
   public void delete()
   {
-    Attendee placeholderAttendee= attendee;
-    this.attendee = null;
-    if(placeholderAttendee != null)
+    for(int i=attendees.size(); i > 0; i--)
     {
-      placeholderAttendee.removeTicket(this);
+      Attendee aAttendee = attendees.get(i - 1);
+      aAttendee.delete();
     }
     Event placeholderEvent = event;
     this.event = null;
@@ -174,7 +169,7 @@ public class Ticket
   {
     return super.toString() + "["+
             "ticketId" + ":" + getTicketId()+ "]" + System.getProperties().getProperty("line.separator") +
-            "  " + "userProfile = "+(getAttendee()!=null?Integer.toHexString(System.identityHashCode(getAttendee())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "userProfile = "+(getAttendees()!=null?Integer.toHexString(System.identityHashCode(getAttendees())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "event = "+(getEvent()!=null?Integer.toHexString(System.identityHashCode(getEvent())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "event = "+(getEvent()!=null?Integer.toHexString(System.identityHashCode(getEvent())):"null");
   }
