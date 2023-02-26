@@ -206,10 +206,10 @@ public class EventAcceptanceTests {
         Event event = new Event(name, description, ticketPrice, eventId, capacity, startTime);
 
         // Act
-        event.deleteCapacity();
+        event.setCapacity(0);
 
         // Assert
-        assertNull(event.getCapacity());
+        assertEquals(event.getCapacity(), 0);
     }
 
     //EID018
@@ -232,6 +232,7 @@ public class EventAcceptanceTests {
         // Assert
         String expectedDetails = "Event: " + name + "\nDescription: " + description + "\nPrice: $" + ticketPrice +
         "\nCapacity: " + capacity + "\nStart time: " + startTime;
-        assertEquals(expectedDetails, eventDetails);
+        assertEquals(expectedDetails, eventDetails.get(0).toString());
     }
+
 }
