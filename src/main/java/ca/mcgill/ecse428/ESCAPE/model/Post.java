@@ -18,10 +18,10 @@ public class Post
   //Post Attributes
   private String content;
   @Id
-  private int postId;
+  private int id;
 
   //Post Associations
-  @OneToMany(cascade= {CascadeType.ALL})
+  @OneToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
   @JoinColumn(name="replies")
   private List<Reply> replies;
   @OneToOne(optional = false)
@@ -34,7 +34,7 @@ public class Post
   public Post(String aContent, int aPostId, Attendee aAttendee)
   {
     content = aContent;
-    postId = aPostId;
+    id = aPostId;
     replies = new ArrayList<Reply>();
     boolean didAddAttendee = setAttendee(aAttendee);
     if (!didAddAttendee)
@@ -60,7 +60,7 @@ public class Post
   public boolean setPostId(int aPostId)
   {
     boolean wasSet = false;
-    postId = aPostId;
+    id = aPostId;
     wasSet = true;
     return wasSet;
   }
@@ -72,7 +72,7 @@ public class Post
 
   public int getPostId()
   {
-    return postId;
+    return id;
   }
   /* Code from template association_GetMany */
   public Reply getReply(int index)
@@ -233,7 +233,7 @@ public class Post
   {
     return super.toString() + "["+
             "content" + ":" + getContent()+ "," +
-            "postId" + ":" + getPostId()+ "]" + System.getProperties().getProperty("line.separator") +
+            "id" + ":" + getPostId()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "userProfile = "+(getAttendee()!=null?Integer.toHexString(System.identityHashCode(getAttendee())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "userProfile = "+(getAttendee()!=null?Integer.toHexString(System.identityHashCode(getAttendee())):"null");
   }

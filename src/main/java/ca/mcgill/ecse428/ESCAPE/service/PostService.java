@@ -4,6 +4,7 @@ package ca.mcgill.ecse428.ESCAPE.service;
 import ca.mcgill.ecse428.ESCAPE.dto.PostRequestDto;
 import ca.mcgill.ecse428.ESCAPE.dto.PostResponseDto;
 import ca.mcgill.ecse428.ESCAPE.exception.EventException;
+import ca.mcgill.ecse428.ESCAPE.model.Attendee;
 import ca.mcgill.ecse428.ESCAPE.model.Event;
 import ca.mcgill.ecse428.ESCAPE.model.Post;
 import ca.mcgill.ecse428.ESCAPE.model.UserProfile;
@@ -29,7 +30,7 @@ public class PostService {
     }
 
     public PostResponseDto createEvent(PostRequestDto request) {
-        UserProfile creator = null;
+        Attendee creator = null;
         Post post = new Post(request.getContent(),0,creator);
         postRepository.save(post);
         return new PostResponseDto(post);

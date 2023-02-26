@@ -3,6 +3,7 @@ package ca.mcgill.ecse428.ESCAPE.model;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 
@@ -17,14 +18,14 @@ public class Attendee extends UserProfile
   //------------------------
   // MEMBER VARIABLES
   //------------------------
-  //Attendee Associations
-  @OneToMany(cascade= {CascadeType.ALL})
+  //Attendee Associations  
+  @OneToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
   @JoinColumn(name="posts")
   private List<Post> posts;
-  @OneToMany(cascade= {CascadeType.ALL})
+  @OneToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
   @JoinColumn(name="events")
   private List<Event> events;
-  @OneToMany(cascade= {CascadeType.ALL})
+  @OneToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
   @JoinColumn(name="tickets")
   private List<Ticket> tickets;
 
@@ -40,7 +41,11 @@ public class Attendee extends UserProfile
     tickets = new ArrayList<Ticket>();
   }
 
-  public Attendee() {}
+  public Attendee() {
+	  posts = new ArrayList<Post>();
+	  events = new ArrayList<Event>();
+	  tickets = new ArrayList<Ticket>();
+  }
 
   //------------------------
   // INTERFACE
