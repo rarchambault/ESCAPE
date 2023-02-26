@@ -4,6 +4,7 @@ package ca.mcgill.ecse428.ESCAPE.model;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.Inheritance;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 
@@ -12,316 +13,294 @@ import java.util.*;
 // line 15 "model.ump"
 // line 89 "model.ump"
 @Entity
-public class Attendee extends UserProfile
-{
+public class Attendee extends UserProfile {
 
-  //------------------------
-  // MEMBER VARIABLES
-  //------------------------
-  //Attendee Associations  
-  @OneToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
-  @JoinColumn(name="posts")
-  private List<Post> posts;
-  @OneToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
-  @JoinColumn(name="events")
-  private List<Event> events;
-  @OneToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
-  @JoinColumn(name="tickets")
-  private List<Ticket> tickets;
+	// ------------------------
+	// MEMBER VARIABLES
+	// ------------------------
+	// Attendee Associations
+	@OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<Post> posts;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Event> events;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Ticket> tickets;
 
-  //------------------------
-  // CONSTRUCTOR
-  //------------------------
+	// ------------------------
+	// CONSTRUCTOR
+	// ------------------------
 
-  public Attendee(String aName, String aEmail, String aPassword, String aPhoto, int aUserId)
-  {
-    super(aName, aEmail, aPassword, aPhoto, aUserId);
-    posts = new ArrayList<Post>();
-    events = new ArrayList<Event>();
-    tickets = new ArrayList<Ticket>();
-  }
+	public Attendee(String aName, String aEmail, String aPassword, String aPhoto) {
+		super(aName, aEmail, aPassword, aPhoto);
+		posts = new ArrayList<Post>();
+		events = new ArrayList<Event>();
+		tickets = new ArrayList<Ticket>();
+	}
 
-  public Attendee() {
-	  posts = new ArrayList<Post>();
-	  events = new ArrayList<Event>();
-	  tickets = new ArrayList<Ticket>();
-  }
+	public Attendee() {
+		posts = new ArrayList<Post>();
+		events = new ArrayList<Event>();
+		tickets = new ArrayList<Ticket>();
+	}
 
-  //------------------------
-  // INTERFACE
-  //------------------------
+	// ------------------------
+	// INTERFACE
+	// ------------------------
 
-  public boolean addPost(Post aPost)
-  {
-    boolean wasAdded = false;
-    if (posts.contains(aPost)) { return false; }
-    posts.add(aPost);
-    aPost.setAttendee(this);
-    wasAdded = true;
-    return wasAdded;
-  }
+	public boolean addPost(Post aPost) {
+		boolean wasAdded = false;
+		if (posts.contains(aPost)) {
+			return false;
+		}
+		posts.add(aPost);
+		aPost.setAttendee(this);
+		wasAdded = true;
+		return wasAdded;
+	}
 
-  public boolean removePost(Post aPost)
-  {
-    boolean wasRemoved = false;
-    aPost.delete();
-    posts.remove(aPost);
-    wasRemoved = true;
-    return wasRemoved;
-  }
+	public boolean removePost(Post aPost) {
+		boolean wasRemoved = false;
+		aPost.delete();
+		posts.remove(aPost);
+		wasRemoved = true;
+		return wasRemoved;
+	}
 
-  public Post getPost(int index)
-  {
-    Post aPost = posts.get(index);
-    return aPost;
-  }
+	public Post getPost(int index) {
+		Post aPost = posts.get(index);
+		return aPost;
+	}
 
-  public List<Post> getPosts()
-  {
-    List<Post> newPosts = Collections.unmodifiableList(posts);
-    return newPosts;
-  }
+	public List<Post> getPosts() {
+		List<Post> newPosts = Collections.unmodifiableList(posts);
+		return newPosts;
+	}
 
-  public int numberOfPosts()
-  {
-    int number = posts.size();
-    return number;
-  }
+	public int numberOfPosts() {
+		int number = posts.size();
+		return number;
+	}
 
-  public boolean hasPosts()
-  {
-    boolean has = posts.size() > 0;
-    return has;
-  }
+	public boolean hasPosts() {
+		boolean has = posts.size() > 0;
+		return has;
+	}
 
-  public int indexOfPost(Post aPost)
-  {
-    int index = posts.indexOf(aPost);
-    return index;
-  }
-  /* Code from template association_GetMany_clear */
-  protected void clear_posts()
-  {
-    posts.clear();
-  }
-  /* Code from template association_GetMany */
-  public Event getEvent(int index)
-  {
-    Event aEvent = events.get(index);
-    return aEvent;
-  }
+	public int indexOfPost(Post aPost) {
+		int index = posts.indexOf(aPost);
+		return index;
+	}
 
-  public List<Event> getEvents()
-  {
-    List<Event> newEvents = Collections.unmodifiableList(events);
-    return newEvents;
-  }
+	/* Code from template association_GetMany_clear */
+	protected void clear_posts() {
+		posts.clear();
+	}
 
-  public int numberOfEvents()
-  {
-    int number = events.size();
-    return number;
-  }
+	/* Code from template association_GetMany */
+	public Event getEvent(int index) {
+		Event aEvent = events.get(index);
+		return aEvent;
+	}
 
-  public boolean hasEvents()
-  {
-    boolean has = events.size() > 0;
-    return has;
-  }
+	public List<Event> getEvents() {
+		List<Event> newEvents = Collections.unmodifiableList(events);
+		return newEvents;
+	}
 
-  public int indexOfEvent(Event aEvent)
-  {
-    int index = events.indexOf(aEvent);
-    return index;
-  }
-  /* Code from template association_GetMany_clear */
-  protected void clear_events()
-  {
-    events.clear();
-  }
-  /* Code from template association_GetMany_relatedSpecialization */
-  public Post getPost_Post(int index)
-  {
-    Post aPost = (Post)posts.get(index);
-    return aPost;
-  }
+	public int numberOfEvents() {
+		int number = events.size();
+		return number;
+	}
 
-  /* Code from template association_GetMany */
-  public Ticket getTicket(int index)
-  {
-    Ticket aTicket = tickets.get(index);
-    return aTicket;
-  }
+	public boolean hasEvents() {
+		boolean has = events.size() > 0;
+		return has;
+	}
 
-  public List<Ticket> getTickets()
-  {
-    List<Ticket> newTickets = Collections.unmodifiableList(tickets);
-    return newTickets;
-  }
+	public int indexOfEvent(Event aEvent) {
+		int index = events.indexOf(aEvent);
+		return index;
+	}
 
-  public int numberOfTickets()
-  {
-    int number = tickets.size();
-    return number;
-  }
+	/* Code from template association_GetMany_clear */
+	protected void clear_events() {
+		events.clear();
+	}
 
-  public boolean hasTickets()
-  {
-    boolean has = tickets.size() > 0;
-    return has;
-  }
+	/* Code from template association_GetMany_relatedSpecialization */
+	public Post getPost_Post(int index) {
+		Post aPost = (Post) posts.get(index);
+		return aPost;
+	}
 
-  public int indexOfTicket(Ticket aTicket)
-  {
-    int index = tickets.indexOf(aTicket);
-    return index;
-  }
-  /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfPosts()
-  {
-    return 0;
-  }
+	/* Code from template association_GetMany */
+	public Ticket getTicket(int index) {
+		Ticket aTicket = tickets.get(index);
+		return aTicket;
+	}
 
-  /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfEvents()
-  {
-    return 0;
-  }
+	public List<Ticket> getTickets() {
+		List<Ticket> newTickets = Collections.unmodifiableList(tickets);
+		return newTickets;
+	}
 
-  public boolean addEvent(Event aEvent)
-  {
-    boolean wasAdded = false;
-    if (events.contains(aEvent)) { return false; }
-    aEvent.addAttendee(this);
-    events.add(aEvent);
-    wasAdded = true;
-    return wasAdded;
-  }
+	public int numberOfTickets() {
+		int number = tickets.size();
+		return number;
+	}
 
-  public boolean removeEvent(Event aEvent)
-  {
-    boolean wasRemoved = false;
-    aEvent.removeAttendee(this);
-    events.remove(aEvent);
-    wasRemoved = true;
-    return wasRemoved;
-  }
-  /* Code from template association_AddIndexControlFunctions */
-  public boolean addEventAt(Event aEvent, int index)
-  {
-    boolean wasAdded = false;
-    if(addEvent(aEvent))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfEvents()) { index = numberOfEvents() - 1; }
-      events.remove(aEvent);
-      events.add(index, aEvent);
-      wasAdded = true;
-    }
-    return wasAdded;
-  }
+	public boolean hasTickets() {
+		boolean has = tickets.size() > 0;
+		return has;
+	}
 
-  public boolean addOrMoveEventAt(Event aEvent, int index)
-  {
-    boolean wasAdded = false;
-    if(events.contains(aEvent))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfEvents()) { index = numberOfEvents() - 1; }
-      events.remove(aEvent);
-      events.add(index, aEvent);
-      wasAdded = true;
-    }
-    else
-    {
-      wasAdded = addEventAt(aEvent, index);
-    }
-    return wasAdded;
-  }
+	public int indexOfTicket(Ticket aTicket) {
+		int index = tickets.indexOf(aTicket);
+		return index;
+	}
 
-  /* Code from template association_AddManyToOne */
-  public Ticket addTicket(int aTicketId, double aPrice, String aName, Event aEvent)
-  {
-    return new Ticket(aTicketId, aPrice, aName, this, aEvent);
-  }
+	/* Code from template association_MinimumNumberOfMethod */
+	public static int minimumNumberOfPosts() {
+		return 0;
+	}
 
-  public boolean addTicket(Ticket aTicket)
-  {
-    boolean wasAdded = false;
-    if (tickets.contains(aTicket)) { return false; }
-    Attendee existingAttendee = aTicket.getAttendee();
-    boolean isNewAttendee = existingAttendee != null && !this.equals(existingAttendee);
-    if (isNewAttendee)
-    {
-      aTicket.setAttendee(this);
-    }
-    else
-    {
-      tickets.add(aTicket);
-    }
-    wasAdded = true;
-    return wasAdded;
-  }
+	/* Code from template association_MinimumNumberOfMethod */
+	public static int minimumNumberOfEvents() {
+		return 0;
+	}
 
-  public boolean removeTicket(Ticket aTicket)
-  {
-    boolean wasRemoved = false;
-    tickets.remove(aTicket);
-    aTicket.delete();
-    wasRemoved = true;
-    return wasRemoved;
-  }
-  /* Code from template association_AddIndexControlFunctions */
-  public boolean addTicketAt(Ticket aTicket, int index)
-  {
-    boolean wasAdded = false;
-    if(addTicket(aTicket))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfTickets()) { index = numberOfTickets() - 1; }
-      tickets.remove(aTicket);
-      tickets.add(index, aTicket);
-      wasAdded = true;
-    }
-    return wasAdded;
-  }
+	public boolean addEvent(Event aEvent) {
+		boolean wasAdded = false;
+		if (events.contains(aEvent)) {
+			return false;
+		}
+		aEvent.addAttendee(this);
+		events.add(aEvent);
+		wasAdded = true;
+		return wasAdded;
+	}
 
-  public boolean addOrMoveTicketAt(Ticket aTicket, int index)
-  {
-    boolean wasAdded = false;
-    if(tickets.contains(aTicket))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfTickets()) { index = numberOfTickets() - 1; }
-      tickets.remove(aTicket);
-      tickets.add(index, aTicket);
-      wasAdded = true;
-    }
-    else
-    {
-      wasAdded = addTicketAt(aTicket, index);
-    }
-    return wasAdded;
-  }
+	public boolean removeEvent(Event aEvent) {
+		boolean wasRemoved = false;
+		aEvent.removeAttendee(this);
+		events.remove(aEvent);
+		wasRemoved = true;
+		return wasRemoved;
+	}
 
-  public void delete()
-  {
-    super.delete();
-    for(int i=posts.size(); i > 0; i--)
-    {
-      Post aPost = posts.get(i - 1);
-      aPost.delete();
-    }
-    for(int i=events.size(); i > 0; i--)
-    {
-      Event aEvent = events.get(i - 1);
-      aEvent.delete();
-    }
-    for(int i=tickets.size(); i > 0; i--)
-    {
-      Ticket aTicket = tickets.get(i - 1);
-      aTicket.delete();
-    }
-  }
+	/* Code from template association_AddIndexControlFunctions */
+	public boolean addEventAt(Event aEvent, int index) {
+		boolean wasAdded = false;
+		if (addEvent(aEvent)) {
+			if (index < 0) {
+				index = 0;
+			}
+			if (index > numberOfEvents()) {
+				index = numberOfEvents() - 1;
+			}
+			events.remove(aEvent);
+			events.add(index, aEvent);
+			wasAdded = true;
+		}
+		return wasAdded;
+	}
+
+	public boolean addOrMoveEventAt(Event aEvent, int index) {
+		boolean wasAdded = false;
+		if (events.contains(aEvent)) {
+			if (index < 0) {
+				index = 0;
+			}
+			if (index > numberOfEvents()) {
+				index = numberOfEvents() - 1;
+			}
+			events.remove(aEvent);
+			events.add(index, aEvent);
+			wasAdded = true;
+		} else {
+			wasAdded = addEventAt(aEvent, index);
+		}
+		return wasAdded;
+	}
+
+	/* Code from template association_AddManyToOne */
+	public Ticket addTicket(int aTicketId, double aPrice, String aName, Event aEvent) {
+		return new Ticket(aTicketId, aPrice, aName, this, aEvent);
+	}
+
+	public boolean addTicket(Ticket aTicket) {
+		boolean wasAdded = false;
+		if (tickets.contains(aTicket)) {
+			return false;
+		}
+		Attendee existingAttendee = aTicket.getAttendee();
+		boolean isNewAttendee = existingAttendee != null && !this.equals(existingAttendee);
+		if (isNewAttendee) {
+			aTicket.setAttendee(this);
+		} else {
+			tickets.add(aTicket);
+		}
+		wasAdded = true;
+		return wasAdded;
+	}
+
+	public boolean removeTicket(Ticket aTicket) {
+		boolean wasRemoved = false;
+		tickets.remove(aTicket);
+		aTicket.delete();
+		wasRemoved = true;
+		return wasRemoved;
+	}
+
+	/* Code from template association_AddIndexControlFunctions */
+	public boolean addTicketAt(Ticket aTicket, int index) {
+		boolean wasAdded = false;
+		if (addTicket(aTicket)) {
+			if (index < 0) {
+				index = 0;
+			}
+			if (index > numberOfTickets()) {
+				index = numberOfTickets() - 1;
+			}
+			tickets.remove(aTicket);
+			tickets.add(index, aTicket);
+			wasAdded = true;
+		}
+		return wasAdded;
+	}
+
+	public boolean addOrMoveTicketAt(Ticket aTicket, int index) {
+		boolean wasAdded = false;
+		if (tickets.contains(aTicket)) {
+			if (index < 0) {
+				index = 0;
+			}
+			if (index > numberOfTickets()) {
+				index = numberOfTickets() - 1;
+			}
+			tickets.remove(aTicket);
+			tickets.add(index, aTicket);
+			wasAdded = true;
+		} else {
+			wasAdded = addTicketAt(aTicket, index);
+		}
+		return wasAdded;
+	}
+
+	public void delete() {
+		super.delete();
+		for (int i = posts.size(); i > 0; i--) {
+			Post aPost = posts.get(i - 1);
+			aPost.delete();
+		}
+		for (int i = events.size(); i > 0; i--) {
+			Event aEvent = events.get(i - 1);
+			aEvent.delete();
+		}
+		for (int i = tickets.size(); i > 0; i--) {
+			Ticket aTicket = tickets.get(i - 1);
+			aTicket.delete();
+		}
+	}
 
 }
