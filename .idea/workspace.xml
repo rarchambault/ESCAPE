@@ -5,36 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="834c8847-d080-4418-9764-5d86b14da66e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/ca/mcgill/ecse428/ESCAPE/acceptance/AID007_Create_Landing_Page_Step_Def.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ca/mcgill/ecse428/ESCAPE/acceptance/UID011_Create_Profile_Step_Def.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/AID007_View_Landing_Page.feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/UID011_Create_Attendee_Profile.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/AID007_Create_Landing_Page.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/AID008_Create_About_Us_Page.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/AID008_View_About_Us_Page.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/CreatePost.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/PID001_Create_Text_Post.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/PostFeature.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/UID011_Create_Profile_Email.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/UID012_Create_Profile_Password.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/UID013_Create_Profile_Phone_Number.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/UID016_Delete_Profile_Email.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/UID016_Delete_Attendee_Profile.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/UID017_Delete_Profile_Password.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/UID018_Delete_Profile_Phone_Number.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/UID022_Delete_User_Profile.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/UID023_Create_User_Profiles.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/adminEditing.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/createPostFromGallery.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/deletePost.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/PID006_Delete_Post.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/editPost.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/PID008_Edit_Post.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/postComments.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/PID010_Comment_On_Post.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/postheader.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/threads.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/upvotesDownvotes.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/PID018_Upvote_Downvote_Post.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Attendee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Attendee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/PhotoGallery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/PhotoGallery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Ticket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/UserProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/UserProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/service/EventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/service/EventService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/EID001_Create_Event.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/EID001_Create_Event.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +99,7 @@
       <updated>1676856859089</updated>
       <workItem from="1676856860240" duration="2348000" />
       <workItem from="1676997413520" duration="5071000" />
-      <workItem from="1677258776443" duration="11080000" />
+      <workItem from="1677258776443" duration="15420000" />
     </task>
     <servers />
   </component>

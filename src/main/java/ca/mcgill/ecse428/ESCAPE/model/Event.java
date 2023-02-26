@@ -24,27 +24,21 @@ public class Event {
 
   //Event Associations
   @OneToMany(cascade= {CascadeType.ALL})
-  @JoinColumn(name="tickets")
   private List<Ticket> tickets;
   @OneToMany(cascade= {CascadeType.ALL})
-  @JoinColumn(name="photoGalleries")
   private List<PhotoGallery> photoGalleries;
-  @OneToMany(cascade= {CascadeType.ALL})
-  @JoinColumn(name="attendees")
-  private List<Attendee> attendees;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Event(String aName, String aDescription, double aTicketPrice, int aEventId, UserProfile aUserProfile) {
+  public Event(String aName, String aDescription, double aTicketPrice, int aEventId) {
     name = aName;
     description = aDescription;
     ticketPrice = aTicketPrice;
     id = aEventId;
     tickets = new ArrayList<Ticket>();
     photoGalleries = new ArrayList<PhotoGallery>();
-    attendees = new ArrayList<Attendee>();
   }
 
   public Event() {}
@@ -152,36 +146,6 @@ public class Event {
   public int indexOfPhotoGallery(PhotoGallery aPhotoGallery) {
     int index = photoGalleries.indexOf(aPhotoGallery);
     return index;
-  }
-
-  public Attendee getAttendee(int index) {
-    Attendee aAttendee = attendees.get(index);
-    return aAttendee;
-  }
-
-  public List<Attendee> getAttendees() {
-    List<Attendee> newAttendees = Collections.unmodifiableList(attendees);
-    return newAttendees;
-  }
-
-  public int numberOfAttendees() {
-    int number = attendees.size();
-    return number;
-  }
-
-  public boolean hasUAttendees() {
-    boolean has = attendees.size() > 0;
-    return has;
-  }
-
-  public int indexOfAttendee(Attendee aAttendee) {
-    int index = attendees.indexOf(aAttendee);
-    return index;
-  }
-
-  /* Code from template association_GetMany_clear */
-  protected void clear_attendees() {
-    attendees.clear();
   }
 
   /* Code from template association_MinimumNumberOfMethod */
@@ -326,25 +290,6 @@ public class Event {
     return wasAdded;
   }
 
-  //String aName, String aEmail, String aPassword, String aPhoto, int aUserId
-
-  public boolean addAttendee(Attendee aAttendee) {
-    boolean wasAdded = false;
-    if (attendees.contains(aAttendee)) {
-      return false;
-    }
-    attendees.add(aAttendee);
-    wasAdded = true;
-    return wasAdded;
-  }
-
-  public boolean removeAttendee(Attendee aAttendee) {
-    boolean wasRemoved = false;
-    attendees.remove(aAttendee);
-    wasRemoved = true;
-    return wasRemoved;
-  }
-
   /* Code from template association_set_specialization_reqCommonCode */
   public void delete() {
     for (int i = tickets.size(); i > 0; i--) {
@@ -354,10 +299,6 @@ public class Event {
     for (int i = photoGalleries.size(); i > 0; i--) {
       PhotoGallery aPhotoGallery = photoGalleries.get(i - 1);
       aPhotoGallery.delete();
-    }
-    for (int i = attendees.size(); i > 0; i--) {
-      UserProfile aUserProfile = attendees.get(i - 1);
-      aUserProfile.delete();
     }
   }
 }

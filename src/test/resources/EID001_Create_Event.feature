@@ -1,6 +1,7 @@
-Feature: Admin creates an event
-  As an admin, I want to be able to post events
-  So an admin can input event information and open the event for registration
+Feature: Create Event
+  As an admin
+  I want to be able to create events
+  So that users can see event information and registrater
 
   Scenario: Admin creates a new event
     Given the admin is trying to create an event
