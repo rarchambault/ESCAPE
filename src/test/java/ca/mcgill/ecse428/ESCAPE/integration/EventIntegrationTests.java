@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 
 import ca.mcgill.ecse428.ESCAPE.dto.EventResponseDto;
+import ca.mcgill.ecse428.ESCAPE.exception.EventException;
 import ca.mcgill.ecse428.ESCAPE.model.Event;
 import ca.mcgill.ecse428.ESCAPE.repository.EventRepository;
 
@@ -29,7 +30,6 @@ public class EventIntegrationTests {
 	private EventRepository eventRepo;
 
 	@BeforeEach
-	@AfterEach
 	public void clearDatabase() {
 		eventRepo.deleteAll();
 	}
@@ -42,13 +42,25 @@ public class EventIntegrationTests {
 	}
 
 	private int testCreateEvent() {
+		// set up event
 		Event event = new Event();
-        event.setName("Test Event");
+        String name = "Test Event";
+		event.setName(name);
         event.setDescription("Test Description");
         event.setName("Test name");
         event.setTicketPrice(12);
-        event.setEventId(21);
-        return event.getId();
+
+		// call method: create a new admin
+		ResponseEntity<EventDto> response = client.postForEntity("/event", new EventDto(name), EventDto.class);
+
+		// check response
+		assertNotNull(response);
+		assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
+		assertNotNull(response.getBody(), "Response has body");
+		assertEquals(name, response.getBody().name, "Response has correct email");
+		assertTrue(response.getBody().id > 0, "Response has valid ID");
+
+		return response.getBody().id;
 	}
 
 	private void testGetEvent(int id) {
@@ -58,6 +70,7 @@ public class EventIntegrationTests {
 
 		// check response
 		assertNotNull(response);
+		System.out.println(response);
 		assertEquals(HttpStatus.OK, response.getStatusCode(), "Response has correct status");
 		assertNotNull(response.getBody(), "Response has body");
 		assertTrue(response.getBody().id == id, "Response has correct ID");
@@ -67,7 +80,7 @@ public class EventIntegrationTests {
 	public void testCreateInvalidEvent() {
 		ResponseEntity<String> response = client.postForEntity("/event", new EventDto("   "), String.class);
 		assertNotNull(response);
-		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode(), "Response has correct status");
+		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode(), "Response has correct status");
 	}
 
 	@Test
@@ -93,6 +106,8 @@ public class EventIntegrationTests {
 class EventDto {
 	public int id;
 	public String name;
+	public String description;
+	public int ticketPrice;
 
 	// Need default constructor so that Jackson can instantiate the object
 	public EventDto() {

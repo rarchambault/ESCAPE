@@ -7,6 +7,5 @@ import java.util.List;
 public interface EventRepository extends CrudRepository<Event, Integer>{
 
 	public Event findEventById(int id);
-	public void deleteEventById(int id);
 
 }
