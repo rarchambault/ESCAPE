@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-EscapeApplication<ESCAPE>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "ca.mcgill.ecse428.ESCAPE.EscapeApplication",
+            "projectName": "ESCAPE",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

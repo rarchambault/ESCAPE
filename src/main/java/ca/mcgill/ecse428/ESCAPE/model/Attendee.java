@@ -1,10 +1,7 @@
 package ca.mcgill.ecse428.ESCAPE.model;
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.*;
 
@@ -19,24 +16,18 @@ public class Attendee extends UserProfile
   //------------------------
   //Attendee Associations
   @OneToMany(cascade= {CascadeType.ALL})
-  @JoinColumn(name="posts")
   private List<Post> posts;
-  @OneToMany(cascade= {CascadeType.ALL})
-  @JoinColumn(name="events")
-  private List<Event> events;
-  @OneToMany(cascade= {CascadeType.ALL})
-  @JoinColumn(name="tickets")
+  @ManyToMany(cascade= {CascadeType.ALL})
   private List<Ticket> tickets;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Attendee(String aName, String aEmail, String aPassword, String aPhoto, int aUserId)
+  public Attendee(String aName, String aEmail, String aPassword)
   {
-    super(aName, aEmail, aPassword, aPhoto, aUserId);
+    super(aName, aEmail, aPassword);
     posts = new ArrayList<Post>();
-    events = new ArrayList<Event>();
     tickets = new ArrayList<Ticket>();
   }
 
@@ -99,42 +90,7 @@ public class Attendee extends UserProfile
   {
     posts.clear();
   }
-  /* Code from template association_GetMany */
-  public Event getEvent(int index)
-  {
-    Event aEvent = events.get(index);
-    return aEvent;
-  }
 
-  public List<Event> getEvents()
-  {
-    List<Event> newEvents = Collections.unmodifiableList(events);
-    return newEvents;
-  }
-
-  public int numberOfEvents()
-  {
-    int number = events.size();
-    return number;
-  }
-
-  public boolean hasEvents()
-  {
-    boolean has = events.size() > 0;
-    return has;
-  }
-
-  public int indexOfEvent(Event aEvent)
-  {
-    int index = events.indexOf(aEvent);
-    return index;
-  }
-  /* Code from template association_GetMany_clear */
-  protected void clear_events()
-  {
-    events.clear();
-  }
-  /* Code from template association_GetMany_relatedSpecialization */
   public Post getPost_Post(int index)
   {
     Post aPost = (Post)posts.get(index);
@@ -177,63 +133,6 @@ public class Attendee extends UserProfile
     return 0;
   }
 
-  /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfEvents()
-  {
-    return 0;
-  }
-
-  public boolean addEvent(Event aEvent)
-  {
-    boolean wasAdded = false;
-    if (events.contains(aEvent)) { return false; }
-    aEvent.addAttendee(this);
-    events.add(aEvent);
-    wasAdded = true;
-    return wasAdded;
-  }
-
-  public boolean removeEvent(Event aEvent)
-  {
-    boolean wasRemoved = false;
-    aEvent.removeAttendee(this);
-    events.remove(aEvent);
-    wasRemoved = true;
-    return wasRemoved;
-  }
-  /* Code from template association_AddIndexControlFunctions */
-  public boolean addEventAt(Event aEvent, int index)
-  {
-    boolean wasAdded = false;
-    if(addEvent(aEvent))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfEvents()) { index = numberOfEvents() - 1; }
-      events.remove(aEvent);
-      events.add(index, aEvent);
-      wasAdded = true;
-    }
-    return wasAdded;
-  }
-
-  public boolean addOrMoveEventAt(Event aEvent, int index)
-  {
-    boolean wasAdded = false;
-    if(events.contains(aEvent))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfEvents()) { index = numberOfEvents() - 1; }
-      events.remove(aEvent);
-      events.add(index, aEvent);
-      wasAdded = true;
-    }
-    else
-    {
-      wasAdded = addEventAt(aEvent, index);
-    }
-    return wasAdded;
-  }
-
   /* Code from template association_AddManyToOne */
   public Ticket addTicket(int aTicketId, double aPrice, String aName, Event aEvent)
   {
@@ -244,11 +143,11 @@ public class Attendee extends UserProfile
   {
     boolean wasAdded = false;
     if (tickets.contains(aTicket)) { return false; }
-    Attendee existingAttendee = aTicket.getAttendee();
-    boolean isNewAttendee = existingAttendee != null && !this.equals(existingAttendee);
+    List<Attendee> existingAttendees = aTicket.getAttendees();
+    boolean isNewAttendee = existingAttendees != null && !existingAttendees.contains(this);
     if (isNewAttendee)
     {
-      aTicket.setAttendee(this);
+      aTicket.addAttendee(this);
     }
     else
     {
@@ -306,11 +205,6 @@ public class Attendee extends UserProfile
     {
       Post aPost = posts.get(i - 1);
       aPost.delete();
-    }
-    for(int i=events.size(); i > 0; i--)
-    {
-      Event aEvent = events.get(i - 1);
-      aEvent.delete();
     }
     for(int i=tickets.size(); i > 0; i--)
     {

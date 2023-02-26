@@ -22,9 +22,8 @@ public class Post
 
   //Post Associations
   @OneToMany(cascade= {CascadeType.ALL})
-  @JoinColumn(name="replies")
   private List<Reply> replies;
-  @OneToOne(optional = false)
+  @ManyToOne(optional = false)
   private Attendee attendee;
 
   //------------------------

@@ -1,112 +1,129 @@
 package ca.mcgill.ecse428.ESCAPE.model;
-/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 import jakarta.persistence.*;
-
+import java.time.LocalDateTime;
 import java.util.*;
-
-// line 34 "model.ump"
-// line 107 "model.ump"
 
 @Entity
 public class Event {
 
-  //------------------------
-  // MEMBER VARIABLES
-  //------------------------
+    //------------------------
+    // MEMBER VARIABLES
+    //------------------------
 
-  //Event Attributes
-  private String name;
-  private String description;
-  private double ticketPrice;
-  @Id
-  private int id;
+    // Event Attributes
+    private String name;
+    private String description;
+    private double ticketPrice;
+
+    @Id
+    private int id;
+    private int capacity;
+    private LocalDateTime startTime;
 
   //Event Associations
   @OneToMany(cascade= {CascadeType.ALL})
-  @JoinColumn(name="tickets")
   private List<Ticket> tickets;
   @OneToMany(cascade= {CascadeType.ALL})
-  @JoinColumn(name="photoGalleries")
   private List<PhotoGallery> photoGalleries;
-  @OneToMany(cascade= {CascadeType.ALL})
-  @JoinColumn(name="attendees")
-  private List<Attendee> attendees;
 
-  //------------------------
-  // CONSTRUCTOR
-  //------------------------
+    //------------------------
+    // CONSTRUCTOR
+    //------------------------
 
-  public Event(String aName, String aDescription, double aTicketPrice, int aEventId, UserProfile aUserProfile) {
-    name = aName;
-    description = aDescription;
-    ticketPrice = aTicketPrice;
-    id = aEventId;
-    tickets = new ArrayList<Ticket>();
-    photoGalleries = new ArrayList<PhotoGallery>();
-    attendees = new ArrayList<Attendee>();
-  }
+    public Event(String aName, String aDescription, double aTicketPrice, int aEventId, int aCapacity, LocalDateTime aStartTime) {
+        name = aName;
+        description = aDescription;
+        ticketPrice = aTicketPrice;
+        id = aEventId;
+        capacity = aCapacity;
+        startTime = aStartTime;
+        tickets = new ArrayList<Ticket>();
+        photoGalleries = new ArrayList<PhotoGallery>();
+    }
 
-  public Event() {}
+    public Event() {}
 
-  //------------------------
-  // INTERFACE
-  //------------------------
+    //------------------------
+    // INTERFACE
+    //------------------------
 
-  public boolean setName(String aName) {
-    boolean wasSet = false;
-    name = aName;
-    wasSet = true;
-    return wasSet;
-  }
+    public boolean setName(String aName) {
+        boolean wasSet = false;
+        name = aName;
+        wasSet = true;
+        return wasSet;
+    }
 
-  public boolean setDescription(String aDescription) {
-    boolean wasSet = false;
-    description = aDescription;
-    wasSet = true;
-    return wasSet;
-  }
+    public boolean setDescription(String aDescription) {
+        boolean wasSet = false;
+        description = aDescription;
+        wasSet = true;
+        return wasSet;
+    }
 
-  public boolean setTicketPrice(double aTicketPrice) {
-    boolean wasSet = false;
-    ticketPrice = aTicketPrice;
-    wasSet = true;
-    return wasSet;
-  }
+    public boolean setTicketPrice(double aTicketPrice) {
+        boolean wasSet = false;
+        ticketPrice = aTicketPrice;
+        wasSet = true;
+        return wasSet;
+    }
 
-  public boolean setEventId(int aEventId) {
-    boolean wasSet = false;
-    id = aEventId;
-    wasSet = true;
-    return wasSet;
-  }
+    public boolean setEventId(int aEventId) {
+        boolean wasSet = false;
+        id = aEventId;
+        wasSet = true;
+        return wasSet;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public boolean setCapacity(int aCapacity) {
+        boolean wasSet = false;
+        capacity = aCapacity;
+        wasSet = true;
+        return wasSet;
+    }
 
-  public String getDescription() {
-    return description;
-  }
+    public boolean setStartTime(LocalDateTime aStartTime) {
+        boolean wasSet = false;
+        startTime = aStartTime;
+        wasSet = true;
+        return wasSet;
+    }
 
-  public double getTicketPrice() {
-    return ticketPrice;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public int getId() {
-    return id;
-  }
+    public String getDescription() {
+        return description;
+    }
 
-  /* Code from template association_GetMany */
-  public Ticket getTicket(int index) {
-    Ticket aTicket = tickets.get(index);
-    return aTicket;
-  }
+    public double getTicketPrice() {
+        return ticketPrice;
+    }
 
-  public List<Ticket> getTickets() {
-    List<Ticket> newTickets = Collections.unmodifiableList(tickets);
-    return newTickets;
-  }
+    public int getId() {
+        return id;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    /* Code from template association_GetMany */
+    public Ticket getTicket(int index) {
+        Ticket aTicket = tickets.get(index);
+        return aTicket;
+    }
+
+    public List<Ticket> getTickets() {
+        List<Ticket> newTickets = Collections.unmodifiableList(tickets);
+        return newTickets;
+    }
 
   public int numberOfTickets() {
     int number = tickets.size();
@@ -152,36 +169,6 @@ public class Event {
   public int indexOfPhotoGallery(PhotoGallery aPhotoGallery) {
     int index = photoGalleries.indexOf(aPhotoGallery);
     return index;
-  }
-
-  public Attendee getAttendee(int index) {
-    Attendee aAttendee = attendees.get(index);
-    return aAttendee;
-  }
-
-  public List<Attendee> getAttendees() {
-    List<Attendee> newAttendees = Collections.unmodifiableList(attendees);
-    return newAttendees;
-  }
-
-  public int numberOfAttendees() {
-    int number = attendees.size();
-    return number;
-  }
-
-  public boolean hasUAttendees() {
-    boolean has = attendees.size() > 0;
-    return has;
-  }
-
-  public int indexOfAttendee(Attendee aAttendee) {
-    int index = attendees.indexOf(aAttendee);
-    return index;
-  }
-
-  /* Code from template association_GetMany_clear */
-  protected void clear_attendees() {
-    attendees.clear();
   }
 
   /* Code from template association_MinimumNumberOfMethod */
@@ -326,25 +313,6 @@ public class Event {
     return wasAdded;
   }
 
-  //String aName, String aEmail, String aPassword, String aPhoto, int aUserId
-
-  public boolean addAttendee(Attendee aAttendee) {
-    boolean wasAdded = false;
-    if (attendees.contains(aAttendee)) {
-      return false;
-    }
-    attendees.add(aAttendee);
-    wasAdded = true;
-    return wasAdded;
-  }
-
-  public boolean removeAttendee(Attendee aAttendee) {
-    boolean wasRemoved = false;
-    attendees.remove(aAttendee);
-    wasRemoved = true;
-    return wasRemoved;
-  }
-
   /* Code from template association_set_specialization_reqCommonCode */
   public void delete() {
     for (int i = tickets.size(); i > 0; i--) {
@@ -355,9 +323,17 @@ public class Event {
       PhotoGallery aPhotoGallery = photoGalleries.get(i - 1);
       aPhotoGallery.delete();
     }
-    for (int i = attendees.size(); i > 0; i--) {
-      UserProfile aUserProfile = attendees.get(i - 1);
-      aUserProfile.delete();
-    }
+  }
+
+  public void deleteStartTime() {
+    this.startTime = null;
+  }
+
+  public void deleteCapacity() {
+    this.capacity = (Integer) null;
+  }
+
+  public void deleteDescription() {
+    this.description = null;
   }
 }
