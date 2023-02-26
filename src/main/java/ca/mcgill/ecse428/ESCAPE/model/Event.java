@@ -2,7 +2,6 @@ package ca.mcgill.ecse428.ESCAPE.model;
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 import jakarta.persistence.*;
-
 import java.util.*;
 
 // line 34 "model.ump"
@@ -20,16 +19,17 @@ public class Event {
   private String description;
   private double ticketPrice;
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
 
   //Event Associations
-  @OneToMany(cascade= {CascadeType.ALL})
+  @OneToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
   @JoinColumn(name="tickets")
   private List<Ticket> tickets;
-  @OneToMany(cascade= {CascadeType.ALL})
+  @OneToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
   @JoinColumn(name="photoGalleries")
   private List<PhotoGallery> photoGalleries;
-  @OneToMany(cascade= {CascadeType.ALL})
+  @OneToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
   @JoinColumn(name="attendees")
   private List<Attendee> attendees;
 
