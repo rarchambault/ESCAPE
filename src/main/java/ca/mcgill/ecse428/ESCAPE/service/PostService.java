@@ -1,51 +1,74 @@
 package ca.mcgill.ecse428.ESCAPE.service;
 
+import java.util.List;
+import java.util.Optional;
 
-import ca.mcgill.ecse428.ESCAPE.dto.PostRequestDto;
-import ca.mcgill.ecse428.ESCAPE.dto.PostResponseDto;
-import ca.mcgill.ecse428.ESCAPE.exception.EventException;
-import ca.mcgill.ecse428.ESCAPE.model.Attendee;
-import ca.mcgill.ecse428.ESCAPE.model.Event;
-import ca.mcgill.ecse428.ESCAPE.model.Post;
-import ca.mcgill.ecse428.ESCAPE.model.UserProfile;
-import ca.mcgill.ecse428.ESCAPE.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import ca.mcgill.ecse428.ESCAPE.dto.PostRequestDto;
+import ca.mcgill.ecse428.ESCAPE.dto.PostResponseDto;
+import ca.mcgill.ecse428.ESCAPE.exception.EscapeException;
+import ca.mcgill.ecse428.ESCAPE.model.Attendee;
+import ca.mcgill.ecse428.ESCAPE.model.Post;
+import ca.mcgill.ecse428.ESCAPE.model.UserProfile;
+import ca.mcgill.ecse428.ESCAPE.repository.AttendeeRepository;
+import ca.mcgill.ecse428.ESCAPE.repository.PostRepository;
 
 @Service
 public class PostService {
-    private final PostRepository postRepository; // make interfdace
 
+	@Autowired
+	PostRepository postRepository;
+	@Autowired
+	AttendeeRepository attendeeRepository;
 
-    @Autowired
-    public PostService(PostRepository postRepository) {
-        this.postRepository = postRepository;
-    }
+	@Transactional
+	public Iterable<Post> getAllPosts() {
+		return postRepository.findAll();
+	}
 
-    public Iterable<Post> getAllPost() {
-        return postRepository.findAll();
-    }
+	@Transactional
+	public Post getPostById(int id) throws EscapeException {
+		Post post = postRepository.findPostById(id);
+		if (post == null) {
+			throw new EscapeException(HttpStatus.NOT_FOUND, "Post not found.");
+		}
+		return post;
+	}
 
-    public PostResponseDto createEvent(PostRequestDto request) {
-        Attendee creator = null;
-        Post post = new Post(request.getContent(),0,creator);
-        postRepository.save(post);
-        return new PostResponseDto(post);
+	// Add user profile when the repo is made
+	@Transactional
+	public PostResponseDto createPost(PostRequestDto request) throws EscapeException {
+		String content = request.getContent();
+		Attendee attendee = attendeeRepository.findAttendeeByUserId(request.getUserId());
+		if (attendee == null) {
+			throw new EscapeException(HttpStatus.NOT_FOUND, "Post creator not found.");
+		}
+		Post post = new Post(content, attendee);
+		postRepository.save(post);
+		return new PostResponseDto(post);
+	}
 
-    }
+	@Transactional
+	public void updatePost(int id, Post post) throws EscapeException {
+		Post optionalPost = postRepository.findPostById(id);
+		if (optionalPost != null) {
+			post.setPostId(id);
+			postRepository.save(post);
+		} else {
+			throw new EscapeException(HttpStatus.NOT_FOUND, "Post not found.");
+		}
+	}
 
-    public void deletePost(int id) throws EventException {
-        Optional<Post> optionalPost = postRepository.findById(id);
-
-        if (optionalPost.isPresent()) {
-            postRepository.delete(optionalPost.get());
-        } else {
-            throw new EventException(HttpStatus.NOT_FOUND, "Event not found with id: " + id);
-
-        }
-    }
+	@Transactional
+	public void deletePost(int id) throws EscapeException {
+		Post post = postRepository.findPostById(id);
+		if (post == null) {
+			throw new EscapeException(HttpStatus.NOT_FOUND, "Post not found.");
+		}
+		postRepository.delete(post);
+	}
 }
-

@@ -31,9 +31,8 @@ public class Post {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public Post(String aContent, int aPostId, Attendee aAttendee) {
+	public Post(String aContent, Attendee aAttendee) {
 		content = aContent;
-		id = aPostId;
 		replies = new ArrayList<Reply>();
 		boolean didAddAttendee = setAttendee(aAttendee);
 		if (!didAddAttendee) {

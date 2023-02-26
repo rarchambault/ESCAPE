@@ -12,8 +12,6 @@ public class PostResponseDto {
 
         this.id = post.getPostId();
         this.content = post.getContent();
-
-
     }
 
     public int getId() {
@@ -23,5 +21,14 @@ public class PostResponseDto {
     public void setId(int id) {
         this.id = id;
     }
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 
 }
