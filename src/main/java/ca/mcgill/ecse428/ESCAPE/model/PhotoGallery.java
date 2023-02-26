@@ -22,7 +22,6 @@ public class PhotoGallery
   @ManyToOne(optional = false)
   private Event event;
   @OneToMany(cascade= {CascadeType.ALL})
-  @JoinColumn(name="photos")
   private List<Photo> photos;
 
   //------------------------
