@@ -10,7 +10,7 @@ public class EventResponseDto {
 	private double ticketPrice;
 	
 	public EventResponseDto(Event event) {
-		this.id = event.getEventId();
+		this.id = event.getId();
 		this.name = event.getName();
 		this.description = event.getDescription();
 		this.ticketPrice = event.getTicketPrice();

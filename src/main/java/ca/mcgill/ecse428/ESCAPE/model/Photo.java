@@ -1,12 +1,14 @@
 package ca.mcgill.ecse428.ESCAPE.model;
-
-/*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 // line 59 "model.ump"
 // line 129 "model.ump"
+@Entity
 public class Photo
 {
 
@@ -16,9 +18,11 @@ public class Photo
 
   //Photo Attributes
   private String photoPath;
+  @Id
   private int photoId;
 
   //Photo Associations
+  @ManyToOne(optional = false)
   private PhotoGallery photoGallery;
 
   //------------------------
@@ -35,6 +39,8 @@ public class Photo
       throw new RuntimeException("Unable to create photo due to photoGallery. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
   }
+
+  public Photo() {}
 
   //------------------------
   // INTERFACE
