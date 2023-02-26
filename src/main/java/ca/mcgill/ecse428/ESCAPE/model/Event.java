@@ -1,112 +1,132 @@
 package ca.mcgill.ecse428.ESCAPE.model;
-/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 import jakarta.persistence.*;
-
 import java.util.*;
-
-// line 34 "model.ump"
-// line 107 "model.ump"
 
 @Entity
 public class Event {
 
-  //------------------------
-  // MEMBER VARIABLES
-  //------------------------
+    //------------------------
+    // MEMBER VARIABLES
+    //------------------------
 
-  //Event Attributes
-  private String name;
-  private String description;
-  private double ticketPrice;
-  @Id
-  private int id;
+    // Event Attributes
+    private String name;
+    private String description;
+    private double ticketPrice;
+    private int id;
+    private int capacity;
+    private String startTime;
 
-  //Event Associations
-  @OneToMany(cascade= {CascadeType.ALL})
-  @JoinColumn(name="tickets")
-  private List<Ticket> tickets;
-  @OneToMany(cascade= {CascadeType.ALL})
-  @JoinColumn(name="photoGalleries")
-  private List<PhotoGallery> photoGalleries;
-  @OneToMany(cascade= {CascadeType.ALL})
-  @JoinColumn(name="attendees")
-  private List<Attendee> attendees;
+    // Event Associations
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "tickets")
+    private List<Ticket> tickets;
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "photoGalleries")
+    private List<PhotoGallery> photoGalleries;
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "attendees")
+    private List<Attendee> attendees;
 
-  //------------------------
-  // CONSTRUCTOR
-  //------------------------
+    //------------------------
+    // CONSTRUCTOR
+    //------------------------
 
-  public Event(String aName, String aDescription, double aTicketPrice, int aEventId, UserProfile aUserProfile) {
-    name = aName;
-    description = aDescription;
-    ticketPrice = aTicketPrice;
-    id = aEventId;
-    tickets = new ArrayList<Ticket>();
-    photoGalleries = new ArrayList<PhotoGallery>();
-    attendees = new ArrayList<Attendee>();
-  }
+    public Event(String aName, String aDescription, double aTicketPrice, int aEventId, int aCapacity, String aStartTime) {
+        name = aName;
+        description = aDescription;
+        ticketPrice = aTicketPrice;
+        id = aEventId;
+        capacity = aCapacity;
+        startTime = aStartTime;
+        tickets = new ArrayList<Ticket>();
+        photoGalleries = new ArrayList<PhotoGallery>();
+        attendees = new ArrayList<Attendee>();
+    }
 
-  public Event() {}
+    public Event() {}
 
-  //------------------------
-  // INTERFACE
-  //------------------------
+    //------------------------
+    // INTERFACE
+    //------------------------
 
-  public boolean setName(String aName) {
-    boolean wasSet = false;
-    name = aName;
-    wasSet = true;
-    return wasSet;
-  }
+    public boolean setName(String aName) {
+        boolean wasSet = false;
+        name = aName;
+        wasSet = true;
+        return wasSet;
+    }
 
-  public boolean setDescription(String aDescription) {
-    boolean wasSet = false;
-    description = aDescription;
-    wasSet = true;
-    return wasSet;
-  }
+    public boolean setDescription(String aDescription) {
+        boolean wasSet = false;
+        description = aDescription;
+        wasSet = true;
+        return wasSet;
+    }
 
-  public boolean setTicketPrice(double aTicketPrice) {
-    boolean wasSet = false;
-    ticketPrice = aTicketPrice;
-    wasSet = true;
-    return wasSet;
-  }
+    public boolean setTicketPrice(double aTicketPrice) {
+        boolean wasSet = false;
+        ticketPrice = aTicketPrice;
+        wasSet = true;
+        return wasSet;
+    }
 
-  public boolean setEventId(int aEventId) {
-    boolean wasSet = false;
-    id = aEventId;
-    wasSet = true;
-    return wasSet;
-  }
+    public boolean setEventId(int aEventId) {
+        boolean wasSet = false;
+        id = aEventId;
+        wasSet = true;
+        return wasSet;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public boolean setCapacity(int aCapacity) {
+        boolean wasSet = false;
+        capacity = aCapacity;
+        wasSet = true;
+        return wasSet;
+    }
 
-  public String getDescription() {
-    return description;
-  }
+    public boolean setStartTime(String aStartTime) {
+        boolean wasSet = false;
+        startTime = aStartTime;
+        wasSet = true;
+        return wasSet;
+    }
 
-  public double getTicketPrice() {
-    return ticketPrice;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public int getId() {
-    return id;
-  }
+    public String getDescription() {
+        return description;
+    }
 
-  /* Code from template association_GetMany */
-  public Ticket getTicket(int index) {
-    Ticket aTicket = tickets.get(index);
-    return aTicket;
-  }
+    public double getTicketPrice() {
+        return ticketPrice;
+    }
 
-  public List<Ticket> getTickets() {
-    List<Ticket> newTickets = Collections.unmodifiableList(tickets);
-    return newTickets;
-  }
+    public int getId() {
+        return id;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    /* Code from template association_GetMany */
+    public Ticket getTicket(int index) {
+        Ticket aTicket = tickets.get(index);
+        return aTicket;
+    }
+
+    public List<Ticket> getTickets() {
+        List<Ticket> newTickets = Collections.unmodifiableList(tickets);
+        return newTickets;
+    }
 
   public int numberOfTickets() {
     int number = tickets.size();
@@ -359,5 +379,17 @@ public class Event {
       UserProfile aUserProfile = attendees.get(i - 1);
       aUserProfile.delete();
     }
+  }
+
+  public void deleteStartTime() {
+    this.startTime = null;
+  }
+
+  public void deleteCapacity() {
+    this.capacity = (Integer) null;
+  }
+
+  public void deleteDescription() {
+    this.description = null;
   }
 }

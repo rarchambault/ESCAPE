@@ -7,6 +7,8 @@ public class EventRequestDto {
 	private String description;
 	private double ticketPrice;
 	private int userId;
+	private int capacity;
+	private String startTime;
 	
 	public int getUserId() {
 		return userId;
@@ -32,6 +34,16 @@ public class EventRequestDto {
 	public void setTicketPrice(double ticketPrice) {
 		this.ticketPrice = ticketPrice;
 	}
-
-
+	public int getCapacity() {
+		return capacity;
+	}
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+	public String getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
 }

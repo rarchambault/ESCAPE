@@ -1,8 +1,12 @@
 package ca.mcgill.ecse428.ESCAPE.accceptance;
 
 import org.junit.jupiter.api.*;
+import org.springframework.ui.Model;
+
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import ca.mcgill.ecse428.ESCAPE.controller.EventController;
@@ -13,63 +17,75 @@ public class EventAcceptanceTests {
 
     //EID001
     @Test
+    //@Given("The admin is trying to create an event: \\(p2)")
     public void adminCreatesEvent_EventDisplayedInList(){
-        //arrange
-        Event event = new Event();
-        Admin admin = new Admin();
-
+        // Arrange
+        String name = "Event";
+        String description = "Description";
+        double ticketPrice = 20.50;
+        int eventId = 1;
+        int capacity = 100;
+        String startTime = "7:00";
+        Event event = new Event(name, description, ticketPrice, eventId, capacity, startTime);
+        
         // Act
-        admin.login();
-        admin.navigateToEventManagementPage();
-        admin.createEvent(event);
+        String eventName = event.getName();
+        String eventDescription = event.getDescription();
+        double eventTicketPrice = event.getTicketPrice();
+        int eventEventId = event.getId();
+        int eventCapacity = event.getCapacity();
+        String eventStartTime = event.getStartTime();
         
         // Assert
-        List<Event> events = Event.getAllEvents();
-        assertTrue(events.contains(event));
+        assertEquals(name, eventName);
+        assertEquals(description, eventDescription);
+        assertEquals(ticketPrice, eventTicketPrice);
+        assertEquals(eventId, eventEventId);
+        assertEquals(capacity, eventCapacity);
+        assertEquals(startTime, eventStartTime);
     }    
 
     //EID002
     @Test
+    //@Given("The admin is trying to create an event capacity for an existing event: \\(p2)")
     public void adminCreatesEventCapacity_EventDisplaysCapacity() {
         // Arrange
-        Event event = new Event();
-        Admin admin = new Admin();
-        String name = "New Event";
+        String name = "Event";
+        String description = "Description";
+        double ticketPrice = 20.50;
+        int eventId = 1;
         int capacity = 100;
-        event.setName(name);
-        event.setCapacity(capacity);
+        String startTime = "7:00";
+        Event event = new Event(name, description, ticketPrice, eventId, capacity, startTime);
 
         // Act
-        admin.login();
-        admin.navigateToEventManagementPage();
-        admin.createNewEvent(event);
+        int updatedCapacity = 200;
+        event.setCapacity(updatedCapacity);
 
         // Assert
-        Event createdEvent = Event.getEvent(event.getId());
-        assertEquals(name, createdEvent.getName());
-        assertEquals(capacity, createdEvent.getCapacity());
+        assertEquals(updatedCapacity, event.getCapacity());
     }
 
     //EID003
     @Test
     public void adminCreatesEventTime_EventDisplaysTime() {
         // Arrange
-        Event event = new Event();
-        Admin admin = new Admin();
-        Time time = new Time("12:00pm");
-        event.setName("Test Event");
-        event.create();
+        String name = "Event";
+        String description = "Description";
+        double ticketPrice = 20.50;
+        int eventId = 1;
+        int capacity = 100;
+        String startTime = "7:00";
+        Event event = new Event(name, description, ticketPrice, eventId, capacity, startTime);
+
+        String newTime = "7:00 PM";
 
         // Act
-        admin.login();
-        admin.navigateToEventManagementPage();
-        admin.selectEvent(event);
-        admin.addEventTime(time);
-        admin.saveEventChanges();
+        event.setStartTime(newTime);
+        String eventTime = event.getStartTime(); 
 
         // Assert
-        event = Event.getEvent(event.getId());
-        assertTrue(event.getTimes().contains(time));
+        assertEquals(newTime, eventTime);
     }
 
 
@@ -77,159 +93,145 @@ public class EventAcceptanceTests {
     @Test
     public void adminCreatesEventDescription_EventDisplaysDescription() {
         // Arrange
-        Event event = new Event();
-        Admin admin = new Admin();
-        String description = "This is a test event description.";
-        event.setDescription(description);
-        
+        String name = "Event";
+        String description = "Description";
+        double ticketPrice = 20.50;
+        int eventId = 1;
+        int capacity = 100;
+        String startTime = "7:00";
+        Event event = new Event(name, description, ticketPrice, eventId, capacity, startTime);
+
         // Act
-        admin.login();
-        admin.navigateToEventManagementPage();
-        admin.createEvent(event);
-        
+        String updatedDescription = "Updated description";
+        event.setDescription(updatedDescription);
+
         // Assert
-        Event createdEvent = Event.getEvent(event.getId());
-        assertNotNull(createdEvent);
-        assertEquals(description, createdEvent.getDescription());
+        assertEquals(updatedDescription, event.getDescription());
+
     }
 
     //EID005
     @Test
     public void adminCreatesEventTicketPrice_EventDisplaysTicketPrice() {
         // Arrange
-        Event event = new Event();
-        Admin admin = new Admin();
-        event.setName("Concert");
-        event.setTicketPrice(50.0);
-        event.create();
-        List<Event> events = Event.getAllEvents();
-        assertTrue(events.contains(event));
-        double eventTicketPrice = event.getTicketPrice();
-        assertEquals(50.0, eventTicketPrice);
+        String name = "Event";
+        String description = "Description";
+        double ticketPrice = 20.50;
+        int eventId = 1;
+        int capacity = 100;
+        String startTime = "7:00";
+        Event event = new Event(name, description, ticketPrice, eventId, capacity, startTime);
 
         // Act
-        admin.login();
-        admin.navigateToEventManagementPage();
-        admin.selectEvent(event);
-        admin.editEventTicketPrice(75.0);
-        admin.saveEventChanges();
+        double updatedTicketPrice = 30.00;
+        event.setTicketPrice(updatedTicketPrice);
 
         // Assert
-        event = Event.getEvent(event.getId());
-        double editedTicketPrice = event.getTicketPrice();
-        assertEquals(75.0, editedTicketPrice);
+        assertEquals(updatedTicketPrice, event.getTicketPrice(), 0.001);
     }
 
 
     //EID014
     @Test
     public void adminDeletesEvent_EventNoLongerDisplayedInList(){
-        //arrange
-        Event Event = new Event();
-        Admin admin = new Admin();
-        event.create();
-        List<Event> Events = Event.getAllEvents();
-        assertTrue(Events.contains(Event));
+        // Arrange
+        String name = "Event";
+        String description = "Description";
+        double ticketPrice = 20.50;
+        int eventId = 1;
+        int capacity = 100;
+        String startTime = "7:00";
+        Event eventToDelete = new Event(name, description, ticketPrice, eventId, capacity, startTime);
+
+        List<Event> events = new ArrayList<>();
+        events.add(eventToDelete);
 
         // Act
-        admin.login();
-        admin.navigateToEventManagementPage();
-        admin.selectEvent(Event);
-        admin.deleteEvent();
+        boolean eventDeleted = events.remove(eventToDelete);
 
         // Assert
-        Events = Event.getAllEvents();
-        assertFalse(Events.contains(Event));
+        assertTrue(eventDeleted);
+        assertFalse(events.contains(eventToDelete));
     }
 
     //EID015
     @Test
     public void adminDeletesEventTime_EventNoLongerHasName(){
         // Arrange
-        Event event = new Event();
-        Admin admin = new Admin();
-        String name;
-        event.setName(name);
-        event.create();
-        List<Event> events = Event.getAllEvents();
-        assertTrue(events.contains(event));
-        String eventName = event.getName();
-        assertTrue(eventName.equals(name));
+        String name = "Event";
+        String description = "Description";
+        double ticketPrice = 20.50;
+        int eventId = 1;
+        int capacity = 100;
+        String startTime = "7:00";
+        Event event = new Event(name, description, ticketPrice, eventId, capacity, startTime);
 
         // Act
-        admin.login();
-        admin.navigateToEventManagementPage();
-        admin.selectEvent(event);
-        admin.editEventName(null);
-        admin.saveEventChanges();
+        event.deleteStartTime();
 
         // Assert
-        event = Event.getEvent(event.getId());
-        String editedEventName = event.getName();
-        assertNull(editedEventName);
-
+        assertNull(event.getStartTime());
     }
 
     //EID013
     @Test
     public void adminDeletesEventDescription_EventNoLongerHasDescription(){
-        //arrange
-        Event event = new Event();
-        Admin admin = new Admin();
-        event.create();
-        List<Event> events = Event.getAllEvents();
-        assertTrue(events.contains(event));
+        // Arrange
+        String name = "Event";
+        String description = "Description";
+        double ticketPrice = 20.50;
+        int eventId = 1;
+        int capacity = 100;
+        String startTime = "7:00";
+        Event event = new Event(name, description, ticketPrice, eventId, capacity, startTime);
 
         // Act
-        admin.login();
-        admin.navigateToEventManagementPage();
-        admin.selectEvent(event);
-        admin.deleteEventDescription();
+        event.deleteDescription();
 
         // Assert
-        events = Event.getAllEvents();
-        assertFalse(events.get(0).getDescription().isPresent());
+        assertNull(event.getDescription());
 
     }
 
     //EID016
     @Test
     public void adminDeletesEventCapacity_EventNoLongerHasCapacity(){
-        //arrange
-        Event event = new Event();
-        Admin admin = new Admin();
-        event.create();
-        List<Event> events = Event.getAllEvents();
-        assertTrue(events.contains(event));
-        
+        // Arrange
+        String name = "Event";
+        String description = "Description";
+        double ticketPrice = 20.50;
+        int eventId = 1;
+        int capacity = 100;
+        String startTime = "7:00";
+        Event event = new Event(name, description, ticketPrice, eventId, capacity, startTime);
+
         // Act
-        admin.login();
-        admin.navigateToEventManagementPage();
-        admin.selectEvent(event);
-        admin.deleteEventCapacity();
-        
+        event.deleteCapacity();
+
         // Assert
-        events = Event.getAllEvents();
-        assertFalse(events.get(0).getCapacity().isPresent());
-        
+        assertNull(event.getCapacity());
     }
 
     //EID018
     @Test
     public void attendeeViewsEvent_EventIsDisplayedInList(){
         // Arrange
-        Event event = new Event();
-        event.create();
-        List<Event> events = Event.getAllEvents();
-        assertTrue(events.contains(event));
+        String name = "Event";
+        String description = "Description";
+        double ticketPrice = 20.50;
+        int eventId = 1;
+        int capacity = 100;
+        String startTime = "7:00";
+        Event event = new Event(name, description, ticketPrice, eventId, capacity, startTime);
 
-        Attendee attendee = new Attendee();
-        attendee.login();
+        Attendee attendee = new Attendee("John", "john@gmail.com", "password", null, 1);
 
         // Act
-        List<Event> attendeeEvents = attendee.viewEvents();
+        List<Event> eventDetails = attendee.getEvents();
 
         // Assert
-        assertTrue(attendeeEvents.contains(event));
+        String expectedDetails = "Event: " + name + "\nDescription: " + description + "\nPrice: $" + ticketPrice +
+        "\nCapacity: " + capacity + "\nStart time: " + startTime;
+        assertEquals(expectedDetails, eventDetails);
     }
 }

@@ -40,7 +40,7 @@ public class EventService {
     public EventResponseDto createEvent(EventRequestDto request) {
     	UserProfile creator = null;
     	//creator = UserProfileRepository.getUserProfileById(request.getUserId());
-    	Event event = new Event(request.getName(), request.getDescription(), request.getTicketPrice(), 0, creator);
+    	Event event = new Event(request.getName(), request.getDescription(), request.getTicketPrice(), request.getUserId(), request.getCapacity(), request.getStartTime());
     	eventRepository.save(event);
     	return new EventResponseDto(event);
     }
