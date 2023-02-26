@@ -38,7 +38,7 @@ public class EventIntegrationTests {
 	public void testCreateAndGetAndDeleteEvent() {
 		int id = testCreateEvent();
 		testGetEvent(id);
-		//testDeleteEvent(id);
+		testDeleteEvent(id);
 	}
 
 	private int testCreateEvent() {
@@ -96,7 +96,7 @@ public class EventIntegrationTests {
 	private void testDeleteEvent(int id) {
 		client.delete("/event/" + id);
 		try {
-			client.getForEntity("/event/" + id, String.class);
+			client.getForEntity("/event/" + id, EventResponseDto.class);
 			fail("Event was found!");
 		} catch (RestClientException | IllegalArgumentException e) {
 		}
