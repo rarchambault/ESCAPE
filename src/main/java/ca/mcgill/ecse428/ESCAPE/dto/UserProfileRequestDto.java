@@ -1,10 +1,9 @@
 package ca.mcgill.ecse428.ESCAPE.dto;
 
-public class UserProfileDto {
+public class UserProfileRequestDto {
     private String name;
     private String email;
     private String password;
-    private String photo;
     private int userId;
 
     public String getName() {
@@ -29,14 +28,6 @@ public class UserProfileDto {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
     }
 
     public int getUserId() {

@@ -6,22 +6,18 @@ public class UserProfileResponseDto {
     
     public String email;
     public String name;
-    public String photo;
     public int userId;
     public String role;
 
-    public UserProfileResponseDto(String email, String name, String photo, int userId, String role) {
+    public UserProfileResponseDto(String email, String name, int userId, String role) {
         this.email = email;
         this.name = name;
-        this.photo = photo;
         this.userId = userId;
     }
 
     public UserProfileResponseDto(UserProfile userProfile, String role) {
         this.email = userProfile.getEmail();
         this.name = userProfile.getName();
-        this.photo = userProfile.getPhoto();
-        this.userId = userProfile.getUserId();
         this.role = role;
     }
 
@@ -42,14 +38,6 @@ public class UserProfileResponseDto {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
     }
 
     public int getUserId() {
