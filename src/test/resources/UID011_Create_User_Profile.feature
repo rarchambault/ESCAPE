@@ -38,8 +38,8 @@ Feature: Create User Profile
 
     Scenario Outline: Create attendee profile failed due to duplicated emails
         When a new attendee attempts to register with "<name>", "<email>" , "<password>"
-        Then the following "<error>" shall be raised. (p9)
-        Then there are 2 members in the system. (p9)
+        Then the following "<error>" shall be raised.
+        Then there are 2 members in the system.
 
         Examples:
             | email         | password  | name  | error |
