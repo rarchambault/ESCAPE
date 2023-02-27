@@ -31,11 +31,10 @@ public class Event {
     // CONSTRUCTOR
     //------------------------
 
-    public Event(String aName, String aDescription, double aTicketPrice, int aEventId, int aCapacity, LocalDateTime aStartTime) {
+    public Event(String aName, String aDescription, double aTicketPrice, int aCapacity, LocalDateTime aStartTime) {
         name = aName;
         description = aDescription;
         ticketPrice = aTicketPrice;
-        id = aEventId;
         capacity = aCapacity;
         startTime = aStartTime;
         tickets = new ArrayList<Ticket>();
