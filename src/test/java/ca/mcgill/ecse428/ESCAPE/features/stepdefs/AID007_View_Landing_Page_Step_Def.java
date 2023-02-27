@@ -1,14 +1,14 @@
-package ca.mcgill.ecse428.ESCAPE.features;
+package ca.mcgill.ecse428.ESCAPE.features.stepdefs;
 
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class AID008_View_About_Us_Page_Step_Def {
+public class AID007_View_Landing_Page_Step_Def {
 
     private WebDriver driver;
 
@@ -17,16 +17,15 @@ public class AID008_View_About_Us_Page_Step_Def {
         // Initialize WebDriver and navigate to the website
         System.setProperty("webdriver.chrome.driver", "path/to/chromedriver.exe");
         driver = new ChromeDriver();
-        driver.get("http://localhost:8081/about");
     }
 
-    @When("I access the about us page")
-    public void iAccessTheAboutUsPage() {
-        driver.get("http://localhost:8081/about");
+    @When("I access the landing page")
+    public void iAccessTheLandingPage() {
+        driver.get("http://localhost:8081/home");
     }
 
-    @Then("I should see the about us page with navigation menu and informative content")
-    public void iShouldSeeTheAboutUsPageWithNavigationMenuAndInformativeContent() {
+    @Then("I should see the landing page with navigation menu and informative content")
+    public void iShouldSeeTheLandingPageWithNavigationMenuAndInformativeContent() {
         // Close the WebDriver
         driver.quit();
     }

@@ -1,4 +1,4 @@
-package ca.mcgill.ecse428.ESCAPE.features;
+package ca.mcgill.ecse428.ESCAPE.features.stepdefs;
 
 import org.springframework.boot.test.context.SpringBootTest;
 

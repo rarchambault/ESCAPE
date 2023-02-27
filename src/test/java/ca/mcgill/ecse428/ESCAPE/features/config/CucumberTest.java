@@ -1,4 +1,4 @@
-package ca.mcgill.ecse428.ESCAPE.features;
+package ca.mcgill.ecse428.ESCAPE.features.config;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features",
-        glue = "ca.mcgill.ecse428.ESCAPE.features"
+        glue = "ca.mcgill.ecse428.ESCAPE.features.stepdefs"
 )
 public class CucumberTest {
 }

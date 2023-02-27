@@ -1,4 +1,4 @@
-package ca.mcgill.ecse428.ESCAPE.features;
+package ca.mcgill.ecse428.ESCAPE.features.stepdefs;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
