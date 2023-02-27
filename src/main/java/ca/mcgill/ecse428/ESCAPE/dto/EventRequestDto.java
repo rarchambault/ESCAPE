@@ -1,19 +1,15 @@
 package ca.mcgill.ecse428.ESCAPE.dto;
 
+import java.time.LocalDateTime;
+
 public class EventRequestDto {
 
 	// attributes
 	private String name;
 	private String description;
 	private double ticketPrice;
-	private int userId;
-	
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+	private int capacity;
+	private LocalDateTime startTime;
 	public String getName() {
 		return name;
 	}
@@ -32,6 +28,16 @@ public class EventRequestDto {
 	public void setTicketPrice(double ticketPrice) {
 		this.ticketPrice = ticketPrice;
 	}
-
-
+	public int getCapacity() {
+		return capacity;
+	}
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+	public LocalDateTime getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(LocalDateTime startTime) {
+		this.startTime = startTime;
+	}
 }
