@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import HomePage from './pages/HomePage.vue'
 import vuetify from './plugins/vuetify'
+import TicketingPage from './pages/TicketingPage'
 
 Vue.config.productionTip = false
 
 const routes = {
   '/': HomePage,
   '/home': HomePage,
+  "/ticketing": TicketingPage,
 }
 
 new Vue({
