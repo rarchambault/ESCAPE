@@ -19,9 +19,9 @@ public class Admin extends UserProfile
   // CONSTRUCTOR
   //------------------------
 
-  public Admin(String aName, String aEmail, String aPassword, String aPhoto, int aUserId)
+  public Admin(String aName, String aEmail, String aPassword)
   {
-    super(aName, aEmail, aPassword, aPhoto, aUserId);
+    super(aName, aEmail, aPassword);
   }
 
   public Admin() {

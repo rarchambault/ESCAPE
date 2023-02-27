@@ -20,20 +20,16 @@ public class UserProfile
   @Id
   private String email;
   private String password;
-  private String photo;
-  private int userId;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public UserProfile(String aName, String aEmail, String aPassword, String aPhoto, int aUserId)
+  public UserProfile(String aName, String aEmail, String aPassword)
   {
     name = aName;
     email = aEmail;
     password = aPassword;
-    photo = aPhoto;
-    userId = aUserId;
   }
 
   public UserProfile() {}
@@ -66,22 +62,6 @@ public class UserProfile
     return wasSet;
   }
 
-  public boolean setPhoto(String aPhoto)
-  {
-    boolean wasSet = false;
-    photo = aPhoto;
-    wasSet = true;
-    return wasSet;
-  }
-
-  public boolean setUserId(int aUserId)
-  {
-    boolean wasSet = false;
-    userId = aUserId;
-    wasSet = true;
-    return wasSet;
-  }
-
   public String getName()
   {
     return name;
@@ -96,18 +76,6 @@ public class UserProfile
   {
     return password;
   }
-
-  public String getPhoto()
-  {
-    return photo;
-  }
-
-  public int getUserId()
-  {
-    return userId;
-  }
-  /* Code from template association_GetMany */
-
 
   public void delete()
   {
