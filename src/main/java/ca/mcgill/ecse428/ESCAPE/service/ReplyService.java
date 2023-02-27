@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ca.mcgill.ecse428.ESCAPE.model.Reply;
+import ca.mcgill.ecse428.ESCAPE.model.Post;
 import ca.mcgill.ecse428.ESCAPE.repository.ReplyRepository;
+import ca.mcgill.ecse428.ESCAPE.repository.PostRepository;
+
 
 
 @Service
@@ -24,23 +27,21 @@ public class ReplyService {
         return null;
     }
 
-    public Reply addReply(Reply reply) {
-        return replyRepository.save(reply);
-    }
-
     // Uncomment and change as needed when PostRepository is implemented 
 
-    // @Autowired
-    // private PostRepository postRepository;
+    @Autowired
+    private PostRepository postRepository;
 
-    // public Reply addReply(Reply reply, int postId) {
-    //     Post post = postRepository.findById(postId).orElse(null);
-    //     if (post == null) {
-    //         return null;
-    //     }
-    //     reply.setPost(post);
-    //     return replyRepository.save(reply);
-    // }
+    public Reply addReply(String content, int postId) {
+        Post post = postRepository.findPostById(postId);
+        
+        if (post == null) {
+            return null;
+        }
+
+        Reply reply = new Reply(content, post);
+        return replyRepository.save(reply);
+    }
 
     public List<Reply> getAllReplies() {
         return (List<Reply>) replyRepository.findAll();

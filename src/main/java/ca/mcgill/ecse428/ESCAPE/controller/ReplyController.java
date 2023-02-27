@@ -11,7 +11,9 @@ import ca.mcgill.ecse428.ESCAPE.model.Reply;
 import ca.mcgill.ecse428.ESCAPE.model.Post;
 
 import ca.mcgill.ecse428.ESCAPE.service.ReplyService;
+import ca.mcgill.ecse428.ESCAPE.dto.ReplyRequestDto;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/replies")
 public class ReplyController {
@@ -28,20 +30,15 @@ public class ReplyController {
         return new ResponseEntity<>(reply, HttpStatus.OK);
     }
 
-    @PostMapping("/")
-    public ResponseEntity<Reply> addReply(@RequestBody Reply reply) {
+    @PostMapping("/{id}")
+    public ResponseEntity<Reply> addReply(@PathVariable int id, @RequestBody ReplyRequestDto replyDto) {
 
-    // Uncomment when post stuff has been implemented 
-    // public ResponseEntity<Reply> addReply(@RequestBody Reply reply, @RequestParam("postId") int postId) {
-
-        // Uncomment when post stuff has been implemented
-        // Reply newReply = replyService.addReply(reply, postId);
-
-        Reply newReply = replyService.addReply(reply);
+        Reply newReply = replyService.addReply(replyDto.getContent(), id);
 
         if (newReply == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
         return new ResponseEntity<>(newReply, HttpStatus.CREATED);
     }
 

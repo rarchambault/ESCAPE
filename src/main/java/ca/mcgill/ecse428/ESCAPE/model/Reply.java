@@ -29,10 +29,9 @@ public class Reply
   // CONSTRUCTOR
   //------------------------
 
-  public Reply(String aContent, int aReplyId, Post aPost)
+  public Reply(String aContent, Post aPost)
   {
     content = aContent;
-    replyId = aReplyId;
     boolean didAddPost = setPost(aPost);
     if (!didAddPost)
     {
