@@ -1,6 +1,8 @@
 .DS_Store
 /.gradle/
 /build/
+/.idea/
+node_modules
 
 # local env files
 .env.local

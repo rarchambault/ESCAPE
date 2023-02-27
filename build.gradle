@@ -21,6 +21,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	// Nice API docs
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
+	implementation 'io.cucumber:cucumber-java:7.11.1'
+	implementation 'io.cucumber:cucumber-junit:7.11.1'
+	implementation 'org.seleniumhq.selenium:selenium-api:3.11.0'
+	implementation 'org.seleniumhq.selenium:selenium-chrome-driver:2.50.0'
 }
 
 tasks.named('test') {
