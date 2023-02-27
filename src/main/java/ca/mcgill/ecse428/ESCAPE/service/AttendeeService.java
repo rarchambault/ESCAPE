@@ -26,7 +26,7 @@ public class AttendeeService {
     }
 
 	@Transactional
-    public Attendee getAttendeeById(String email) throws EscapeException {
+    public Attendee getAttendeeByEmail(String email) throws EscapeException {
         Attendee attendee = attendeeRepository.findAttendeeByEmail(email);
         if (attendee == null) {
             throw new EscapeException(HttpStatus.NOT_FOUND, "Attendee not found.");
@@ -37,11 +37,13 @@ public class AttendeeService {
     // Add user profile when the repo is made
 	@Transactional
     public UserProfileResponseDto createAttendee(UserProfileRequestDto request) {
-    	UserProfile creator = null;
-    	// check if the name is blank
+    	// check for invalid inputs
 		String name = request.getName();
 		String email = request.getEmail();
 		String password = request.getPassword();
+		if (name == null || email == null || password == null) {
+			throw new EscapeException(HttpStatus.BAD_REQUEST, "Required attributes missing.");
+		}
 		if (name.isBlank()) {
 			throw new EscapeException(HttpStatus.BAD_REQUEST, "Invalid attendee name.");
 		}

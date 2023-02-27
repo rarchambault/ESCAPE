@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import ca.mcgill.ecse428.ESCAPE.dto.UserProfileDto;
+import ca.mcgill.ecse428.ESCAPE.dto.UserProfileRequestDto;
 import ca.mcgill.ecse428.ESCAPE.dto.UserProfileResponseDto;
 import ca.mcgill.ecse428.ESCAPE.model.UserProfile;
 import ca.mcgill.ecse428.ESCAPE.service.UserProfileService;
@@ -25,13 +25,13 @@ public class UserProfileController{
     private UserProfileService userProfileService;
 
     @PostMapping("/admin")
-    public ResponseEntity<UserProfileResponseDto> createAdminProfile(@RequestBody UserProfileDto request) {
+    public ResponseEntity<UserProfileResponseDto> createAdminProfile(@RequestBody UserProfileRequestDto request) {
         UserProfileResponseDto response = userProfileService.createAdminProfile(request);
         return new ResponseEntity<UserProfileResponseDto>(response, HttpStatus.CREATED);
     }
 
     @PostMapping("/attendee")
-    public ResponseEntity<UserProfileResponseDto> createAttendeeProfile(@RequestBody UserProfileDto request) {
+    public ResponseEntity<UserProfileResponseDto> createAttendeeProfile(@RequestBody UserProfileRequestDto request) {
         UserProfileResponseDto response = userProfileService.createAttendeeProfile(request);
         return new ResponseEntity<UserProfileResponseDto>(response, HttpStatus.CREATED);
     }

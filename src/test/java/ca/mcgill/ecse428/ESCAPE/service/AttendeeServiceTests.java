@@ -14,6 +14,8 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 
+import ca.mcgill.ecse428.ESCAPE.dto.UserProfileRequestDto;
+import ca.mcgill.ecse428.ESCAPE.dto.UserProfileResponseDto;
 import ca.mcgill.ecse428.ESCAPE.exception.EscapeException;
 import ca.mcgill.ecse428.ESCAPE.model.Attendee;
 import ca.mcgill.ecse428.ESCAPE.repository.AttendeeRepository;
@@ -30,7 +32,7 @@ public class AttendeeServiceTests {
 	AttendeeService attendeeService;
 
 	@Test
-	public voemail testGetAttendeeByEmail() {
+	public void testGetAttendeeByEmail() {
 		// Tell the mocked repository how to behave
 		final Attendee party = new Attendee();
 		String email = party.getEmail();
@@ -44,15 +46,15 @@ public class AttendeeServiceTests {
 	}
 
 	@Test
-	public voemail testGetAttendeeByInvalidEmail() {
-		final int invalemailEmail = 99;
+	public void testGetAttendeeByUnrecognizedEmail() {
+		final String UnrecognizedEmail = "anUnrecognizedEmail";
 
-		// Mock: if asking for a attendee with invalemail ID, return null
-		when(attendeeRepo.findAttendeeByEmail(invalemailEmail)).thenAnswer((InvocationOnMock invocation) -> null);
+		// Mock: if asking for a attendee with invalid ID, return null
+		when(attendeeRepo.findAttendeeByEmail(UnrecognizedEmail)).thenAnswer((InvocationOnMock invocation) -> null);
 
 		// call method, and obtain resulting exception
 		EscapeException ex = assertThrows(EscapeException.class,
-				() -> attendeeService.getAttendeeByEmail(invalemailEmail));
+				() -> attendeeService.getAttendeeByEmail(UnrecognizedEmail));
 
 		// check results
 		assertEquals("Attendee not found.", ex.getMessage());
@@ -60,50 +62,46 @@ public class AttendeeServiceTests {
 	}
 
 	@Test
-	public voemail testCreateAttendee() {
+	public void testCreateAttendee() {
 		// Mock: just return the attendee with no modification
 		when(attendeeRepo.save(any(Attendee.class))).thenAnswer((InvocationOnMock invocation) -> invocation.getArgument(0));
 
 		// test set up - create an attendee request
-		AttendeeRequestDto attendeeRequest = new AttendeeRequestDto();
-		String description = "an attendee description";
-		String name = "Party";
-		int price = 14;
-		attendeeRequest.setDescription(description);
+		String name = "aName";
+		String email = "anEmail";
+		String password = "aPassword";
+		UserProfileRequestDto attendeeRequest = new UserProfileRequestDto(name, email, password);
 		attendeeRequest.setName(name);
-		attendeeRequest.setTicketPrice(price);
 
 		// call method
-		AttendeeResponseDto returnedAttendee = attendeeService.createAttendee(attendeeRequest);
+		UserProfileResponseDto returnedAttendee = attendeeService.createAttendee(attendeeRequest);
 
 		// check results
 		assertNotNull(returnedAttendee);
 		assertEquals(name, returnedAttendee.getName());
-		assertEquals(description, returnedAttendee.getDescription());
-		assertEquals(price, returnedAttendee.getTicketPrice());
 		// Check that the service actually saved the attendee
 		// verify(attendeeRepo, times(1)).save();
 	}
 	
 	@Test
-	public voemail testGetAllAttendees() {
+	public void testGetAllAttendees() {
 		
 	}
 
 	// test delete attendee
 	@Test
-	public voemail testDeleteAttendee() {
+	public void testDeleteAttendee() {
 	}
 
 	// test invaleud delete attendee - not found
 	@Test
-	public voemail testInvalemailDeleteAttendee() {
+	public void testInvalidDeleteAttendee() {
 		// Mock: if searching using an invalid attendee email return null
-		when(attendeeRepo.findAttendeeByEmail(any(int.class))).thenAnswer(x -> null);
+		when(attendeeRepo.findAttendeeByEmail(any(String.class))).thenAnswer(x -> null);
 
 		// call method, expecting exception
 		EscapeException ex = assertThrows(EscapeException.class,
-				() -> attendeeService.deleteAttendee(Integer.MAX_VALUE));
+				() -> attendeeService.deleteAttendee("anUnrecognizedEmail"));
 
 		// check results
 		assertEquals(ex.getMessage(), "Attendee not found.");

@@ -1,7 +1,14 @@
 package ca.mcgill.ecse428.ESCAPE.dto;
 
 public class UserProfileRequestDto {
-    private String name;
+    public UserProfileRequestDto(String name, String email, String password) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+	}
+
+	private String name;
     private String email;
     private String password;
     private int userId;
