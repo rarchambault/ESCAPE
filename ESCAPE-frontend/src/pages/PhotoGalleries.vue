@@ -20,7 +20,7 @@
               </v-card-title>
               <v-card-text>{{ gallery.description }}</v-card-text>
               <v-card-actions>
-                <v-btn color="primary" text :href="'/gallery/' + gallery.id">View Gallery</v-btn>
+                <v-btn color="primary" text :href="'/gallery/' + 'photogallery'">View Gallery</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>

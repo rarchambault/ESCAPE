@@ -60,14 +60,6 @@
           {
             title: "Photo 10",
             src: require("../assets/ESC10.png")
-          },
-          {
-            title: "Photo 11",
-            src: require("../assets/ESC11.png")
-          },
-          {
-            title: "Photo 12",
-            src: require("../assets//ESC1.jpeg")
           }
         ]
       }
