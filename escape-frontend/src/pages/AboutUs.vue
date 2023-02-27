@@ -62,7 +62,7 @@
 .image {
   border-radius: 50%;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-  background-image: url('Images/maxresdefault.jpeg');
+  background-image: ('@/assets/ESC1.jpeg');
   background-size: cover;
   background-position: center;
 }
@@ -86,7 +86,7 @@
 
 
 #background {
-  background-image: url("Images/people.png");
+  background-image: ('@/assets/ESC1.jpeg');
 }
 
   .name-box:hover {
