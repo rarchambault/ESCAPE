@@ -27,8 +27,9 @@ dependencies {
 	implementation 'org.seleniumhq.selenium:selenium-chrome-driver:2.50.0'
 	implementation 'org.junit.platform:junit-platform-suite-api:1.4.0-RC2'
 	testImplementation group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.8.2'
-	implementation 'net.masterthought:cucumber-reporting:4.2.3'
 	implementation 'io.cucumber:cucumber-spring:7.3.0'
+	testImplementation 'io.cucumber:cucumber-java:6.10.4'
+	testImplementation 'io.cucumber:cucumber-spring:6.10.4'
 }
 
 tasks.named('test') {
