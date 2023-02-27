@@ -2,6 +2,9 @@ import Vue from 'vue'
 import HomePage from './pages/HomePage.vue'
 import vuetify from './plugins/vuetify'
 import TicketingPage from './pages/TicketingPage'
+import PostPage from "./pages/PostPage"
+import ViewTickets from "./pages/ViewTickets"
+import PhotoGalleries from "./pages/PhotoGalleries"
 
 Vue.config.productionTip = false
 
@@ -9,6 +12,9 @@ const routes = {
   '/': HomePage,
   '/home': HomePage,
   "/ticketing": TicketingPage,
+  "/post": PostPage,
+  "/viewtickets": ViewTickets,
+  "/photogalleries": PhotoGalleries,
 }
 
 new Vue({
