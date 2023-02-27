@@ -8,12 +8,13 @@ import java.util.*;
 // line 2 "model.ump"
 // line 77 "model.ump"
 @MappedSuperclass
-public class UserProfile
-{
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class UserProfile {
 
-  //------------------------
-  // MEMBER VARIABLES
-  //------------------------
+	// ------------------------
+	// MEMBER VARIABLES
+	// ------------------------
+
 
   //UserProfile Attributes
   private String name;
@@ -21,9 +22,9 @@ public class UserProfile
   private String email;
   private String password;
 
-  //------------------------
-  // CONSTRUCTOR
-  //------------------------
+	// ------------------------
+	// CONSTRUCTOR
+	// ------------------------
 
   public UserProfile(String aName, String aEmail, String aPassword)
   {
@@ -32,52 +33,46 @@ public class UserProfile
     password = aPassword;
   }
 
-  public UserProfile() {}
+	public UserProfile() {
+	}
 
-  //------------------------
-  // INTERFACE
-  //------------------------
+	// ------------------------
+	// INTERFACE
+	// ------------------------
 
-  public boolean setName(String aName)
-  {
-    boolean wasSet = false;
-    name = aName;
-    wasSet = true;
-    return wasSet;
-  }
+	public boolean setName(String aName) {
+		boolean wasSet = false;
+		name = aName;
+		wasSet = true;
+		return wasSet;
+	}
 
-  public boolean setEmail(String aEmail)
-  {
-    boolean wasSet = false;
-    email = aEmail;
-    wasSet = true;
-    return wasSet;
-  }
+	public boolean setEmail(String aEmail) {
+		boolean wasSet = false;
+		email = aEmail;
+		wasSet = true;
+		return wasSet;
+	}
 
-  public boolean setPassword(String aPassword)
-  {
-    boolean wasSet = false;
-    password = aPassword;
-    wasSet = true;
-    return wasSet;
-  }
+	public boolean setPassword(String aPassword) {
+		boolean wasSet = false;
+		password = aPassword;
+		wasSet = true;
+		return wasSet;
+	}
 
-  public String getName()
-  {
-    return name;
-  }
+	public String getName() {
+		return name;
+	}
 
-  public String getEmail()
-  {
-    return email;
-  }
+	public String getEmail() {
+		return email;
+	}
 
-  public String getPassword()
-  {
-    return password;
-  }
+	public String getPassword() {
+		return password;
+	}
 
-  public void delete()
-  {
-  }
+	public void delete() {
+	}
 }
