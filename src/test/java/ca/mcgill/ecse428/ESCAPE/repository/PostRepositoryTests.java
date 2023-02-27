@@ -39,7 +39,7 @@ public class PostRepositoryTests {
 		String name = "Sandy Sand";
 		String email = "andy@hotmail.com";
 		String password = "pass";
-		Attendee sandy = new Attendee(name, email, password, null);
+		Attendee sandy = new Attendee(name, email, password);
 		sandy = attendeeRepository.save(sandy);
 
 		// Create object

@@ -18,6 +18,4 @@ public class PostRequestDto {
     public void setContent(String content) {
         this.content = content;
     }
-
-
 }

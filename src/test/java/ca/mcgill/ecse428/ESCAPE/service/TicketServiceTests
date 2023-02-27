@@ -1,0 +1,108 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.MockBeans;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.web.context.WebApplicationContext;
+
+@ExtendWith(SpringExtension.class)
+@WebMvcTest(TicketController.class)
+class TicketControllerTests {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    private TicketService ticketService;
+
+    @Test
+    void testShowTickets() throws Exception {
+        Attendee attendee1;
+        Attendee attendee2;
+        Event event1;
+        Event event2;
+        Ticket ticket1 = new Ticket(1, 2.0, "Ticket1", attendee1, event1);
+        Ticket ticket2 = new Ticket(1, 2.0, "Ticket2", attendee2, event2);
+        List<Ticket> tickets = Arrays.asList(ticket1, ticket2);
+        Mockito.when(ticketService.getAllTickets()).thenReturn(tickets);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/tickets"))
+               .andExpect(MockMvcResultMatchers.status().isOk())
+               .andExpect(MockMvcResultMatchers.model().attribute("tickets", tickets))
+               .andExpect(MockMvcResultMatchers.view().name("view-tickets"));
+    }
+}
+
+@SpringBootTest
+class TicketServiceTests {
+
+    @Autowired
+    private TicketService ticketService;
+
+    @MockBean
+    private TicketRepository ticketRepository;
+
+    @Test
+    void testGetAllTickets() {
+        Attendee attendee1;
+        Attendee attendee2;
+        Event event1;
+        Event event2;
+        Ticket ticket1 = new Ticket(1, 2.0, "Ticket1", attendee1, event1);
+        Ticket ticket2 = new Ticket(1, 2.0, "Ticket2", attendee2, event2);
+        List<Ticket> tickets = Arrays.asList(ticket1, ticket2);
+        Mockito.when(ticketRepository.findAll()).thenReturn(tickets);
+
+        List<Ticket> result = ticketService.getAllTickets();
+
+        Mockito.verify(ticketRepository, Mockito.times(1)).findAll();
+        assertEquals(tickets, result);
+    }
+}
+
+@Test
+void testDeleteTicket() throws Exception {
+    long ticketId = 1L;
+    mockMvc.perform(MockMvcRequestBuilders.post("/tickets/{id}/delete", ticketId))
+           .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+           .andExpect(MockMvcResultMatchers.redirectedUrl("/tickets"));
+
+    Mockito.verify(ticketService, Mockito.times(1)).deleteTicket(ticketId);
+}
+}
+
+@SpringBootTest
+class TicketServiceTests {
+
+@MockBean
+private TicketRepository ticketRepository;
+
+@Test
+void testDeleteTicket() {
+    long ticketId = 1L;
+    Attendee attendee1;
+    Attendee attendee2;
+    Event event1;
+    Event event2;
+    Ticket ticket1 = new Ticket(1, 2.0, "Ticket1", attendee1, event1);
+    Ticket ticket2 = new Ticket(1, 2.0, "Ticket2", attendee2, event2);
+    Mockito.when(ticketRepository.findById(ticketId)).thenReturn(Optional.of(ticket));
+
+    ticketService.deleteTicket(ticketId);
+
+    Mockito.verify(ticketRepository, Mockito.times(1)).findById(ticketId);
+    Mockito.verify(ticketRepository, Mockito.times(1)).delete(ticket);
+}
+}

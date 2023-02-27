@@ -86,10 +86,9 @@ public class PostServiceTests {
 		int userId = 1;
 		person.setEmail(email);
 		person.setName(name);
-		person.setUserId(userId);
 		// when searching for person using email, return person
-		when(attendeeRepo.findAttendeeById(userId)).thenAnswer((InvocationOnMock invocation) -> person);
-		postRequest.setUserId(1);
+		when(attendeeRepo.findAttendeeByEmail(email)).thenAnswer((InvocationOnMock invocation) -> person);
+		postRequest.setAttendeeEmail(email);
 
 		// call method
 		PostResponseDto returnedPost = postService.createPost(postRequest);
