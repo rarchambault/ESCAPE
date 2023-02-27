@@ -203,18 +203,4 @@ public class Attendee extends UserProfile {
 			aTicket.delete();
 		}
 	}
-  public void delete()
-  {
-    super.delete();
-    for(int i=posts.size(); i > 0; i--)
-    {
-      Post aPost = posts.get(i - 1);
-      aPost.delete();
-    }
-    for(int i=tickets.size(); i > 0; i--)
-    {
-      Ticket aTicket = tickets.get(i - 1);
-      aTicket.delete();
-    }
-  }
 }
