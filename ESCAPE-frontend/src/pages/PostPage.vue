@@ -1,7 +1,16 @@
 <template>
   <v-app>
     <v-app-bar app color="primary" dark>
-      <v-toolbar-title>ESC Posts</v-toolbar-title>
+      <v-app-bar app color="black" dark>
+        <v-toolbar-title>Engineering Socials Committee Advanced Programming Environment (ESCAPE)</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn color="white" text class="mx-3" href='/about' >About Us</v-btn>
+        <v-btn color="white" text class="mx-3" href='/photogalleries'>Photo Galleries</v-btn>
+        <v-btn color="white" text class="mx-3" href='/post' >Social Wall</v-btn>
+        <v-btn color="white" text class="mx-3" href='/ticketing'>Buy Tickets</v-btn>
+        <v-btn color="white" text class="mx-3" href='/viewtickets'>View My Tickets</v-btn>
+        <v-btn align="center" justify="center" color="white" href="/login"> Login  </v-btn>
+      </v-app-bar>
     </v-app-bar>
     <v-main>
       <v-container>
@@ -25,6 +34,7 @@
   </v-app>
 </template>
 
+
 <script>
 export default {
   name: "PostPage",
@@ -34,29 +44,29 @@ export default {
         name: "John Doe",
         date: "April 15th, 2023",
         content:
-          "I had a great time at the event last night! Thanks to everyone who organized it.",
+            "I had a great time at the event last night! Thanks to everyone who organized it.",
         avatar: require("../assets/ESC4.jpeg")
       },
       {
         name: "Jane Smith",
         date: "May 6th, 2023",
         content:
-          "Can't wait for the next event! Who else is excited?",
+            "Can't wait for the next event! Who else is excited?",
         avatar: require("../assets/ESC5.jpeg")
       },
       {
         name: "Bob Johnson",
         date: "June 10th, 2023",
         content:
-          "I'm looking for a roommate for next semester. Anyone interested?",
+            "I'm looking for a roommate for next semester. Anyone interested?",
         avatar: require("../assets/ESC7.jpeg")
       }
     ]
   }),
   //methods: {
-    //replyToPost(post) {
-      // Implement reply functionality
-   // }
+  //replyToPost(post) {
+  // Implement reply functionality
+  // }
   //}
 };
 </script>
