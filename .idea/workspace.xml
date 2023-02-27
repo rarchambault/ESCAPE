@@ -4,31 +4,66 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="e59dcd4e-e848-4992-bbdf-74b7b7c2a6bc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/exception/EscapeException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/exception/EscapeExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/src/App.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/src/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/src/router/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/static.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/.browserslistrc" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/.browserslistrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/.eslintrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/jsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/jsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/src/assets/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/src/assets/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/src/assets/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/src/assets/logo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/src/components/HelloWorld.vue" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/src/components/HelloWorld.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/src/layouts/default/AppBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/src/layouts/default/AppBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/src/layouts/default/Default.vue" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/src/layouts/default/Default.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/src/layouts/default/View.vue" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/src/layouts/default/View.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/src/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/src/plugins/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/src/plugins/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/src/plugins/vuetify.js" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/src/plugins/vuetify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/src/plugins/webfontloader.js" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/src/plugins/webfontloader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/src/router/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/src/styles/settings.scss" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/src/styles/settings.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/src/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escape-frontend/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/escape-frontend/escape-frontend/vite.config.js" afterDir="false" />
+=======
+    <list default="true" id="834c8847-d080-4418-9764-5d86b14da66e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+>>>>>>> main
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/controller/UserProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/controller/AttendeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/dao/AdminRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/repository/AdminRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/dao/UserProfileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/repository/AttendeeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/dto/EventResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/dto/EventResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Admin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Attendee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Attendee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Feed.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/PhotoGallery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/PhotoGallery.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Post.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/Ticket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/repository/EventRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/repository/EventRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/service/UserProfileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/service/AttendeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/UserProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/model/UserProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/service/EventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/mcgill/ecse428/ESCAPE/service/EventService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/EID001_Create_Event.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/EID001_Create_Event.feature" afterDir="false" />
+>>>>>>> main
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +74,23 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ESCAPE" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -61,6 +113,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;a56b360a04e9613753e6b5230b9ded94&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+=======
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
@@ -72,6 +148,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/rarch/Desktop/ECSE428 Software Engineering in Practice/ESCAPE",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -83,7 +160,9 @@
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
     "spring.configuration.checksum": "a56b360a04e9613753e6b5230b9ded94",
     "vue.rearranger.settings.migration": "true"
+>>>>>>> main
   }
+<<<<<<< HEAD
 }]]></component>
   <component name="RunManager" selected="Gradle.PostServiceTests">
     <configuration name="PostIntegrationTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -155,6 +234,10 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+=======
+}</component>
+  <component name="RunManager">
+>>>>>>> main
     <configuration name="EscapeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="ESCAPE.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="ca.mcgill.ecse428.ESCAPE.EscapeApplication" />
@@ -173,13 +256,14 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6ae04748-9ebf-4ab0-a7d9-37e6a63dfb28" name="Changes" comment="" />
+      <changelist id="834c8847-d080-4418-9764-5d86b14da66e" name="Changes" comment="" />
       <created>1676856859089</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1676856859089</updated>
       <workItem from="1676856860240" duration="2348000" />
       <workItem from="1676997413520" duration="5071000" />
+      <workItem from="1677258776443" duration="15420000" />
     </task>
     <servers />
   </component>

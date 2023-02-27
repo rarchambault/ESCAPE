@@ -21,11 +21,11 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	// Post Associations
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Reply> replies;
-	@ManyToOne(optional = false, cascade = CascadeType.MERGE)
-	private Attendee attendee;
+  //Post Associations
+  @OneToMany(cascade= {CascadeType.ALL})
+  private List<Reply> replies;
+  @ManyToOne(optional = false)
+  private Attendee attendee;
 
 	// ------------------------
 	// CONSTRUCTOR

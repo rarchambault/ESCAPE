@@ -15,24 +15,23 @@ public class UserProfile {
 	// MEMBER VARIABLES
 	// ------------------------
 
-	// UserProfile Attributes
-	private String name;
-	@Id
-	private String email;
-	private String password;
-	private String photo;
-	private int userId;
+
+  //UserProfile Attributes
+  private String name;
+  @Id
+  private String email;
+  private String password;
 
 	// ------------------------
 	// CONSTRUCTOR
 	// ------------------------
 
-	public UserProfile(String aName, String aEmail, String aPassword, String aPhoto) {
-		name = aName;
-		email = aEmail;
-		password = aPassword;
-		photo = aPhoto;
-	}
+  public UserProfile(String aName, String aEmail, String aPassword)
+  {
+    name = aName;
+    email = aEmail;
+    password = aPassword;
+  }
 
 	public UserProfile() {
 	}
@@ -62,20 +61,6 @@ public class UserProfile {
 		return wasSet;
 	}
 
-	public boolean setPhoto(String aPhoto) {
-		boolean wasSet = false;
-		photo = aPhoto;
-		wasSet = true;
-		return wasSet;
-	}
-
-	public boolean setUserId(int aUserId) {
-		boolean wasSet = false;
-		userId = aUserId;
-		wasSet = true;
-		return wasSet;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -87,15 +72,6 @@ public class UserProfile {
 	public String getPassword() {
 		return password;
 	}
-
-	public String getPhoto() {
-		return photo;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-	/* Code from template association_GetMany */
 
 	public void delete() {
 	}

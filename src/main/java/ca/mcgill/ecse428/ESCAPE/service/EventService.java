@@ -1,6 +1,5 @@
 package ca.mcgill.ecse428.ESCAPE.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +16,9 @@ import ca.mcgill.ecse428.ESCAPE.repository.EventRepository;
 
 @Service
 public class EventService {
-    
+
 	@Autowired
-	EventRepository eventRepository;
-    //private final UserProfileRepository userProfileRepository;
+    EventRepository eventRepository;
 
 	@Transactional
     public Iterable<Event> getAllEvents() {
@@ -45,8 +43,9 @@ public class EventService {
 		if (name.isBlank()) {
 			throw new EventException(HttpStatus.BAD_REQUEST, "Invalid event name.");
 		}
-    	//creator = UserProfileRepository.getUserProfileById(request.getUserId());
-    	Event event = new Event(name, request.getDescription(), request.getTicketPrice(), 0, creator);
+
+    	Event event = new Event(request.getName(), request.getDescription(), request.getTicketPrice(), request.getUserId(), request.getCapacity(), request.getStartTime());
+
     	eventRepository.save(event);
     	return new EventResponseDto(event);
     }
