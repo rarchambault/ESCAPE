@@ -1,74 +1,66 @@
 <template>
-    <v-app>
-      <v-app-bar app color="primary" dark>
-        <v-toolbar-title>Tickets</v-toolbar-title>
-      </v-app-bar>
-      <v-main>
-        <v-container>
-          <v-card v-for="(ticket, index) in tickets" :key="index" class="my-4">
-            <v-card-title>{{ ticket.eventName }}</v-card-title>
-            <v-card-text>
-              <v-row>
-                <v-col cols="6">
-                  <div>Date: {{ ticket.eventDate }}</div>
-                  <div>Time: {{ ticket.eventTime }}</div>
-                  <div>Location: {{ ticket.eventLocation }}</div>
-                </v-col>
-                <v-col cols="6">
-                  <div>Ticket Type: {{ ticket.ticketType }}</div>
-                  <div>Quantity: {{ ticket.quantity }}</div>
-                  <div>Price: {{ ticket.price }}</div>
-                </v-col>
-              </v-row>
-            </v-card-text>
-            <v-card-actions>
-              <v-btn color="primary" @click="downloadTicket(ticket)">Download Ticket</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-container>
-      </v-main>
-    </v-app>
-  </template>
-  
-  <script>
-  export default {
-    name: "MyTicketsPage",
-    data: () => ({
-      tickets: [
-        {
-          eventName: "Power Hour",
-          eventDate: "April 15th, 2023",
-          eventTime: "7:00 PM",
-          eventLocation: "123 Main St, Montreal, QC",
-          ticketType: "General Admission",
-          quantity: 2,
-          price: "$20.00"
-        },
-        {
-          eventName: "Apartment Crawl",
-          eventDate: "May 6th, 2023",
-          eventTime: "2:00 PM",
-          eventLocation: "456 Maple Ave, Montreal, QC",
-          ticketType: "VIP",
-          quantity: 1,
-          price: "$30.00"
-        },
-        {
-          eventName: "Foam Party",
-          eventDate: "June 10th, 2023",
-          eventTime: "9:00 PM",
-          eventLocation: "789 Elm St, Montreal, QC",
-          ticketType: "Early Bird",
-          quantity: 4,
-          price: "$10.00"
-        }
-      ]
-    }),
-    methods: {
-      downloadTicket(ticket) {
-        // Add code here to download the ticket
-        console.log("Downloading ticket for event: " + ticket.eventName);
+  <v-app>
+    <v-app-bar app color="black" dark>
+      <v-toolbar-title>Engineering Socials Committee Advanced Programming Environment (ESCAPE)</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn color="white" text class="mx-3" href='/about' >About Us</v-btn>
+      <v-btn color="white" text class="mx-3" href='/photogalleries'>Photo Galleries</v-btn>
+      <v-btn color="white" text class="mx-3" href='/post' >Social Wall</v-btn>
+      <v-btn color="white" text class="mx-3" href='/ticketing'>Buy Tickets</v-btn>
+      <v-btn color="white" text class="mx-3" href='/viewtickets'>View My Tickets</v-btn>
+      <v-btn align="center" justify="center" color="white" href="/login"> Login  </v-btn>
+    </v-app-bar>
+    <v-main>
+      <v-container>
+        <v-row>
+          <v-col v-for="(event, index) in events" :key="index" cols="12" md="6" lg="4">
+            <v-card elevation="2" class="mx-auto" max-width="400">
+              <v-img :src="event.image" height="200"></v-img>
+              <v-card-title class="headline">{{ event.title }}</v-card-title>
+              <v-card-subtitle>{{ event.date }}</v-card-subtitle>
+              <v-card-text>{{ event.description }}</v-card-text>
+              <v-card-actions>
+                <v-btn color="orange" text :href="event.ticketUrl">Buy Tickets</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
+</template>
+
+
+<script>
+export default {
+  name: "EventTicketingPage",
+  data: () => ({
+    events: [
+      {
+        title: "Power Hour",
+        date: "April 15th, 2023",
+        description:
+            "Come join us for our famous Power Hour event, where you will enjoy an hour of drinking and music.",
+        ticketUrl: "https://mcgilleus.yapsody.com/",
+        image: require("../assets/ESC7.jpeg")
+      },
+      {
+        title: "Apartment Crawl",
+        date: "May 6th, 2023",
+        description:
+            "Join us for a tour of some of the best apartments in the city, with drinks and good times at each stop.",
+        ticketUrl: "https://mcgilleus.yapsody.com/",
+        image: require("../assets/ESC5.jpeg")
+      },
+      {
+        title: "Foam Party",
+        date: "June 10th, 2023",
+        description:
+            "Get ready to get wet and wild at our Foam Party event, featuring great music and lots of bubbles.",
+        ticketUrl: "https://mcgilleus.yapsody.com/",
+        image: require("../assets/ESC10.png")
       }
-    }
-  };
-  </script>
+    ]
+  })
+};
+</script>
