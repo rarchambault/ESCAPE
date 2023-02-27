@@ -42,6 +42,7 @@ public class Post {
 	}
 
 	public Post() {
+		replies = new ArrayList<Reply>();
 	}
 
 	// ------------------------

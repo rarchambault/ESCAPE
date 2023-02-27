@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
+
 @Entity
 public class Event {
 
@@ -17,6 +18,7 @@ public class Event {
     private double ticketPrice;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private int capacity;
     private LocalDateTime startTime;

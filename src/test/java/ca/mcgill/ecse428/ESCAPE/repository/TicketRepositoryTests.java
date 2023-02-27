@@ -3,12 +3,15 @@ package ca.mcgill.ecse428.ESCAPE.repository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import ca.mcgill.ecse428.ESCAPE.model.Event;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import ca.mcgill.ecse428.ESCAPE.model.Ticket;
+
+import java.time.LocalDateTime;
 
 @SpringBootTest
 public class TicketRepositoryTests {
@@ -33,6 +36,8 @@ public class TicketRepositoryTests {
     public void testPersistAndLoadTicket() {
         // Create object
         Ticket anTicket = new Ticket();
+        Event event = new Event("Power hour", "Description", 20, 100, LocalDateTime.of(2023, 03, 10, 7, 0));
+        anTicket.setEvent(event);
 
         // Save object
         anTicket = ticketRepository.save(anTicket);

@@ -10,25 +10,24 @@ import java.util.*;
 @Entity
 public class Attendee extends UserProfile {
 
-  //------------------------
-  // MEMBER VARIABLES
-  //------------------------
-  //Attendee Associations
-  @OneToMany(cascade= {CascadeType.ALL})
-  private List<Post> posts;
-  @ManyToMany(cascade= {CascadeType.ALL})
-  private List<Ticket> tickets;
+	// ------------------------
+	// MEMBER VARIABLES
+	// ------------------------
+	// Attendee Associations
+	@OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<Post> posts;
+	@ManyToMany(cascade = { CascadeType.ALL })
+	private List<Ticket> tickets;
 
 	// ------------------------
 	// CONSTRUCTOR
 	// ------------------------
 
-  public Attendee(String aName, String aEmail, String aPassword)
-  {
-    super(aName, aEmail, aPassword);
-    posts = new ArrayList<Post>();
-    tickets = new ArrayList<Ticket>();
-  }
+	public Attendee(String aName, String aEmail, String aPassword) {
+		super(aName, aEmail, aPassword);
+		posts = new ArrayList<Post>();
+		tickets = new ArrayList<Ticket>();
+	}
 
 	public Attendee() {
 		posts = new ArrayList<Post>();
@@ -78,16 +77,15 @@ public class Attendee extends UserProfile {
 		return has;
 	}
 
-  public int indexOfPost(Post aPost)
-  {
-    int index = posts.indexOf(aPost);
-    return index;
-  }
-  /* Code from template association_GetMany_clear */
-  protected void clear_posts()
-  {
-    posts.clear();
-  }
+	public int indexOfPost(Post aPost) {
+		int index = posts.indexOf(aPost);
+		return index;
+	}
+
+	/* Code from template association_GetMany_clear */
+	protected void clear_posts() {
+		posts.clear();
+	}
 
 	/* Code from template association_GetMany */
 	public Ticket getTicket(int index) {
@@ -125,29 +123,26 @@ public class Attendee extends UserProfile {
 		return 0;
 	}
 
-  /* Code from template association_AddManyToOne */
-  public Ticket addTicket(int aTicketId, double aPrice, String aName, Event aEvent)
-  {
-    return new Ticket(aTicketId, aPrice, aName, this, aEvent);
-  }
+	/* Code from template association_AddManyToOne */
+	public Ticket addTicket(int aTicketId, double aPrice, String aName, Event aEvent) {
+		return new Ticket(aTicketId, aPrice, aName, this, aEvent);
+	}
 
-  public boolean addTicket(Ticket aTicket)
-  {
-    boolean wasAdded = false;
-    if (tickets.contains(aTicket)) { return false; }
-    List<Attendee> existingAttendees = aTicket.getAttendees();
-    boolean isNewAttendee = existingAttendees != null && !existingAttendees.contains(this);
-    if (isNewAttendee)
-    {
-      aTicket.addAttendee(this);
-    }
-    else
-    {
-      tickets.add(aTicket);
-    }
-    wasAdded = true;
-    return wasAdded;
-  }
+	public boolean addTicket(Ticket aTicket) {
+		boolean wasAdded = false;
+		if (tickets.contains(aTicket)) {
+			return false;
+		}
+		List<Attendee> existingAttendees = aTicket.getAttendees();
+		boolean isNewAttendee = existingAttendees != null && !existingAttendees.contains(this);
+		if (isNewAttendee) {
+			aTicket.addAttendee(this);
+		} else {
+			tickets.add(aTicket);
+		}
+		wasAdded = true;
+		return wasAdded;
+	}
 
 	public boolean removeTicket(Ticket aTicket) {
 		boolean wasRemoved = false;
