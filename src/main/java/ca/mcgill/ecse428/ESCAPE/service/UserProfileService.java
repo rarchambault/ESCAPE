@@ -12,7 +12,6 @@ import ca.mcgill.ecse428.ESCAPE.model.Admin;
 import ca.mcgill.ecse428.ESCAPE.model.Attendee;
 import ca.mcgill.ecse428.ESCAPE.repository.AdminRepository;
 import ca.mcgill.ecse428.ESCAPE.repository.AttendeeRepository;
-import ca.mcgill.ecse428.ESCAPE.exception.UserProfileException;
 import ca.mcgill.ecse428.ESCAPE.dto.UserProfileRequestDto;
 import ca.mcgill.ecse428.ESCAPE.dto.UserProfileResponseDto;
 

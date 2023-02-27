@@ -21,9 +21,6 @@ public class UserProfileResponseDto {
         this.role = role;
     }
 
-    public UserProfileResponseDto() {
-    }
-
     public String getEmail() {
         return email;
     }

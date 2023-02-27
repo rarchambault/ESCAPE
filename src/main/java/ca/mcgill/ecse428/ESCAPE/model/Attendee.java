@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.util.*;
 
+
 // line 15 "model.ump"
 // line 89 "model.ump"
 @Entity
@@ -15,7 +16,7 @@ public class Attendee extends UserProfile
   // MEMBER VARIABLES
   //------------------------
   //Attendee Associations
-  @OneToMany(cascade= {CascadeType.ALL})
+  @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
   private List<Post> posts;
   @ManyToMany(cascade= {CascadeType.ALL})
   private List<Ticket> tickets;
