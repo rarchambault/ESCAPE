@@ -88,7 +88,7 @@ public class PostServiceTests {
 		person.setName(name);
 		person.setUserId(userId);
 		// when searching for person using email, return person
-		when(attendeeRepo.findAttendeeByUserId(userId)).thenAnswer((InvocationOnMock invocation) -> person);
+		when(attendeeRepo.findAttendeeById(userId)).thenAnswer((InvocationOnMock invocation) -> person);
 		postRequest.setUserId(1);
 
 		// call method
