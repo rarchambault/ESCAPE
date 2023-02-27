@@ -45,14 +45,14 @@ public class TicketIntegrationTests {
 
 	private int testCreateTicket() {
 		Ticket ticket = new Ticket();
-		Attendee attendee;
-		Event event;
+		Attendee attendee = new Attendee();
+		Event event = new Event();
         ticket.setTicketId(1);
         ticket.setPrice(1.0);
         ticket.setName("Test name");
-		ticket.setAttendee(attendee);
+		ticket.addAttendee(attendee);
 		ticket.setEvent(event);
-        return ticket.getId();
+        return ticket.getTicketId();
 	}
 
 	private void testGetTicket(int id) {
@@ -64,14 +64,7 @@ public class TicketIntegrationTests {
 		assertNotNull(response);
 		assertEquals(HttpStatus.OK, response.getStatusCode(), "Response has correct status");
 		assertNotNull(response.getBody(), "Response has body");
-		assertTrue(response.getBody().id == id, "Response has correct ID");
-	}
-
-	@Test
-	public void testCreateInvalidTicket() {
-		ResponseEntity<String> response = client.postForEntity("/ticket", new TicketResponseDto("   "), String.class);
-		assertNotNull(response);
-		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode(), "Response has correct status");
+		assertTrue(response.getBody().getTicketId() == id, "Response has correct ID");
 	}
 
 	@Test

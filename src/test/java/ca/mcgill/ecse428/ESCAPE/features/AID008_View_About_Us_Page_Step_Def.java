@@ -1,13 +1,12 @@
-package ca.mcgill.ecse428.ESCAPE.features.stepdefs;
+package ca.mcgill.ecse428.ESCAPE.features;
 
-import ca.mcgill.ecse428.ESCAPE.features.bdd.SpringIntegrationTest;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class AID008_View_About_Us_Page_Step_Def extends SpringIntegrationTest {
+public class AID008_View_About_Us_Page_Step_Def {
 
     private WebDriver driver;
 
