@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 public class AID008_View_About_Us_Page_Step_Def {
 
     private WebDriver driver;
