@@ -5,7 +5,9 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 public class AID007_View_Landing_Page_Step_Def {
 
     private WebDriver driver;
