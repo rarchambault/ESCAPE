@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
@@ -95,6 +97,17 @@ public class EventServiceTests {
 	// test delete event
 	@Test
 	public void testDeleteEvent() {
+		Event anEvent = new Event();
+		int id = anEvent.getId();
+
+		// Mock: if looking for post using this posts ID return the post as if it were in the database
+		when(eventRepo.findEventById(id)).thenAnswer(x -> anEvent);
+
+		// call method
+		eventService.deleteEvent(id);
+
+		// check results
+		verify(eventRepo, times(1)).delete(anEvent);
 	}
 
 	// test invalid delete event - not found

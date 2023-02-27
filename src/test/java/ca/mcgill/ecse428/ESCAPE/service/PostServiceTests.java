@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
@@ -107,6 +109,24 @@ public class PostServiceTests {
 	// test delete post
 	@Test
 	public void testDeletePost() {
+		// setup: create an post to delete
+		Attendee person = new Attendee();
+		String email = "finnigan@mail.com";
+		String name = "Finn Igan";
+		person.setEmail(email);
+		person.setName(name);
+		Post aPost = new Post();
+		int id = aPost.getPostId();
+		aPost.setAttendee(person);
+
+		// Mock: if looking for post using this posts ID return the post as if it were in the database
+		when(postRepo.findPostById(id)).thenAnswer(x -> aPost);
+
+		// call method
+		postService.deletePost(id);
+
+		// check results
+		verify(postRepo, times(1)).delete(aPost);
 	}
 
 	// test invalid delete post - not found

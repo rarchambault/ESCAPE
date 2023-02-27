@@ -64,11 +64,12 @@ public class PostService {
 	}
 
 	@Transactional
-	public void deletePost(int id) throws EscapeException {
+	public void deletePost(int id) {
 		Post post = postRepository.findPostById(id);
 		if (post == null) {
 			throw new EscapeException(HttpStatus.NOT_FOUND, "Post not found.");
 		}
 		postRepository.delete(post);
+		post.delete();
 	}
 }

@@ -57,7 +57,7 @@ public class EventIntegrationTests {
 		assertNotNull(response);
 		assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
 		assertNotNull(response.getBody(), "Response has body");
-		assertEquals(name, response.getBody().name, "Response has correct email");
+		assertEquals(name, response.getBody().name, "Response has correct name");
 		assertTrue(response.getBody().id > 0, "Response has valid ID");
 
 		return response.getBody().id;
@@ -93,6 +93,7 @@ public class EventIntegrationTests {
 	}
 
 	// test delete event
+	@Test
 	private void testDeleteEvent(int id) {
 		client.delete("/event/" + id);
 		try {
