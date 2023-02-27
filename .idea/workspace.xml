@@ -78,6 +78,12 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+<<<<<<< HEAD
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view />
+=======
         <projects_view>
           <tree_state>
             <expand>
@@ -89,6 +95,7 @@
             <select />
           </tree_state>
         </projects_view>
+>>>>>>> main
       </state>
     </system>
   </component>
@@ -114,6 +121,9 @@
     <option name="showLibraryContents" value="true" />
   </component>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> main
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
@@ -125,6 +135,10 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+<<<<<<< HEAD
+    &quot;last_opened_file_path&quot;: &quot;/Users/rarch/Desktop/ECSE428 Software Engineering in Practice/ESCAPE&quot;,
+=======
+>>>>>>> main
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -136,6 +150,15 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;a56b360a04e9613753e6b5230b9ded94&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+<<<<<<< HEAD
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+=======
 =======
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
@@ -236,6 +259,7 @@
     </configuration>
 =======
 }</component>
+>>>>>>> main
   <component name="RunManager">
 >>>>>>> main
     <configuration name="EscapeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
