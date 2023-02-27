@@ -1,12 +1,15 @@
 import Vue from 'vue'
 import HomePage from './pages/HomePage.vue'
 import vuetify from './plugins/vuetify'
+import EventList from './components/EventList.vue'
+
 
 Vue.config.productionTip = false
 
 const routes = {
   '/': HomePage,
   '/home': HomePage,
+  '/events': EventList
 }
 
 new Vue({
