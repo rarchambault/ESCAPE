@@ -5,7 +5,6 @@ import ca.mcgill.ecse428.ESCAPE.model.UserProfile;
 import org.springframework.data.repository.CrudRepository;
 
 public interface AttendeeRepository extends CrudRepository<Attendee, String> {
-	public Attendee findAttendeeByUserId(int userId);
 
 	public Attendee findAttendeeByEmail(String email);
 }

@@ -43,7 +43,7 @@ public class PostService {
 	@Transactional
 	public PostResponseDto createPost(PostRequestDto request) throws EscapeException {
 		String content = request.getContent();
-		Attendee attendee = attendeeRepository.findAttendeeByUserId(request.getUserId());
+		Attendee attendee = attendeeRepository.findAttendeeByEmail(request.getEmail());
 		if (attendee == null) {
 			throw new EscapeException(HttpStatus.NOT_FOUND, "Post creator not found.");
 		}

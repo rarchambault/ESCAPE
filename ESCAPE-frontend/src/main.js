@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import HomePage from './pages/HomePage.vue'
+import ViewAllEvents from './components/ViewAllEvents.vue' // import the ViewAllEvents component
 import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false
@@ -7,6 +8,7 @@ Vue.config.productionTip = false
 const routes = {
   '/': HomePage,
   '/home': HomePage,
+  '/events': ViewAllEvents // add a route for the ViewAllEvents component
 }
 
 new Vue({
