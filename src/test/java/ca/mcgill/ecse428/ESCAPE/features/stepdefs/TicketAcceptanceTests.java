@@ -1,3 +1,5 @@
+package ca.mcgill.ecse428.ESCAPE.features.stepdefs;
+
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import ca.mcgill.ecse428.ESCAPE.model.*;
