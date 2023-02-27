@@ -4,19 +4,18 @@ public class PostRequestDto {
 
     // attributes
     private String content;
-    private String email;
+    private String attendeeEmail;
 
-    public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getContent() {
+    public String getAttendeeEmail() {
+        return attendeeEmail;
+    }
+    public void setAttendeeEmail(String attendeeEmail) {
+        this.attendeeEmail = attendeeEmail;
+    }
+    public String getContent() {
         return content;
     }
     public void setContent(String content) {
         this.content = content;
     }
-
 }

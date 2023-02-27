@@ -1,8 +1,5 @@
 package ca.mcgill.ecse428.ESCAPE.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -13,7 +10,6 @@ import ca.mcgill.ecse428.ESCAPE.dto.PostResponseDto;
 import ca.mcgill.ecse428.ESCAPE.exception.EscapeException;
 import ca.mcgill.ecse428.ESCAPE.model.Attendee;
 import ca.mcgill.ecse428.ESCAPE.model.Post;
-import ca.mcgill.ecse428.ESCAPE.model.UserProfile;
 import ca.mcgill.ecse428.ESCAPE.repository.AttendeeRepository;
 import ca.mcgill.ecse428.ESCAPE.repository.PostRepository;
 
@@ -43,7 +39,7 @@ public class PostService {
 	@Transactional
 	public PostResponseDto createPost(PostRequestDto request) throws EscapeException {
 		String content = request.getContent();
-		Attendee attendee = attendeeRepository.findAttendeeByEmail(request.getEmail());
+		Attendee attendee = attendeeRepository.findAttendeeByEmail(request.getAttendeeEmail());
 		if (attendee == null) {
 			throw new EscapeException(HttpStatus.NOT_FOUND, "Post creator not found.");
 		}

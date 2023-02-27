@@ -21,6 +21,15 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	// Nice API docs
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
+	implementation 'io.cucumber:cucumber-java:7.3.0'
+	implementation 'io.cucumber:cucumber-junit:7.11.1'
+	implementation 'org.seleniumhq.selenium:selenium-api:3.11.0'
+	implementation 'org.seleniumhq.selenium:selenium-chrome-driver:2.50.0'
+	implementation 'org.junit.platform:junit-platform-suite-api:1.4.0-RC2'
+	testImplementation group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.8.2'
+	implementation 'io.cucumber:cucumber-spring:7.3.0'
+	testImplementation 'io.cucumber:cucumber-java:6.10.4'
+	testImplementation 'io.cucumber:cucumber-spring:6.10.4'
 }
 
 tasks.named('test') {
