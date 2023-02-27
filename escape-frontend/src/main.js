@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import HomePage from './pages/HomePage.vue'
+import ViewAllEvents from './components/ViewAllEvents.vue' // import the ViewAllEvents component
 import vuetify from './plugins/vuetify'
 import TicketingPage from './pages/TicketingPage'
 import PostPage from "./pages/PostPage"
@@ -15,6 +16,7 @@ const routes = {
   "/post": PostPage,
   "/viewtickets": ViewTickets,
   "/photogalleries": PhotoGalleries,
+  '/events': ViewAllEvents // add a route for the ViewAllEvents component
 }
 
 new Vue({
