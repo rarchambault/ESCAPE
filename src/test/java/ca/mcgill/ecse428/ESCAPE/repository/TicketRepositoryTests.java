@@ -36,15 +36,15 @@ public class TicketRepositoryTests {
 
         // Save object
         anTicket = ticketRepository.save(anTicket);
-        int TicketId = anTicket.getId();
+        int TicketId = 1;
 
         // Read object from database
         anTicket = null;
-        anTicket = ticketRepository.findTicketById(TicketId);
+        anTicket = ticketRepository.findTicketByTicketId(TicketId);
 
         // Assert that object has correct attributes
         assertNotNull(anTicket);
-        assertEquals(TicketId, anTicket.getId());
+        assertEquals(TicketId, anTicket.getTicketId());
     }
     
     // TO DO implement tests when the relevant classes are done (repositories)

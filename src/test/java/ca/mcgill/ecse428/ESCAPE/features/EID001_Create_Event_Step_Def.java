@@ -1,4 +1,4 @@
-package ca.mcgill.ecse428.ESCAPE.features.stepdefs;
+package ca.mcgill.ecse428.ESCAPE.features;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -9,7 +9,6 @@ import java.util.Optional;
 import ca.mcgill.ecse428.ESCAPE.controller.EventController;
 import ca.mcgill.ecse428.ESCAPE.dto.EventRequestDto;
 import ca.mcgill.ecse428.ESCAPE.dto.EventResponseDto;
-import ca.mcgill.ecse428.ESCAPE.features.bdd.SpringIntegrationTest;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -17,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-public class EID001_Create_Event_Step_Def extends SpringIntegrationTest {
+public class EID001_Create_Event_Step_Def {
 
     @Autowired
     private EventController eventController;
