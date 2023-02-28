@@ -186,6 +186,7 @@ public class Attendee extends UserProfile {
 		}
 		return wasAdded;
 	}
+
 	public void delete() {
 		super.delete();
 		for (int i = posts.size(); i > 0; i--) {

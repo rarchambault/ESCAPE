@@ -32,11 +32,9 @@ public class AttendeeController{
  		return new ResponseEntity<UserProfileResponseDto>(response, HttpStatus.CREATED);
  	}
     
-    @DeleteMapping("/attendee/{id}")
-    public String deleteAttendee(@PathVariable String email) {
-
+    @DeleteMapping("/attendee/{email}")
+    public void deleteAttendee(@PathVariable String email) {
         attendeeService.deleteAttendee(email);
-        return "redirect:/attendee";
     }
 
     @GetMapping(value = "/attendee/{email}")

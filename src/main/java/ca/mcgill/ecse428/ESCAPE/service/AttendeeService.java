@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestClientException;
 
 import ca.mcgill.ecse428.ESCAPE.dto.UserProfileRequestDto;
 import ca.mcgill.ecse428.ESCAPE.dto.UserProfileResponseDto;
@@ -36,12 +37,16 @@ public class AttendeeService {
 
     // Add user profile when the repo is made
 	@Transactional
-    public UserProfileResponseDto createAttendee(UserProfileRequestDto request) {
+    public UserProfileResponseDto createAttendee(UserProfileRequestDto request) throws EscapeException{
     	// check for invalid inputs
-		String name = request.getName();
-		String email = request.getEmail();
-		String password = request.getPassword();
-		if (name == null || email == null || password == null) {
+		String name = "";
+		String email = "";
+		String password = "";
+		try {
+			name = request.getName();
+			email = request.getEmail();
+			password = request.getPassword();
+		} catch(RestClientException e) {
 			throw new EscapeException(HttpStatus.BAD_REQUEST, "Required attributes missing.");
 		}
 		if (name.isBlank()) {
@@ -55,7 +60,7 @@ public class AttendeeService {
 		}
     	Attendee attendee = new Attendee(name, email, password);
     	attendeeRepository.save(attendee);
-    	return new UserProfileResponseDto(attendee, "Attendee");
+    	return new UserProfileResponseDto(name, email, 0, "Attendee");
     }
 
 	@Transactional

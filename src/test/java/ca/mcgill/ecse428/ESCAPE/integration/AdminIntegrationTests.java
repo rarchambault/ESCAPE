@@ -17,39 +17,39 @@ import org.springframework.web.client.RestClientException;
 
 import ca.mcgill.ecse428.ESCAPE.dto.UserProfileResponseDto;
 import ca.mcgill.ecse428.ESCAPE.exception.EscapeException;
-import ca.mcgill.ecse428.ESCAPE.model.Attendee;
-import ca.mcgill.ecse428.ESCAPE.repository.AttendeeRepository;
+import ca.mcgill.ecse428.ESCAPE.model.Admin;
+import ca.mcgill.ecse428.ESCAPE.repository.AdminRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT) // set random port
-public class AttendeeIntegrationTests {
+public class AdminIntegrationTests {
 
 	@Autowired
 	private TestRestTemplate client;
 	@Autowired
-	private AttendeeRepository attendeeRepo;
+	private AdminRepository adminRepo;
 
 	@BeforeEach
 	public void clearDatabase() {
-		attendeeRepo.deleteAll();
+		adminRepo.deleteAll();
 	}
 
 	@Test
-	public void testCreateAndGetAndDeleteAttendee() {
-		String email = testCreateAttendee();
-		testGetAttendee(email);
-		//testDeleteAttendee(email);
+	public void testCreateAndGetAndDeleteAdmin() {
+		String email = testCreateAdmin();
+		testGetAdmin(email);
+		//testDeleteAdmin(email);
 	}
 
-	private String testCreateAttendee() {
-		// set up attendee
+	private String testCreateAdmin() {
+		// set up admin
 		String name = "aName";
 		String email = "anEmail";
-		AttendeeDto dto = new AttendeeDto(name, email);
+		AdminDto dto = new AdminDto(name, email);
 		String password = "password";
 		dto.setPassword(password);
 
-		// call method: create a new attendee
-		ResponseEntity<AttendeeDto> response = client.postForEntity("/attendee", dto, AttendeeDto.class);
+		// call method: create a new admin
+		ResponseEntity<AdminDto> response = client.postForEntity("/admin", dto, AdminDto.class);
 
 		// check response
 		assertNotNull(response);
@@ -60,10 +60,10 @@ public class AttendeeIntegrationTests {
 		return response.getBody().email;
 	}
 
-	private void testGetAttendee(String email) {
+	private void testGetAdmin(String email) {
 
-		// call method: get the attendee by their email
-		ResponseEntity<AttendeeDto> response = client.getForEntity("/attendee/" + email, AttendeeDto.class);
+		// call method: get the admin by their email
+		ResponseEntity<AdminDto> response = client.getForEntity("/admin/" + email, AdminDto.class);
 
 		// check response
 		assertNotNull(response);
@@ -74,33 +74,33 @@ public class AttendeeIntegrationTests {
 	}
 
 	@Test
-	public void testCreateInvalidAttendee() {
-		ResponseEntity<String> response = client.postForEntity("/attendee", new AttendeeDto("  ","   "), String.class);
+	public void testCreateInvalidAdmin() {
+		ResponseEntity<String> response = client.postForEntity("/admin", new AdminDto("  ","   "), String.class);
 		assertNotNull(response);
 		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode(), "Response has correct status");
 	}
 
 	@Test
-	public void testGetInvalidAttendee() {
-		ResponseEntity<String> response = client.getForEntity("/attendee/" + Integer.MAX_VALUE, String.class);
+	public void testGetInvalidAdmin() {
+		ResponseEntity<String> response = client.getForEntity("/admin/" + Integer.MAX_VALUE, String.class);
 
 		assertNotNull(response);
 		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode(), "Response has correct status");
-		assertEquals("Attendee not found.", response.getBody(), "Response has correct error message");
+		assertEquals("Admin not found.", response.getBody(), "Response has correct error message");
 	}
 
-	// test delete attendee
-	private void testDeleteAttendee(String email) {
-		client.delete("/attendee/" + email);
+	// test delete admin
+	private void testDeleteAdmin(String email) {
+		client.delete("/admin/" + email);
 		try {
-			client.getForEntity("/attendee/" + email, String.class);
-			fail("Attendee was found!");
+			client.getForEntity("/admin/" + email, String.class);
+			fail("Admin was found!");
 		} catch (RestClientException | IllegalArgumentException e) {
 		}
 	}
 }
 
-class AttendeeDto {
+class AdminDto {
 	
 	public String name;
 	public String email;
@@ -109,10 +109,10 @@ class AttendeeDto {
 	public String role;
 
 	// Need default constructor so that Jackson can instantiate the object
-	public AttendeeDto() {
+	public AdminDto() {
 	}
 
-	public AttendeeDto(String name, String email) {
+	public AdminDto(String name, String email) {
 		this.name = name;
 		this.email = email;
 	}
