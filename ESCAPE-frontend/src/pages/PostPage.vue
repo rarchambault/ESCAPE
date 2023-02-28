@@ -15,6 +15,8 @@
     <v-main>
       <v-container>
         <v-list dense>
+          <v-list-item> <CreatePost />
+          </v-list-item>
           <v-list-item v-for="(post, index) in posts" :key="index">
             <v-list-item-avatar>
               <v-img :src="post.avatar"></v-img>
@@ -23,9 +25,23 @@
               <v-list-item-title>{{ post.name }}</v-list-item-title>
               <v-list-item-subtitle>{{ post.date }}</v-list-item-subtitle>
               <v-list-item-text>{{ post.content }}</v-list-item-text>
-              <v-list-item-action>
-                <v-btn text color="primary" @click="replyToPost(post)">Reply</v-btn>
+              <v-list-item-action v-if="post.user === currentUser">
+                <v-btn color="error" text @click="deletePost(index)">Delete</v-btn>
               </v-list-item-action>
+              <add-reply/>
+              <v-list-item v-for="(comment, index) in post.comments" :key="index">
+                <v-list-item-avatar>
+                  <v-img :src="comment.avatar"></v-img>
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title>{{ comment.name }}</v-list-item-title>
+                  <v-list-item-subtitle>{{ comment.date }}</v-list-item-subtitle>
+                  <v-list-item-text>{{ comment.content }}</v-list-item-text>
+                  <v-list-item-action v-if="comment.user === currentUser">
+                    <v-btn color="error" text @click="deleteComment(index, post)">Delete</v-btn>
+                  </v-list-item-action>
+                </v-list-item-content>
+              </v-list-item>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -34,10 +50,13 @@
   </v-app>
 </template>
 
-
 <script>
+import CreatePost from '../components/CreatePost.vue';
+import AddReply from '../components/AddReply.vue';
+
 export default {
   name: "PostPage",
+  components: { CreatePost, AddReply },
   data: () => ({
     posts: [
       {
@@ -63,10 +82,10 @@ export default {
       }
     ]
   }),
-  //methods: {
-  //replyToPost(post) {
-  // Implement reply functionality
-  // }
-  //}
+  methods: {
+    deletePost(index) {
+      this.posts.splice(index, 1);
+    }
+  }
 };
 </script>
