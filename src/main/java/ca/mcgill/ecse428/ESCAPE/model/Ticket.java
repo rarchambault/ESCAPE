@@ -20,6 +20,7 @@ public class Ticket
 
   //Ticket Attributes
   @Id
+  @GeneratedValue (strategy = GenerationType.AUTO)
   private int ticketId;
   private String name;
   private double price;
@@ -35,9 +36,8 @@ public class Ticket
   // CONSTRUCTOR
   //------------------------
 
-  public Ticket(int aTicketId, double aPrice, String aName, Attendee aAttendee, Event aEvent)
+  public Ticket(double aPrice, String aName, Attendee aAttendee, Event aEvent)
   {
-    ticketId = aTicketId;
     price = aPrice;
     name = aName;
     attendees = new ArrayList<Attendee>();
@@ -151,16 +151,18 @@ public class Ticket
 
   public void delete()
   {
-    for(int i=attendees.size(); i > 0; i--)
-    {
-      Attendee aAttendee = attendees.get(i - 1);
-      aAttendee.delete();
-    }
-    Event placeholderEvent = event;
-    this.event = null;
-    if(placeholderEvent != null)
-    {
-      placeholderEvent.removeTicket(this);
+    if (attendees != null){
+      for(int i=attendees.size(); i > 0; i--)
+      {
+        Attendee aAttendee = attendees.get(i - 1);
+        aAttendee.delete();
+      }
+      Event placeholderEvent = event;
+      this.event = null;
+      if(placeholderEvent != null)
+      {
+        placeholderEvent.removeTicket(this);
+      }
     }
   }
 

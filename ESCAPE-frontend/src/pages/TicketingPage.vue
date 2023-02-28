@@ -20,7 +20,7 @@
               <v-card-subtitle>{{ event.date }}</v-card-subtitle>
               <v-card-text>{{ event.description }}</v-card-text>
               <v-card-actions>
-                <v-btn color="orange" text :href="event.ticketUrl">Buy Tickets</v-btn>
+                <v-btn color="orange" text :href="event.ticketUrl" >Buy Tickets</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>

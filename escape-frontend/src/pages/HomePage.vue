@@ -185,7 +185,7 @@ export default {
       this.player.pauseVideo();
     },
     redirect(){
-      window.location = "/visitor";
+      window.location = "/about";
     }
   },
 };
