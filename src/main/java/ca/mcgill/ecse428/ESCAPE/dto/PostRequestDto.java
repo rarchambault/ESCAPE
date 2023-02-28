@@ -12,11 +12,18 @@ public class PostRequestDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getContent() {
+    private String attendeeEmail;
+
+    public String getAttendeeEmail() {
+        return attendeeEmail;
+    }
+    public void setAttendeeEmail(String attendeeEmail) {
+        this.attendeeEmail = attendeeEmail;
+    }
+    public String getContent() {
         return content;
     }
     public void setContent(String content) {
         this.content = content;
     }
-
 }
