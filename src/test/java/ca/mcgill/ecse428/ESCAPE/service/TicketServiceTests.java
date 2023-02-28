@@ -18,8 +18,12 @@ import org.springframework.http.HttpStatus;
 
 import ca.mcgill.ecse428.ESCAPE.dto.TicketRequestDto;
 import ca.mcgill.ecse428.ESCAPE.dto.TicketResponseDto;
-import ca.mcgill.ecse428.ESCAPE.exception.TicketException;
+import ca.mcgill.ecse428.ESCAPE.exception.EscapeException;
+import ca.mcgill.ecse428.ESCAPE.model.Attendee;
+import ca.mcgill.ecse428.ESCAPE.model.Event;
 import ca.mcgill.ecse428.ESCAPE.model.Ticket;
+import ca.mcgill.ecse428.ESCAPE.repository.AttendeeRepository;
+import ca.mcgill.ecse428.ESCAPE.repository.EventRepository;
 import ca.mcgill.ecse428.ESCAPE.repository.TicketRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -28,10 +32,18 @@ public class TicketServiceTests {
 	// Replace the repository with a "mock" that exposes the same interface
 	@Mock
 	TicketRepository ticketRepo;
+	@Mock
+	AttendeeRepository attendeeRepo;
+	@Mock
+	EventRepository eventRepo;
 
 	// Get a service that uses the mock repository
 	@InjectMocks
 	TicketService ticketService;
+	@InjectMocks
+	AttendeeService attendeeService;
+	@InjectMocks
+	EventService eventService;
 
 	@Test
 	public void testGetTicketById() {
@@ -55,7 +67,7 @@ public class TicketServiceTests {
 		when(ticketRepo.findTicketByTicketId(invalidId)).thenAnswer((InvocationOnMock invocation) -> null);
 
 		// call method, and obtain resulting exception
-		TicketException ex = assertThrows(TicketException.class,
+		EscapeException ex = assertThrows(EscapeException.class,
 				() -> ticketService.getTicketById(invalidId));
 
 		// check results
@@ -71,7 +83,17 @@ public class TicketServiceTests {
 		// test set up - create an ticket request
 		String name = "Party";
 		int price = 17;
-		TicketRequestDto ticketRequest = new TicketRequestDto(ticketId, price, name, attendee, event);
+		// create mocks for the required associated classes
+		Attendee person = new Attendee();
+		String email = "dawg@oo.com";
+		person.setEmail(email);
+		when(attendeeRepo.findAttendeeByEmail(email)).thenAnswer((InvocationOnMock invocation) -> person);
+		Event event = new Event();
+		int eventId = 71;
+		event.setEventId(71);
+		when(eventRepo.findEventById(eventId)).thenAnswer((InvocationOnMock invocation) -> event);
+		
+		TicketRequestDto ticketRequest = new TicketRequestDto(name, price, eventId, email);
 
 		// call method
 		TicketResponseDto returnedTicket = ticketService.createTicket(ticketRequest);
@@ -111,7 +133,7 @@ public class TicketServiceTests {
 		when(ticketRepo.findTicketByTicketId(any(int.class))).thenAnswer(x -> null);
 
 		// call method, expecting exception
-		TicketException ex = assertThrows(TicketException.class,
+		EscapeException ex = assertThrows(EscapeException.class,
 				() -> ticketService.deleteTicket(Integer.MAX_VALUE));
 
 		// check results

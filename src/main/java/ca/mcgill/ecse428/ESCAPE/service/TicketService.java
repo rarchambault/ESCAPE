@@ -11,7 +11,6 @@ import org.springframework.web.client.RestClientException;
 import ca.mcgill.ecse428.ESCAPE.dto.TicketRequestDto;
 import ca.mcgill.ecse428.ESCAPE.dto.TicketResponseDto;
 import ca.mcgill.ecse428.ESCAPE.exception.EscapeException;
-import ca.mcgill.ecse428.ESCAPE.exception.TicketException;
 import ca.mcgill.ecse428.ESCAPE.model.Attendee;
 import ca.mcgill.ecse428.ESCAPE.model.Event;
 import ca.mcgill.ecse428.ESCAPE.model.Ticket;
@@ -37,10 +36,10 @@ public class TicketService {
     }
 
 	@Transactional
-    public Ticket getTicketById(int id) throws TicketException {
+    public Ticket getTicketById(int id) throws EscapeException {
         Ticket ticket = ticketRepository.findTicketByTicketId(id);
         if (ticket == null) {
-            throw new TicketException(HttpStatus.NOT_FOUND, "Ticket not found.");
+            throw new EscapeException(HttpStatus.NOT_FOUND, "Ticket not found.");
         } 
         return ticket;
     }
@@ -76,21 +75,21 @@ public class TicketService {
     }
 
 	@Transactional
-    public void updateTicket(int id, Ticket ticket) throws TicketException {
+    public void updateTicket(int id, Ticket ticket) throws EscapeException {
         Ticket optionalTicket = ticketRepository.findTicketByTicketId(id);
         if (optionalTicket != null) {
             ticket.setTicketId(id);
             ticketRepository.save(ticket);
         } else {
-            throw new TicketException(HttpStatus.NOT_FOUND, "Ticket not found.");
+            throw new EscapeException(HttpStatus.NOT_FOUND, "Ticket not found.");
         }
     }
 
 	@Transactional
-    public void deleteTicket(int id) throws TicketException {
+    public void deleteTicket(int id) throws EscapeException {
         Ticket ticket = ticketRepository.findTicketByTicketId(id);
         if (ticket == null) {
-        	throw new TicketException(HttpStatus.NOT_FOUND, "Ticket not found.");
+        	throw new EscapeException(HttpStatus.NOT_FOUND, "Ticket not found.");
         } 
         ticketRepository.delete(ticket);
     }
