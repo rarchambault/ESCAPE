@@ -30,21 +30,7 @@
               <v-list-item-text>{{ post.content }}</v-list-item-text>
               <add-reply/>
             </v-list-item-content>
-            <v-list-item v-for="(reply, index) in post.replies" :key="index">
-              <v-list-item-avatar>
-                <v-icon color = "purple">{{ 'Samuel'.split(' ')
-                    .map(word => word.charAt(0))
-                    .join('')
-                    .toUpperCase() }}</v-icon>
-              </v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title>Sam</v-list-item-title>
-                <v-list-item-subtitle>Monday, February 27</v-list-item-subtitle>
-                <v-list-item-text>{{ reply.content }}</v-list-item-text>
-                <add-reply/>
-              </v-list-item-content>
             </v-list-item>
-          </v-list-item>
         </v-list>
       </v-container>
     </v-main>
