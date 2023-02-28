@@ -44,14 +44,16 @@ public class TicketIntegrationTests {
 	}
 
 	private int testCreateTicket() {
+		
 		Ticket ticket = new Ticket();
 		Attendee attendee;
 		Event event;
         ticket.setTicketId(1);
         ticket.setPrice(1.0);
         ticket.setName("Test name");
-		ticket.setAttendee(attendee);
 		ticket.setEvent(event);
+		
+		ResponseEntity<TicketRequestDto> response = client.getForEntity("/ticket/" + id, TicketRequestDto.class);
         return ticket.getId();
 	}
 

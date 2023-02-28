@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import ca.mcgill.ecse428.ESCAPE.model.Event;
 import ca.mcgill.ecse428.ESCAPE.model.Ticket;
 
 @SpringBootTest
@@ -15,9 +16,6 @@ public class TicketRepositoryTests {
 
     @Autowired
     private TicketRepository ticketRepository;
-    // TO DO add these when the repos have been made
-    //private PhotoGalleryRepository photoGalleryRepository;
-    //private TicketRepository ticketRepository;
     @Autowired
     private EventRepository eventRepository;
 
@@ -32,19 +30,24 @@ public class TicketRepositoryTests {
     @Test
     public void testPersistAndLoadTicket() {
         // Create object
-        Ticket anTicket = new Ticket();
+        Ticket aTicket = new Ticket();
+        
+        // create and link an event
+        Event anEvent = new Event();
+        eventRepository.save(anEvent);
+        aTicket.setEvent(anEvent);
 
         // Save object
-        anTicket = ticketRepository.save(anTicket);
-        int TicketId = anTicket.getId();
+        aTicket = ticketRepository.save(aTicket);
+        int TicketId = aTicket.getTicketId();
 
         // Read object from database
-        anTicket = null;
-        anTicket = ticketRepository.findTicketById(TicketId);
+        aTicket = null;
+        aTicket = ticketRepository.findTicketByTicketId(TicketId);
 
         // Assert that object has correct attributes
-        assertNotNull(anTicket);
-        assertEquals(TicketId, anTicket.getId());
+        assertNotNull(aTicket);
+        assertEquals(TicketId, aTicket.getTicketId());
     }
     
     // TO DO implement tests when the relevant classes are done (repositories)

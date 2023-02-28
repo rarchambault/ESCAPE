@@ -41,7 +41,10 @@ public class Event {
         photoGalleries = new ArrayList<PhotoGallery>();
     }
 
-    public Event() {}
+    public Event() {
+    	tickets = new ArrayList<Ticket>();
+        photoGalleries = new ArrayList<PhotoGallery>();
+    }
 
     //------------------------
     // INTERFACE
