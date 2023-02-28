@@ -88,7 +88,7 @@ export default {
         await axios.request(options)
             .then(response => response.data)
             .then((res) => {
-              if (res === "Attendee not found." || res.password !== this.password) {
+              if (res.data === "Attendee not found.") {
                 this.errorMessage = "Incorrect email or password. Please try again."
               } else {
                 sessionStorage.setItem("email", this.email);
