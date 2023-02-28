@@ -2,16 +2,28 @@ package ca.mcgill.ecse428.ESCAPE.dto;
 
 
 import ca.mcgill.ecse428.ESCAPE.model.Post;
+import ca.mcgill.ecse428.ESCAPE.model.Reply;
+
+import java.util.List;
 
 public class PostResponseDto {
 
     private int id;
+
+    private String email;
+
+    private String name;
     private String content;
+
+    private List<Reply> replies;
 
     public PostResponseDto(Post post) {
 
         this.id = post.getPostId();
         this.content = post.getContent();
+        this.email = post.getAttendee().getEmail();
+        this.name = post.getAttendee().getName();
+        this.replies = post.getReplies();
     }
 
     public int getId() {
@@ -30,5 +42,23 @@ public class PostResponseDto {
 		this.content = content;
 	}
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Reply> getReplies() {
+        return replies;
+    }
 }

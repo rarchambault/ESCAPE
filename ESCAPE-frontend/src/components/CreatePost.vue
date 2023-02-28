@@ -18,7 +18,7 @@
             <v-row>
               <!-- Labels for each column and v-model is what is written in textfield  -->
               <v-col cols="12">
-                <v-textarea v-model="name" label="What's on your mind?" :rules="[v => !!v]" required></v-textarea>
+                <v-textarea v-model="content" label="What's on your mind?" :rules="[v => !!v]" required></v-textarea>
               </v-col>
             </v-row>
           </v-container>
@@ -52,7 +52,7 @@ export default {
     content: '',
     name:'',
     date:'',
-    valid: true
+    valid: true,
   }),
 
   methods: {
@@ -70,7 +70,7 @@ export default {
           },
           data: {
             content: this.content,
-            attendeeEmail: sessionStorage.getItem("email"),
+            email: sessionStorage.getItem("email"),
           }
         };
 
@@ -78,7 +78,7 @@ export default {
             .then(response => response.data)
             .then(() => {
               this.$refs.form.reset();
-              this.$parent.$parent.$parent.getPosts();
+              this.$parent.$parent.getPosts();
               this.dialog = false;
             })
             .catch(err => console.error(err));

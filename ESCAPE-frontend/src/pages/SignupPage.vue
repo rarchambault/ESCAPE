@@ -93,7 +93,7 @@ export default {
           },
           data: {
             "name": this.name,
-            "emailAddress": this.email,
+            "email": this.email,
             "password": this.password,
           }
         };

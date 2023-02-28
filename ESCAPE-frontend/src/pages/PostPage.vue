@@ -9,7 +9,7 @@
         <v-btn color="white" text class="mx-3" href='/post' >Social Wall</v-btn>
         <v-btn color="white" text class="mx-3" href='/ticketing'>Buy Tickets</v-btn>
         <v-btn color="white" text class="mx-3" href='/viewtickets'>View My Tickets</v-btn>
-        <v-btn align="center" justify="center" color="white" href="/login"> Login  </v-btn>
+        <v-btn align="center" justify="center" color="white" font-color = "black" href="/login"> Logout  </v-btn>
       </v-app-bar>
     </v-app-bar>
     <v-main>
@@ -19,30 +19,31 @@
           </v-list-item>
           <v-list-item v-for="(post, index) in posts" :key="index">
             <v-list-item-avatar>
-              <v-img :src="post.avatar"></v-img>
+              <v-icon color = "red">{{ post.name.split(' ')
+                  .map(word => word.charAt(0))
+                  .join('')
+                  .toUpperCase() }}</v-icon>
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>{{ post.name }}</v-list-item-title>
-              <v-list-item-subtitle>{{ post.date }}</v-list-item-subtitle>
+              <v-list-item-subtitle>Monday, February 27</v-list-item-subtitle>
               <v-list-item-text>{{ post.content }}</v-list-item-text>
-              <v-list-item-action v-if="post.user === currentUser">
-                <v-btn color="error" text @click="deletePost(index)">Delete</v-btn>
-              </v-list-item-action>
               <add-reply/>
-              <v-list-item v-for="(comment, index) in post.comments" :key="index">
-                <v-list-item-avatar>
-                  <v-img :src="comment.avatar"></v-img>
-                </v-list-item-avatar>
-                <v-list-item-content>
-                  <v-list-item-title>{{ comment.name }}</v-list-item-title>
-                  <v-list-item-subtitle>{{ comment.date }}</v-list-item-subtitle>
-                  <v-list-item-text>{{ comment.content }}</v-list-item-text>
-                  <v-list-item-action v-if="comment.user === currentUser">
-                    <v-btn color="error" text @click="deleteComment(index, post)">Delete</v-btn>
-                  </v-list-item-action>
-                </v-list-item-content>
-              </v-list-item>
             </v-list-item-content>
+            <v-list-item v-for="(reply, index) in post.replies" :key="index">
+              <v-list-item-avatar>
+                <v-icon color = "purple">{{ 'Samuel'.split(' ')
+                    .map(word => word.charAt(0))
+                    .join('')
+                    .toUpperCase() }}</v-icon>
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title>Sam</v-list-item-title>
+                <v-list-item-subtitle>Monday, February 27</v-list-item-subtitle>
+                <v-list-item-text>{{ reply.content }}</v-list-item-text>
+                <add-reply/>
+              </v-list-item-content>
+            </v-list-item>
           </v-list-item>
         </v-list>
       </v-container>
@@ -53,39 +54,39 @@
 <script>
 import CreatePost from '../components/CreatePost.vue';
 import AddReply from '../components/AddReply.vue';
+import axios from "axios";
 
 export default {
   name: "PostPage",
   components: { CreatePost, AddReply },
   data: () => ({
-    posts: [
-      {
-        name: "John Doe",
-        date: "April 15th, 2023",
-        content:
-            "I had a great time at the event last night! Thanks to everyone who organized it.",
-        avatar: require("../assets/ESC4.jpeg")
-      },
-      {
-        name: "Jane Smith",
-        date: "May 6th, 2023",
-        content:
-            "Can't wait for the next event! Who else is excited?",
-        avatar: require("../assets/ESC5.jpeg")
-      },
-      {
-        name: "Bob Johnson",
-        date: "June 10th, 2023",
-        content:
-            "I'm looking for a roommate for next semester. Anyone interested?",
-        avatar: require("../assets/ESC7.jpeg")
-      }
-    ]
+    posts: []
   }),
   methods: {
     deletePost(index) {
       this.posts.splice(index, 1);
+    },
+
+    getPosts() {
+      let options = {
+        method: 'GET',
+        url: `http://localhost:8080/post`,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      };
+
+      axios.request(options)
+          .then(response => response.data)
+          .then(posts => {
+            this.posts = posts;
+          })
+          .catch(err => console.error(err));
     }
+  },
+
+  created() {
+    this.getPosts();
   }
 };
 </script>
