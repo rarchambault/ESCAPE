@@ -77,7 +77,7 @@ export default {
       if (this.valid) {
         let options = {
           method: 'GET',
-          url: `http://localhost:8090/attendee/${this.email}`,
+          url: `http://localhost:8080/attendee/${this.email}`,
           headers: {
             'Content-Type': 'application/json',
           }
@@ -92,6 +92,7 @@ export default {
                 this.errorMessage = "Incorrect email or password. Please try again."
               } else {
                 sessionStorage.setItem("email", this.email);
+                sessionStorage.setItem("name", this.name);
                 sessionStorage.setItem("isAdmin", false);
                 sessionStorage.setItem("isLoggedIn", true);
                 window.location = "/ticketing";
@@ -107,7 +108,7 @@ export default {
       if (this.valid) {
           let options = {
             method: 'GET',
-            url: `http://localhost:8090/admin/${this.email}`,
+            url: `http://localhost:8080/admin/${this.email}`,
             headers: {
               'Content-Type': 'application/json',
             }
@@ -120,6 +121,7 @@ export default {
                   this.errorMessage = "Incorrect email or password. Please try again."
                 } else {
                   sessionStorage.setItem("email", this.email);
+                  sessionStorage.setItem("name", this.name);
                   sessionStorage.setItem("isAdmin", true);
                   sessionStorage.setItem("isLoggedIn", true);
                   window.location = "/photogalleries";

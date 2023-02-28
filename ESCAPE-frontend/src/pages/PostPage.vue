@@ -15,6 +15,8 @@
     <v-main>
       <v-container>
         <v-list dense>
+          <v-list-item> <CreatePost />
+          </v-list-item>
           <v-list-item v-for="(post, index) in posts" :key="index">
             <v-list-item-avatar>
               <v-img :src="post.avatar"></v-img>
@@ -24,7 +26,7 @@
               <v-list-item-subtitle>{{ post.date }}</v-list-item-subtitle>
               <v-list-item-text>{{ post.content }}</v-list-item-text>
               <v-list-item-action>
-                <v-btn text color="primary" @click="replyToPost(post)">Reply</v-btn>
+                <add-reply/>
               </v-list-item-action>
             </v-list-item-content>
           </v-list-item>
@@ -36,8 +38,12 @@
 
 
 <script>
+import CreatePost from '../components/CreatePost.vue';
+import AddReply from '../components/AddReply.vue';
+
 export default {
   name: "PostPage",
+  components: { CreatePost, AddReply },
   data: () => ({
     posts: [
       {
