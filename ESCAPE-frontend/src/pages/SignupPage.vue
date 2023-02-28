@@ -87,7 +87,7 @@ export default {
 
         let attendeeOptions = {
           method: 'POST',
-          url: `http://localhost:8090/attendee`,
+          url: `http://localhost:8080/attendee`,
           headers: {
             'Content-Type': 'application/json',
           },
@@ -102,6 +102,7 @@ export default {
             .then(res => res.data)
             .then(() => {
               sessionStorage.setItem("email", this.email);
+              sessionStorage.setItem("name", this.name);
               sessionStorage.setItem("isAdmin", false);
               sessionStorage.setItem("isLoggedIn", true);
               window.location = "/ticketing";
