@@ -92,5 +92,6 @@ public class TicketService {
         	throw new EscapeException(HttpStatus.NOT_FOUND, "Ticket not found.");
         } 
         ticketRepository.delete(ticket);
+        ticket.delete();
     }
 }

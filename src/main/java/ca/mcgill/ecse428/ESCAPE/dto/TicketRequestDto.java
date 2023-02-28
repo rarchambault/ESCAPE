@@ -15,6 +15,9 @@ public class TicketRequestDto {
 		this.eventId = eventId;
 		this.attendeeEmail = attendeeEmail;
 	}
+	
+	public TicketRequestDto() {} // default constructor for jackson parsing
+	
 	public int getEventId() {
 		return eventId;
 	}

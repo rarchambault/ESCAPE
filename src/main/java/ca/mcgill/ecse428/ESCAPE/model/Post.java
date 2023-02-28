@@ -24,7 +24,7 @@ public class Post {
   //Post Associations
   @OneToMany(cascade= {CascadeType.ALL})
   private List<Reply> replies;
-  @ManyToOne(optional = false)
+  @ManyToOne(optional = false,cascade = CascadeType.MERGE)
   private Attendee attendee;
 
 	// ------------------------

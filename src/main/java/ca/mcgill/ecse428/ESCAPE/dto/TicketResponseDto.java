@@ -14,6 +14,13 @@ public class TicketResponseDto {
 		this.price = ticket.getPrice();
 	}
 
+	public TicketResponseDto(int ticketId, String name, double price) {
+		super();
+		this.ticketId = ticketId;
+		this.name = name;
+		this.price = price;
+	}
+
 	public int getTicketId() {
 		return ticketId;
 	}
