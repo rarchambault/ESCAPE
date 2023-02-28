@@ -16,9 +16,9 @@ Vue.config.productionTip = false
 const routes = {
   '/': HomePage,
   '/home': HomePage,
+  '/about': AboutUs,
   '/login': LoginPage,
   '/signup': SignupPage,
-  '/about': AboutUs,
   "/ticketing": TicketingPage,
   "/post": PostPage,
   "/viewtickets": ViewTickets,

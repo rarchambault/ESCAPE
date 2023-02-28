@@ -16,6 +16,8 @@ import ca.mcgill.ecse428.ESCAPE.dto.PostResponseDto;
 import ca.mcgill.ecse428.ESCAPE.model.Post;
 import ca.mcgill.ecse428.ESCAPE.service.PostService;
 
+import java.util.ArrayList;
+
 @CrossOrigin(origins = "*")
 @RestController
 public class PostController {
@@ -43,5 +45,16 @@ public class PostController {
 				HttpStatus.OK);
 	}
 
+	@GetMapping("/post")
+	public ResponseEntity<Iterable<PostResponseDto>> getAllPosts() {
+		Iterable<Post> posts = postService.getAllPosts();
 
+		ArrayList<PostResponseDto> postResponses = new ArrayList<PostResponseDto>();
+
+		for (var post : posts) {
+			postResponses.add(new PostResponseDto(post));
+		}
+
+		return new ResponseEntity<Iterable<PostResponseDto>>(postResponses, HttpStatus.OK);
+	}
 }

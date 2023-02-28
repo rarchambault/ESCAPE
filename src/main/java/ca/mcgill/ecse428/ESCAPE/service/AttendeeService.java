@@ -52,7 +52,7 @@ public class AttendeeService {
 		if (name.isBlank()) {
 			throw new EscapeException(HttpStatus.BAD_REQUEST, "Invalid attendee name.");
 		}
-		if (email.isBlank()) {
+		if (email.isEmpty() || email.isBlank()) {
 			throw new EscapeException(HttpStatus.BAD_REQUEST, "Invalid attendee email.");
 		}
 		if (password.isBlank()) {
