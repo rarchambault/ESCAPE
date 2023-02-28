@@ -151,16 +151,18 @@ public class Ticket
 
   public void delete()
   {
-    for(int i=attendees.size(); i > 0; i--)
-    {
-      Attendee aAttendee = attendees.get(i - 1);
-      aAttendee.delete();
-    }
-    Event placeholderEvent = event;
-    this.event = null;
-    if(placeholderEvent != null)
-    {
-      placeholderEvent.removeTicket(this);
+    if (attendees != null){
+      for(int i=attendees.size(); i > 0; i--)
+      {
+        Attendee aAttendee = attendees.get(i - 1);
+        aAttendee.delete();
+      }
+      Event placeholderEvent = event;
+      this.event = null;
+      if(placeholderEvent != null)
+      {
+        placeholderEvent.removeTicket(this);
+      }
     }
   }
 
