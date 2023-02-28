@@ -13,32 +13,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import ca.mcgill.ecse428.ESCAPE.dto.UserProfileRequestDto;
 import ca.mcgill.ecse428.ESCAPE.dto.UserProfileResponseDto;
-import ca.mcgill.ecse428.ESCAPE.model.Attendee;
-import ca.mcgill.ecse428.ESCAPE.service.AttendeeService;
+import ca.mcgill.ecse428.ESCAPE.model.Admin;
+import ca.mcgill.ecse428.ESCAPE.service.AdminService;
 
 @CrossOrigin(origins = "*")
 @RestController
-public class AttendeeController {
+public class AdminController {
 
     @Autowired
-    private AttendeeService attendeeService;
+    private AdminService adminService;
 
-    // create attendee
- 	@PostMapping("/attendee")
- 	public ResponseEntity<UserProfileResponseDto> createAttendee(@RequestBody UserProfileRequestDto request) {
- 		UserProfileResponseDto response = attendeeService.createAttendee(request);
+    // create admin
+ 	@PostMapping("/admin")
+ 	public ResponseEntity<UserProfileResponseDto> createAdmin(@RequestBody UserProfileRequestDto request) {
+ 		UserProfileResponseDto response = adminService.createAdmin(request);
  		return new ResponseEntity<UserProfileResponseDto>(response, HttpStatus.CREATED);
  	}
     
-    @DeleteMapping("/attendee/{email}")
-    public void deleteAttendee(@PathVariable String email) {
-        attendeeService.deleteAttendee(email);
+    @DeleteMapping("/admin/{email}")
+    public void deleteAdmin(@PathVariable String email) {
+        adminService.deleteAdmin(email);
     }
 
-    @GetMapping(value = "/attendee/{email}")
-	public ResponseEntity<UserProfileResponseDto> getAttendeeById(@PathVariable String email) {
-		Attendee attendee = attendeeService.getAttendeeByEmail(email);
-		return new ResponseEntity<UserProfileResponseDto>(new UserProfileResponseDto(attendee, "Attendee"),
+    @GetMapping(value = "/admin/{email}")
+	public ResponseEntity<UserProfileResponseDto> getAdminById(@PathVariable String email) {
+		Admin admin = adminService.getAdminByEmail(email);
+		return new ResponseEntity<UserProfileResponseDto>(new UserProfileResponseDto(admin, "Admin"),
 				HttpStatus.OK);
 	}
 

@@ -9,10 +9,11 @@ public class UserProfileResponseDto {
     public int userId;
     public String role;
 
-    public UserProfileResponseDto(String email, String name, int userId, String role) {
+    public UserProfileResponseDto( String name, String email,int userId, String role) {
         this.email = email;
         this.name = name;
         this.userId = userId;
+        this.role = role;
     }
 
     public UserProfileResponseDto(UserProfile userProfile, String role) {
