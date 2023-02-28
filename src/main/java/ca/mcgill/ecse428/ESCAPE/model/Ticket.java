@@ -20,6 +20,7 @@ public class Ticket
 
   //Ticket Attributes
   @Id
+  @GeneratedValue (strategy = GenerationType.AUTO)
   private int ticketId;
   private String name;
   private double price;
@@ -35,9 +36,8 @@ public class Ticket
   // CONSTRUCTOR
   //------------------------
 
-  public Ticket(int aTicketId, double aPrice, String aName, Attendee aAttendee, Event aEvent)
+  public Ticket(double aPrice, String aName, Attendee aAttendee, Event aEvent)
   {
-    ticketId = aTicketId;
     price = aPrice;
     name = aName;
     attendees = new ArrayList<Attendee>();
