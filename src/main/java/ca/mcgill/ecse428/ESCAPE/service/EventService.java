@@ -44,7 +44,7 @@ public class EventService {
 			throw new EventException(HttpStatus.BAD_REQUEST, "Invalid event name.");
 		}
 
-    	Event event = new Event(request.getName(), request.getDescription(), request.getTicketPrice(), request.getUserId(), request.getCapacity(), request.getStartTime());
+    	Event event = new Event(request.getName(), request.getDescription(), request.getTicketPrice(), request.getCapacity(), request.getStartTime());
 
     	eventRepository.save(event);
     	return new EventResponseDto(event);

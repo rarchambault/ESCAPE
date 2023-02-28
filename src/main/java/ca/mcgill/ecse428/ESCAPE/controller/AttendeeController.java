@@ -16,16 +16,18 @@ import ca.mcgill.ecse428.ESCAPE.dto.UserProfileResponseDto;
 import ca.mcgill.ecse428.ESCAPE.model.Attendee;
 import ca.mcgill.ecse428.ESCAPE.service.AttendeeService;
 
+import java.util.ArrayList;
+
 @CrossOrigin(origins = "*")
 @RestController
-public class AttendeeController {
+public class AttendeeController{
 
     @Autowired
     private AttendeeService attendeeService;
 
     // create attendee
  	@PostMapping("/attendee")
- 	public ResponseEntity<UserProfileResponseDto> createAttendee(@RequestBody UserProfileRequestDto request) {
+ 	public ResponseEntity<UserProfileResponseDto> createAttendeeProfile(@RequestBody UserProfileRequestDto request) {
  		UserProfileResponseDto response = attendeeService.createAttendee(request);
  		return new ResponseEntity<UserProfileResponseDto>(response, HttpStatus.CREATED);
  	}
@@ -42,5 +44,16 @@ public class AttendeeController {
 				HttpStatus.OK);
 	}
 
+	@GetMapping()
+	public ResponseEntity<Iterable<UserProfileResponseDto>> getAllAttendees() {
+		Iterable<Attendee> attendees = attendeeService.getAllAttendees();
 
+		ArrayList<UserProfileResponseDto> attendeeResponses = new ArrayList<UserProfileResponseDto>();
+
+		for (var attendee : attendees) {
+			attendeeResponses.add(new UserProfileResponseDto(attendee, "attendee"));
+		}
+
+		return new ResponseEntity<Iterable<UserProfileResponseDto>>(attendeeResponses, HttpStatus.OK);
+	}
 }

@@ -1,26 +1,33 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <v-toolbar-title>Engineering Socials Committee Photos</v-toolbar-title>
+    <v-app-bar app color="black" dark>
+      <v-toolbar-title>Engineering Socials Committee Advanced Programming Environment (ESCAPE)</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn color="white" text class="mx-3" href='/about' >About Us</v-btn>
+      <v-btn color="white" text class="mx-3" href='/photogalleries'>Photo Galleries</v-btn>
+      <v-btn color="white" text class="mx-3" href='/post' >Social Wall</v-btn>
+      <v-btn color="white" text class="mx-3" href='/ticketing'>Buy Tickets</v-btn>
+      <v-btn color="white" text class="mx-3" href='/viewtickets'>View My Tickets</v-btn>
+      <v-btn align="center" justify="center" color="white" href="/login"> Login  </v-btn>
     </v-app-bar>
     <v-main>
       <v-container>
         <v-row>
           <v-col
-            v-for="(gallery, index) in galleries"
-            :key="index"
-            cols="12"
-            md="6"
-            lg="4"
+              v-for="(gallery, index) in galleries"
+              :key="index"
+              cols="12"
+              md="6"
+              lg="4"
           >
-            <v-card elevation="2">
+            <v-card elevation="2" class="mx-auto" max-width="500">
               <v-img :src="gallery.coverPhoto" height="200"></v-img>
               <v-card-title class="headline">
                 {{ gallery.title }}
               </v-card-title>
               <v-card-text>{{ gallery.description }}</v-card-text>
               <v-card-actions>
-                <v-btn color="primary" text :href="'/gallery/' + 'photogallery'">View Gallery</v-btn>
+                <v-btn color="primary" text :href="'/gallery/photogallery' ">View Gallery</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -29,6 +36,7 @@
     </v-main>
   </v-app>
 </template>
+
 
 <script>
 export default {

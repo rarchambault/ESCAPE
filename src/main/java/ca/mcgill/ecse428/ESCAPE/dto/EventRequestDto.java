@@ -8,16 +8,8 @@ public class EventRequestDto {
 	private String name;
 	private String description;
 	private double ticketPrice;
-	private int userId;
 	private int capacity;
 	private LocalDateTime startTime;
-	
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
 	public String getName() {
 		return name;
 	}

@@ -3,6 +3,7 @@ package ca.mcgill.ecse428.ESCAPE.service;
 import java.util.Optional;
 import java.util.List;
 
+import ca.mcgill.ecse428.ESCAPE.exception.EscapeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import ca.mcgill.ecse428.ESCAPE.repository.AdminRepository;
 import ca.mcgill.ecse428.ESCAPE.repository.AttendeeRepository;
 import ca.mcgill.ecse428.ESCAPE.dto.UserProfileRequestDto;
 import ca.mcgill.ecse428.ESCAPE.dto.UserProfileResponseDto;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserProfileService {
@@ -44,5 +46,16 @@ public class UserProfileService {
         return new UserProfileResponseDto(attendee, "attendee");
     }
 
+    @Transactional
+    public Iterable<Attendee> getAllAttendees() {
+
+        Iterable<Attendee> attendees = attendeeRepository.findAll();
+
+        if (attendees == null) {
+            throw new EscapeException(HttpStatus.NOT_FOUND, "Attendees not found.");
+        }
+
+        return attendees;
+    }
     
 }
