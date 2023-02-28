@@ -55,13 +55,13 @@ public class PostIntegrationTests {
 		attendeeRepo.save(person);
 		
 		// set up post
-		Post post = new Post();
+		PostDto dto = new PostDto();
         String content = "Some post content.";
-		post.setContent(content);
-		post.setAttendee(person);
+		dto.setContent(content);
+		dto.setEmail(email);
 
 		// call method: create a new post
-		ResponseEntity<PostDto> response = client.postForEntity("/post", new PostDto(content), PostDto.class);
+		ResponseEntity<PostDto> response = client.postForEntity("/post", dto, PostDto.class);
 
 		// check response
 		assertNotNull(response);
@@ -109,9 +109,23 @@ public class PostIntegrationTests {
 class PostDto {
 	public int id;
 	public String content;
+	public String email;
 
 	// Need default constructor so that Jackson can instantiate the object
 	public PostDto() {
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+		
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public PostDto(String content) {

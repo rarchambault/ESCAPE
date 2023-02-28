@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestClientException;
 
 import ca.mcgill.ecse428.ESCAPE.dto.PostRequestDto;
 import ca.mcgill.ecse428.ESCAPE.dto.PostResponseDto;
@@ -42,8 +43,16 @@ public class PostService {
 	// Add user profile when the repo is made
 	@Transactional
 	public PostResponseDto createPost(PostRequestDto request) throws EscapeException {
-		String content = request.getContent();
-		Attendee attendee = attendeeRepository.findAttendeeByEmail(request.getEmail());
+		String content = "";
+		String email = "";
+		try {
+			email = request.getEmail();
+			content = request.getContent();
+		} catch (RestClientException e) {
+			throw new EscapeException(HttpStatus.BAD_REQUEST, "Missing required post information.");
+		}
+		content = request.getContent();
+		Attendee attendee = attendeeRepository.findAttendeeByEmail(email);
 		if (attendee == null) {
 			throw new EscapeException(HttpStatus.NOT_FOUND, "Post creator not found.");
 		}
