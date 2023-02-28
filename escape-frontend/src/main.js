@@ -8,12 +8,16 @@ import PostPage from "./pages/PostPage"
 import ViewTickets from "./pages/ViewTickets"
 import PhotoGalleries from "./pages/PhotoGalleries"
 import PhotoGallery from "./pages/PhotoGallery"
+import LoginPage from "./pages/LoginPage.vue"
+import SignupPage from "./pages/SignupPage.vue"
 
 Vue.config.productionTip = false
 
 const routes = {
   '/': HomePage,
   '/home': HomePage,
+  '/login': LoginPage,
+  '/signup': SignupPage,
   '/about': AboutUs,
   "/ticketing": TicketingPage,
   "/post": PostPage,
