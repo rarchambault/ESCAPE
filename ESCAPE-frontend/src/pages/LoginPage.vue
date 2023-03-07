@@ -92,7 +92,7 @@ export default {
                 this.errorMessage = "Incorrect email or password. Please try again."
               } else {
                 sessionStorage.setItem("email", this.email);
-                sessionStorage.setItem("name", this.name);
+                sessionStorage.setItem("name", res.name);
                 sessionStorage.setItem("isAdmin", false);
                 sessionStorage.setItem("isLoggedIn", true);
                 window.location = "/ticketing";
@@ -121,7 +121,7 @@ export default {
                   this.errorMessage = "Incorrect email or password. Please try again."
                 } else {
                   sessionStorage.setItem("email", this.email);
-                  sessionStorage.setItem("name", this.name);
+                  sessionStorage.setItem("name", res.name);
                   sessionStorage.setItem("isAdmin", true);
                   sessionStorage.setItem("isLoggedIn", true);
                   window.location = "/photogalleries";
