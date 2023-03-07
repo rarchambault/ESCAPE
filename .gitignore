@@ -20,3 +20,4 @@ node_modules
 *application.properties
 
 /ESCAPE-frontend/node_modules/
+.settings
