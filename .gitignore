@@ -18,3 +18,5 @@ node_modules
 *.sw?
 
 *application.properties
+
+/ESCAPE-frontend/node_modules/
