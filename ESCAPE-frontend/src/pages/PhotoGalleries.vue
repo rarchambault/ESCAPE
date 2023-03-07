@@ -8,7 +8,7 @@
       <v-btn color="white" text class="mx-3" href='/post' >Social Wall</v-btn>
       <v-btn color="white" text class="mx-3" href='/ticketing'>Buy Tickets</v-btn>
       <v-btn color="white" text class="mx-3" href='/viewtickets'>View My Tickets</v-btn>
-      <v-btn align="center" justify="center" color="white" href="/login"> Login  </v-btn>
+      <v-btn align="center" justify="center" color="white" @click="logInOrProfile"> Login  </v-btn>
     </v-app-bar>
     <v-main>
       <v-container>
@@ -62,6 +62,15 @@ export default {
         id: "escape-room-challenge"
       }
     ]
-  })
+  }),
+  methods: {
+    logInOrProfile() {
+      if (sessionStorage.getItem("isLoggedIn") === "true") {
+        window.location =  "/userprofile";
+      } else {
+        window.location = "/login";
+      }
+    }
+  }
 };
 </script>
