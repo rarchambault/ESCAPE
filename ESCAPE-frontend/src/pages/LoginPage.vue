@@ -117,7 +117,7 @@ export default {
           await axios.request(options)
               .then(response => response.data)
               .then((res) => {
-                if (res === "Admin not found." || res.password !== this.password) {
+                if (res === "Admin not found.") {
                   this.errorMessage = "Incorrect email or password. Please try again."
                 } else {
                   sessionStorage.setItem("email", this.email);
@@ -127,7 +127,11 @@ export default {
                   window.location = "/photogalleries";
                 }
               })
-              .catch(err => console.error(err));
+              .catch((err) => {
+                  console.error(err);
+                  this.errorMessage = "Incorrect email or password. Please try again."
+                }
+              );
         }
       }
     },
