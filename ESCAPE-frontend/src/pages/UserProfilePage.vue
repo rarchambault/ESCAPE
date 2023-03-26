@@ -16,12 +16,42 @@
     <div align="center">
         <h1>Username: {{ name}}</h1>
         <p>Email: {{ email }}</p>
-        <p v-if="isAdmin">Admin User</p>
+        <p v-if="isAdmin === 'true'">Admin User</p>
         <div>
             <v-btn color="primary" @click="closeAccount">Close Account</v-btn>
             <v-btn color="primary" @click="logout">Logout</v-btn>
         </div>
         <div class="red--text"> {{ error }}</div>
+    </div>
+    <div v-if="isAdmin === 'true'">
+        <v-card-text>
+            <v-card-title class="headline">Admin Options</v-card-title>
+        </v-card-text>
+        <div align="center">
+            <h3> Create admin user </h3>
+            <v-card-text> <!--  Main body -->
+                <v-form ref="form">
+                  <v-text-field v-model="name_input" name="name" label="Name" type="text" placeholder="name"
+                                required></v-text-field>
+                  <v-text-field v-model="email_input" name="email" label="Email" type="text" placeholder="email"
+                                required></v-text-field>
+
+                  <v-text-field v-model="password" name="password" label="Password" type="password"
+                                placeholder="password" autocomplete="on" required></v-text-field>
+
+                  <v-text-field v-model="confirmPassword" name="confirmPassword" label="Confirm Password"
+                                type="password" placeholder="confirm password" autocomplete="on" required></v-text-field>
+                  <div class="red--text"> {{ errorAdminCreation }}</div>
+
+                  <v-row>
+                    <v-col>
+                      <v-btn color="primary" value="log in" class="mt-4" @click="createAdmin()"> Create
+                        Account </v-btn>
+                    </v-col>
+                  </v-row>
+                </v-form>
+              </v-card-text>
+        </div>
     </div>
   </v-app>
 </template>
@@ -37,7 +67,12 @@ export default {
             name: sessionStorage.getItem('name'),
             email: sessionStorage.getItem('email'),
             isAdmin: sessionStorage.getItem('isAdmin'),
+            name_input: '',
+            email_input: '',
+            password: '',
+            confirmPassword: '',
             error: '',
+            errorAdminCreation: '',
         }
     },
 
@@ -75,6 +110,43 @@ export default {
                 });
             }
         },
+        createAdmin(){
+            this.valid = this.$refs.form.validate();
+
+            if (this.valid) {
+
+                if(this.password !== this.confirmPassword){
+                this.errorAdminCreation = "Your passwords do no match. Please try again.";
+                return;
+                }
+
+                let attendeeOptions = {
+                method: 'POST',
+                url: `http://localhost:8080/admin`,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: {
+                    "name": this.name_input,
+                    "email": this.email_input,
+                    "password": this.password,
+                }
+                };
+
+                axios.request(attendeeOptions)
+                    .then(res => res.data)
+                    .then(() => {
+                        this.errorAdminCreation = "Admin created successfully";
+                        this.name_input = "";
+                        this.email_input = "";
+                        this.password = "";
+                        this.confirmPassword = "";
+                    })
+                    .catch(err => {
+                        this.errorAdminCreation = err.response.data
+                    })
+            }
+        }
     }
 }
 </script>
