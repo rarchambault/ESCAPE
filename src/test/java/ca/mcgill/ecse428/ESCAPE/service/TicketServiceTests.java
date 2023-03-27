@@ -8,6 +8,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import ca.mcgill.ecse428.ESCAPE.dto.RegisterRequestDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -84,16 +85,12 @@ public class TicketServiceTests {
 		String name = "Party";
 		int price = 17;
 		// create mocks for the required associated classes
-		Attendee person = new Attendee();
-		String email = "dawg@oo.com";
-		person.setEmail(email);
-		when(attendeeRepo.findAttendeeByEmail(email)).thenAnswer((InvocationOnMock invocation) -> person);
 		Event event = new Event();
 		int eventId = 71;
 		event.setEventId(71);
 		when(eventRepo.findEventById(eventId)).thenAnswer((InvocationOnMock invocation) -> event);
 		
-		TicketRequestDto ticketRequest = new TicketRequestDto(name, price, eventId, email);
+		TicketRequestDto ticketRequest = new TicketRequestDto(name, price, eventId);
 
 		// call method
 		TicketResponseDto returnedTicket = ticketService.createTicket(ticketRequest);
@@ -103,6 +100,69 @@ public class TicketServiceTests {
 		assertEquals(price, returnedTicket.getPrice());
 		// Check that the service actually saved the ticket
 		// verify(ticketRepo, times(1)).save();
+	}
+
+	@Test
+	public void testRegisterAttendee() {
+		// Mock: just return the ticket with no modification
+		when(ticketRepo.save(any(Ticket.class))).thenAnswer((InvocationOnMock invocation) -> invocation.getArgument(0));
+
+		// test set up - create a registration request
+		// create mocks for the required associated classes
+		String attendeeEmail = "attendee@email.com";
+		Attendee attendee = new Attendee();
+		attendee.setEmail(attendeeEmail);
+		when(attendeeRepo.findAttendeeByEmail(attendeeEmail)).thenAnswer((InvocationOnMock invocation) -> attendee);
+
+		int ticketId = 1;
+		Ticket ticket = new Ticket();
+		ticket.setTicketId(ticketId);
+		when(ticketRepo.findTicketByTicketId(ticketId)).thenAnswer((InvocationOnMock invocation) -> ticket);
+
+		RegisterRequestDto registerRequest = new RegisterRequestDto(attendeeEmail, ticketId);
+
+		// call method
+		TicketResponseDto returnedTicket = ticketService.registerAttendee(registerRequest);
+
+		// check results
+		assertNotNull(returnedTicket);
+		assertNotNull(returnedTicket.getAttendeeEmails());
+		assertEquals(1, returnedTicket.getAttendeeEmails().size());
+	}
+
+	@Test
+	public void testUnregisterAttendee() {
+		// Mock: just return the ticket with no modification
+		when(ticketRepo.save(any(Ticket.class))).thenAnswer((InvocationOnMock invocation) -> invocation.getArgument(0));
+
+		// test set up - create a registration request
+		// create mocks for the required associated classes
+		String attendeeEmail = "attendee@email.com";
+		Attendee attendee = new Attendee();
+		attendee.setEmail(attendeeEmail);
+		when(attendeeRepo.findAttendeeByEmail(attendeeEmail)).thenAnswer((InvocationOnMock invocation) -> attendee);
+
+		int ticketId = 1;
+		Ticket ticket = new Ticket();
+		ticket.setTicketId(ticketId);
+		when(ticketRepo.findTicketByTicketId(ticketId)).thenAnswer((InvocationOnMock invocation) -> ticket);
+
+		RegisterRequestDto registerRequest = new RegisterRequestDto(attendeeEmail, ticketId);
+
+		// call method
+		TicketResponseDto ticketWithAttendee = ticketService.registerAttendee(registerRequest);
+
+		// check results
+		assertNotNull(ticketWithAttendee);
+		assertNotNull(ticketWithAttendee.getAttendeeEmails());
+		assertEquals(1, ticketWithAttendee.getAttendeeEmails().size());
+
+		// call method
+		TicketResponseDto ticketNoAttendee = ticketService.unregisterAttendee(registerRequest);
+
+		// check results
+		assertNotNull(ticketNoAttendee);
+		assertEquals(0, ticketNoAttendee.getAttendeeEmails().size());
 	}
 	
 	@Test

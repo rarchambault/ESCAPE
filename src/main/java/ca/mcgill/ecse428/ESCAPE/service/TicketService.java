@@ -2,6 +2,7 @@ package ca.mcgill.ecse428.ESCAPE.service;
 
 import java.util.Optional;
 
+import ca.mcgill.ecse428.ESCAPE.dto.RegisterRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -48,30 +49,90 @@ public class TicketService {
     public TicketResponseDto createTicket(TicketRequestDto request) throws EscapeException{
 		int price = 0;
 		String name = "";
-		String email = "";
 		int eventId = 0;
 		// check for required fields in given requestDTO
 		try {
 			price = request.getPrice();
 			name = request.getName();
-			email = request.getAttendeeEmail();
 			eventId = request.getEventId();
 		} catch (RestClientException e) {
     		throw new EscapeException(HttpStatus.BAD_REQUEST, "Required attributes missing.");
 		}
 		// check for linked objects in the database
-		Attendee attendee = attendeeRepository.findAttendeeByEmail(email);
 		Event event = eventRepository.findEventById(eventId);
     	if (event == null) {
     		throw new EscapeException(HttpStatus.NOT_FOUND, "Event not found.");
     	}
-    	if (attendee == null) {
-    		throw new EscapeException(HttpStatus.NOT_FOUND, "Attendee not found.");
-    	}
     	// create, save, and return successfully created object
-    	Ticket ticket = new Ticket(price, name, attendee, event);
+    	Ticket ticket = new Ticket(price, name, event);
     	ticketRepository.save(ticket);
     	return new TicketResponseDto(ticket);
+    }
+
+    @Transactional
+    public TicketResponseDto registerAttendee(RegisterRequestDto request) throws EscapeException{
+        String attendeeEmail = "";
+        int ticketId = 0;
+        // check for required fields in given requestDTO
+        try {
+            attendeeEmail = request.getAttendeeEmail();
+            ticketId = request.getTicketId();
+        } catch (RestClientException e) {
+            throw new EscapeException(HttpStatus.BAD_REQUEST, "Required attributes missing.");
+        }
+
+        Attendee attendee = attendeeRepository.findAttendeeByEmail(attendeeEmail);
+        if (attendee == null) {
+            throw new EscapeException(HttpStatus.NOT_FOUND, "Attendee not found.");
+        }
+
+        // check for linked objects in the database
+        Ticket ticket = ticketRepository.findTicketByTicketId(ticketId);
+        if (ticket == null) {
+            throw new EscapeException(HttpStatus.NOT_FOUND, "Ticket not found.");
+        }
+
+        // Add ticket to attendee and attendee to ticket
+        attendee.addTicket(ticket);
+        ticket.addAttendee(attendee);
+
+        // Save both modified objects
+        ticketRepository.save(ticket);
+        attendeeRepository.save(attendee);
+        return new TicketResponseDto(ticket);
+    }
+
+    @Transactional
+    public TicketResponseDto unregisterAttendee(RegisterRequestDto request) throws EscapeException{
+        String attendeeEmail = "";
+        int ticketId = 0;
+        // check for required fields in given requestDTO
+        try {
+            attendeeEmail = request.getAttendeeEmail();
+            ticketId = request.getTicketId();
+        } catch (RestClientException e) {
+            throw new EscapeException(HttpStatus.BAD_REQUEST, "Required attributes missing.");
+        }
+
+        Attendee attendee = attendeeRepository.findAttendeeByEmail(attendeeEmail);
+        if (attendee == null) {
+            throw new EscapeException(HttpStatus.NOT_FOUND, "Attendee not found.");
+        }
+
+        // check for linked objects in the database
+        Ticket ticket = ticketRepository.findTicketByTicketId(ticketId);
+        if (ticket == null) {
+            throw new EscapeException(HttpStatus.NOT_FOUND, "Ticket not found.");
+        }
+
+        // Add ticket to attendee and attendee to ticket
+        attendee.removeTicket(ticket);
+        ticket.removeAttendee(attendee);
+
+        // Save both modified objects
+        ticketRepository.save(ticket);
+        attendeeRepository.save(attendee);
+        return new TicketResponseDto(ticket);
     }
 
 	@Transactional
