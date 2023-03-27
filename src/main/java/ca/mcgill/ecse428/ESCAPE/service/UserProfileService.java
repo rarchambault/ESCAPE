@@ -46,6 +46,34 @@ public class UserProfileService {
         return new UserProfileResponseDto(attendee, "attendee");
     }
 
+    public boolean setProfile_picture_path(String email, String profile_picture_path) {
+        Attendee attendee = attendeeRepository.findAttendeeByEmail(email);
+        Admin admin = adminRepository.findAdminByEmail(email);
+        if (attendee != null) {
+            attendee.setProfile_picture_path(profile_picture_path);
+            attendeeRepository.save(attendee);
+            return true;
+        } else if (admin != null) {
+            admin.setProfile_picture_path(profile_picture_path);
+            adminRepository.save(admin);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public String getProfile_picture_path(String email) {
+        Attendee attendee = attendeeRepository.findAttendeeByEmail(email);
+        Admin admin = adminRepository.findAdminByEmail(email);
+        if (attendee != null) {
+            return attendee.getProfile_picture_path();
+        } else if (admin != null) {
+            return admin.getProfile_picture_path();
+        } else {
+            return null;
+        }
+    }
+
     @Transactional
     public Iterable<Attendee> getAllAttendees() {
 

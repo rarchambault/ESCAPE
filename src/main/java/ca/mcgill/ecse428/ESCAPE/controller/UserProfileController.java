@@ -14,15 +14,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 
 import ca.mcgill.ecse428.ESCAPE.dto.UserProfileRequestDto;
 import ca.mcgill.ecse428.ESCAPE.dto.UserProfileResponseDto;
 import ca.mcgill.ecse428.ESCAPE.model.UserProfile;
 import ca.mcgill.ecse428.ESCAPE.service.UserProfileService;
 
+import ca.mcgill.ecse428.ESCAPE.storage.*;
+
 @RestController
 @RequestMapping("UserProfile")
 public class UserProfileController{
+
+    private final StorageService storageService;
+
+    @Autowired
+    public UserProfileController(StorageService storageService) {
+        this.storageService = storageService;
+    }
+
     @Autowired
     private UserProfileService userProfileService;
 
@@ -36,6 +51,24 @@ public class UserProfileController{
     public ResponseEntity<UserProfileResponseDto> createAttendeeProfile(@RequestBody UserProfileRequestDto request) {
         UserProfileResponseDto response = userProfileService.createAttendeeProfile(request);
         return new ResponseEntity<UserProfileResponseDto>(response, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/{email}/profilePicture")
+    public String uploadProfilePicture(@PathVariable String email, @RequestParam("file") MultipartFile file) {
+        storageService.store(file);
+        userProfileService.setProfile_picture_path(email, file.getOriginalFilename());
+        return "redirect:/UserProfile/" + email;
+    }
+
+    @GetMapping("/{email}/profilePicture")
+    public ResponseEntity<Resource> serveFile(@PathVariable String email) {
+        String filename = userProfileService.getProfile_picture_path(email);
+        if(filename == "") {
+            return ResponseEntity.notFound().build();
+        }
+        Resource file = storageService.loadAsResource(filename);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
     @GetMapping()
