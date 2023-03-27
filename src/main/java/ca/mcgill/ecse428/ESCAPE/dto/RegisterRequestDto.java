@@ -1,38 +1,30 @@
 package ca.mcgill.ecse428.ESCAPE.dto;
 
-public class TicketRequestDto {
+public class RegisterRequestDto {
 
 	// attributes
-	private String name;
-	private int price;
-	private int eventId;
-	
-	public TicketRequestDto(String name, int price, int eventId) {
+	private String attendeeEmail;
+	private int ticketId;
+
+	public RegisterRequestDto(String attendeeEmail, int ticketId) {
 		super();
-		this.name = name;
-		this.price = price;
-		this.eventId = eventId;
+		this.attendeeEmail = attendeeEmail;
+		this.ticketId = ticketId;
 	}
+
+	public RegisterRequestDto() {} // default constructor for jackson parsing
 	
-	public TicketRequestDto() {} // default constructor for jackson parsing
-	
-	public int getEventId() {
-		return eventId;
+	public int getTicketId() {
+		return ticketId;
 	}
-	public void setEventId(int eventId) {
-		this.eventId = eventId;
+	public void setTicketId(int ticketId) {
+		this.ticketId = ticketId;
 	}
-	public String getName() {
-		return name;
+	public String getAttendeeEmail() {
+		return attendeeEmail;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
+	public void setAttendeeEmail(String attendeeEmail) {
+		this.attendeeEmail = attendeeEmail;
 	}
 
 

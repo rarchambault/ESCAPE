@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import ca.mcgill.ecse428.ESCAPE.dto.RegisterRequestDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,6 +49,8 @@ public class TicketIntegrationTests {
 	public void testCreateAndGetAndDeleteTicket() {
 		int id = testCreateTicket();
 		testGetTicket(id);
+		testRegisterAttendee(id);
+		testUnregisterAttendee(id);
 		//testDeleteTicket(id);
 	}
 
@@ -65,7 +68,7 @@ public class TicketIntegrationTests {
 		// set up ticket
 		int price = 33;
 		String name = "a ticket name";
-		TicketDto dto = new TicketDto(price, name, email, eventId);
+		TicketDto dto = new TicketDto(price, name, eventId);
 
 		// call method: create a new ticket
 		ResponseEntity<TicketDto> response = client.postForEntity("/ticket", dto, TicketDto.class);
@@ -77,6 +80,46 @@ public class TicketIntegrationTests {
 		assertEquals(name, response.getBody().name, "Response has correct name");
 
 		return response.getBody().ticketId;
+	}
+
+	private void testRegisterAttendee(int ticketId) {
+
+		// setup - first create and save required associated class objects
+		Attendee person = new Attendee();
+		String email = "obi@kenobi.com";
+		person.setEmail(email);
+		attendeeRepo.save(person);
+
+		RegisterRequestDto requestDto = new RegisterRequestDto(email, ticketId);
+
+		// call method: create a new ticket
+		ResponseEntity<TicketResponseDto> response = client.postForEntity("/ticket/register", requestDto, TicketResponseDto.class);
+
+		// check response
+		assertNotNull(response);
+		assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
+		assertNotNull(response.getBody(), "Response has body");
+		assertEquals(email, response.getBody().getAttendeeEmail(0), "Response has correct attendee registered");
+	}
+
+	private void testUnregisterAttendee(int ticketId) {
+
+		// setup - first create and save required associated class objects
+		Attendee person = new Attendee();
+		String email = "obi@kenobi.com";
+		person.setEmail(email);
+		attendeeRepo.save(person);
+
+		RegisterRequestDto requestDto = new RegisterRequestDto(email, ticketId);
+
+		// call method: create a new ticket
+		ResponseEntity<TicketResponseDto> response = client.postForEntity("/ticket/unregister", requestDto, TicketResponseDto.class);
+
+		// check response
+		assertNotNull(response);
+		assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
+		assertNotNull(response.getBody(), "Response has body");
+		assertEquals(0, response.getBody().getAttendeeEmails().size(), "Response has no attendees registered");
 	}
 
 	private void testGetTicket(int id) {
@@ -116,7 +159,6 @@ class TicketDto {
 	
 	public int price;
 	public String name;
-	public String attendeeEmail;
 	public int eventId;
 	public int ticketId;
 
@@ -128,11 +170,10 @@ class TicketDto {
 		this.ticketId = ticketId;
 	}
 
-	public TicketDto(int price, String name, String attendeeEmail, int eventId) {
+	public TicketDto(int price, String name, int eventId) {
 		super();
 		this.price = price;
 		this.name = name;
-		this.attendeeEmail = attendeeEmail;
 		this.eventId = eventId;
 	}
 
@@ -150,14 +191,6 @@ class TicketDto {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String attendeeEmail() {
-		return attendeeEmail;
-	}
-
-	public void setEmail(String attendeeEmail) {
-		this.attendeeEmail = attendeeEmail;
 	}
 
 	public int getEventId() {

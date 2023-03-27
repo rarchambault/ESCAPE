@@ -6,14 +6,12 @@ public class TicketRequestDto {
 	private String name;
 	private int price;
 	private int eventId;
-	private String attendeeEmail;
 	
-	public TicketRequestDto(String name, int price, int eventId, String attendeeEmail) {
+	public TicketRequestDto(String name, int price, int eventId) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.eventId = eventId;
-		this.attendeeEmail = attendeeEmail;
 	}
 	
 	public TicketRequestDto() {} // default constructor for jackson parsing
@@ -23,12 +21,6 @@ public class TicketRequestDto {
 	}
 	public void setEventId(int eventId) {
 		this.eventId = eventId;
-	}
-	public String getAttendeeEmail() {
-		return attendeeEmail;
-	}
-	public void setAttendeeEmail(String attendeeEmail) {
-		this.attendeeEmail = attendeeEmail;
 	}
 	public String getName() {
 		return name;

@@ -1,5 +1,6 @@
 package ca.mcgill.ecse428.ESCAPE.controller;
 
+import ca.mcgill.ecse428.ESCAPE.dto.RegisterRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,18 @@ public class TicketController {
  		TicketResponseDto response = ticketService.createTicket(request);
  		return new ResponseEntity<TicketResponseDto>(response, HttpStatus.CREATED);
  	}
+
+	@PostMapping("/ticket/register")
+	public ResponseEntity<TicketResponseDto> registerAttendee(@RequestBody RegisterRequestDto request) {
+		TicketResponseDto response = ticketService.registerAttendee(request);
+		return new ResponseEntity<TicketResponseDto>(response, HttpStatus.CREATED);
+	}
+
+	@PostMapping("/ticket/unregister")
+	public ResponseEntity<TicketResponseDto> unregisterAttendee(@RequestBody RegisterRequestDto request) {
+		TicketResponseDto response = ticketService.unregisterAttendee(request);
+		return new ResponseEntity<TicketResponseDto>(response, HttpStatus.CREATED);
+	}
     
     @DeleteMapping("/ticket/{id}")
     public void deleteTicket(@PathVariable int id) {

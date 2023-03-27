@@ -36,7 +36,7 @@ public class Ticket
   // CONSTRUCTOR
   //------------------------
 
-  public Ticket(double aPrice, String aName, Attendee aAttendee, Event aEvent)
+  public Ticket(double aPrice, String aName, Event aEvent)
   {
     price = aPrice;
     name = aName;
@@ -48,7 +48,9 @@ public class Ticket
     }
   }
 
-  public Ticket() {}
+  public Ticket() {
+    attendees = new ArrayList<Attendee>();
+  }
 
   //------------------------
   // INTERFACE

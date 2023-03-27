@@ -180,8 +180,8 @@ public class Event {
 	}
 
 	/* Code from template association_AddManyToOne */
-	public Ticket addTicket(double aPrice, String aName, Attendee aAttendee) {
-		return new Ticket(aPrice, aName, aAttendee, this);
+	public Ticket addTicket(double aPrice, String aName) {
+		return new Ticket(aPrice, aName,this);
 	}
 
 	public boolean addTicket(Ticket aTicket) {
