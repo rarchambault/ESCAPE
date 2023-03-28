@@ -63,8 +63,20 @@ public class UserProfileService {
     }
 
     public String getProfile_picture_path(String email) {
-        Attendee attendee = attendeeRepository.findAttendeeByEmail(email);
-        Admin admin = adminRepository.findAdminByEmail(email);
+        Attendee attendee = null;
+        Admin admin = null;
+        try{
+            attendee = attendeeRepository.findAttendeeByEmail(email);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        try{
+            admin = adminRepository.findAdminByEmail(email);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
         if (attendee != null) {
             return attendee.getProfile_picture_path();
         } else if (admin != null) {
