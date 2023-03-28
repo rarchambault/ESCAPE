@@ -53,18 +53,21 @@ public class UserProfileController{
         return new ResponseEntity<UserProfileResponseDto>(response, HttpStatus.CREATED);
     }
 
-    @PostMapping("/{email}/profilePicture")
-    public String uploadProfilePicture(@PathVariable String email, @RequestParam("file") MultipartFile file) {
+    @PostMapping("/profilePicture/{email}")
+    public ResponseEntity<String> uploadProfilePicture(@PathVariable String email, @RequestParam("file") MultipartFile file) {
         storageService.store(file);
-        userProfileService.setProfile_picture_path(email, file.getOriginalFilename());
-        return "redirect:/UserProfile/" + email;
+        if(userProfileService.setProfile_picture_path(email, file.getOriginalFilename())){
+            return ResponseEntity.ok().header(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*")
+                    .body(String.format("Successfully uploaded %s!", file.getOriginalFilename()));
+        }
+        return ResponseEntity.badRequest().body("Profile picture upload failed");
     }
 
-    @GetMapping("/{email}/profilePicture")
+    @GetMapping("/profilePicture/{email}")
     public ResponseEntity<Resource> serveFile(@PathVariable String email) {
         String filename = userProfileService.getProfile_picture_path(email);
         if(filename == "") {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.noContent().build();
         }
         Resource file = storageService.loadAsResource(filename);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,

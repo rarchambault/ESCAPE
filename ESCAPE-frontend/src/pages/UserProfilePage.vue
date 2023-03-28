@@ -14,6 +14,11 @@
         <v-card-title class="headline">User Profile</v-card-title>
     </v-card-text>
     <div align="center">
+        <img :src="profilePictureSrc" alt="Profile Picture" width="200" height="200">
+        <div>
+            <input type="file" @change="handleFileUpload" ref="fileInput">
+            <v-btn @click="uploadFile" color="blue">Upload</v-btn>
+        </div>
         <h1>Username: {{ name}}</h1>
         <p>Email: {{ email }}</p>
         <p v-if="isAdmin === 'true'">Admin User</p>
@@ -73,6 +78,10 @@ export default {
             confirmPassword: '',
             error: '',
             errorAdminCreation: '',
+            profilePictureSrc: 'http://localhost:8080/UserProfile/profilePicture/' + sessionStorage.getItem('email'),
+            profilePictureTarget: 'http://localhost:8080/UserProfile/profilePicture/' + sessionStorage.getItem('email'),
+            profilePictureName: "profilePicture_" + sessionStorage.getItem('email'),
+            file: null,
         }
     },
 
@@ -146,7 +155,30 @@ export default {
                         this.errorAdminCreation = err.response.data
                     })
             }
+        },
+        handleFileUpload(event) {
+            this.file = event.target.files[0]
+        },
+        uploadFile() {
+            const formData = new FormData()
+            formData.append('file', this.file)
+        
+            axios.post("http://localhost:8080/UserProfile/profilePicture/" + sessionStorage.getItem('email'), formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(response => {
+            // Handle successful upload
+            console.log(response.data)
+            this.$forceUpdate();
+            window.location = '/userprofile';
+            })
+            .catch(error => {
+            // Handle upload error
+            console.error(error)
+            })
         }
-    }
+    },
 }
 </script>
