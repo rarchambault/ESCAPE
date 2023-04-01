@@ -57,4 +57,15 @@ public class PostController {
 
 		return new ResponseEntity<Iterable<PostResponseDto>>(postResponses, HttpStatus.OK);
 	}
+
+	@PostMapping("/post/{id}/text")
+	public ResponseEntity<?> setPostText(@PathVariable int id, @RequestBody String text) {
+    	Post post = postService.getPostById(id);
+    	if (post == null) {
+    	    return new ResponseEntity<>("Post not found with id " + id, HttpStatus.NOT_FOUND);
+    	}
+    	postService.setTextBelow(id, text);
+    	return ResponseEntity.ok().build();
+	}
+
 }

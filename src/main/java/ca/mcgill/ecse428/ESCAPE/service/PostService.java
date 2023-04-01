@@ -81,4 +81,12 @@ public class PostService {
 		postRepository.delete(post);
 		post.delete();
 	}
+
+	public void setTextBelow(int id, String text) {
+        Post post = postRepository.findById(id).orElse(null);
+        if (post != null) {
+            post.setTextBelow(text);
+            postRepository.save(post);
+        }
+    }
 }

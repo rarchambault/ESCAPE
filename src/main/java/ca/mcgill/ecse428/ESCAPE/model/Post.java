@@ -222,4 +222,15 @@ public class Post {
 				+ System.getProperties().getProperty("line.separator") + "  " + "userProfile = "
 				+ (getAttendee() != null ? Integer.toHexString(System.identityHashCode(getAttendee())) : "null");
 	}
+
+	private String textBelow;
+
+    public String getTextBelow() {
+        return textBelow;
+    }
+
+    public void setTextBelow(String textBelow) {
+        this.textBelow = textBelow;
+    }
+
 }
