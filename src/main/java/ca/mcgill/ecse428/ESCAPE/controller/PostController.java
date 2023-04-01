@@ -68,4 +68,13 @@ public class PostController {
     	return ResponseEntity.ok().build();
 	}
 
+	@PostMapping("/post/{id}/comment")
+	public ResponseEntity<?> addComment(@PathVariable int id, @RequestBody String comment) {
+    	Post post = postService.getPostById(id);
+    	if (post == null) {
+    	    return new ResponseEntity<>("Post not found with id " + id, HttpStatus.NOT_FOUND);
+    	}
+    	post.addReply(comment, id);
+    	return ResponseEntity.ok().build();
+	}
 }
