@@ -16,10 +16,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 
+import ca.mcgill.ecse428.ESCAPE.controller.PostController;
 import ca.mcgill.ecse428.ESCAPE.dto.PostResponseDto;
 import ca.mcgill.ecse428.ESCAPE.exception.EscapeException;
 import ca.mcgill.ecse428.ESCAPE.model.Attendee;
 import ca.mcgill.ecse428.ESCAPE.model.Post;
+import ca.mcgill.ecse428.ESCAPE.model.Reply;
 import ca.mcgill.ecse428.ESCAPE.repository.AttendeeRepository;
 import ca.mcgill.ecse428.ESCAPE.repository.PostRepository;
 
@@ -131,4 +133,30 @@ class PostDto {
 	public PostDto(String content) {
 		this.content = content;
 	}
+
+	@Test
+	public void testSetPostText(int id) {
+    	String newText = "New post text";
+    	Attendee attendee = new Attendee();
+    	Post post = new Post("Old post text", attendee);
+    	PostController controller = new PostController();
+
+    	controller.setPostText(id, newText);
+    	assertEquals(newText, post.getTextBelow());
+	}
+
+	@Test
+	public void testAddReply() {
+    	Reply reply1 = new Reply("Comment 1", id, null);
+    	Reply reply2 = new Reply("Comment 2", id, null);
+    	Attendee attendee = new Attendee();
+		Post post = new Post("Post text", attendee);
+    	post.addReply(reply1);
+    	post.addReply(reply2);
+
+    	assertEquals(2, post.getReplies().size());
+    	assertTrue(post.getReplies().contains(reply1));
+    	assertTrue(post.getReplies().contains(reply2));
+	}
+
 }
