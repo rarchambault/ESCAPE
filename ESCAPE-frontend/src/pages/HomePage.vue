@@ -186,6 +186,9 @@ export default {
     },
     redirect(){
       window.location = "/about";
+    },
+    redirectEvents(){
+      window.location = "/events";
     }
   },
 };

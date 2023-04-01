@@ -51,6 +51,9 @@
       </form>
     </div>
   </div>
+  <div class="edit-page">
+    <button type="submit">Edit Page</button>
+  </div>
 </div>
 </div>
 </template>
@@ -272,6 +275,15 @@
   cursor: pointer;
 }
 
+.edit-page button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+}
 
 .contact-us-box button[type="submit"]:hover {
   background-color: #3e8e41;
