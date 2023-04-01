@@ -1,5 +1,6 @@
 package ca.mcgill.ecse428.ESCAPE.service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.List;
 
@@ -96,6 +97,28 @@ public class UserProfileService {
         }
 
         return attendees;
+    }
+    @Transactional
+    public List<UserProfile> getAllUserProfiles() {
+
+        Iterable<Attendee> attendees = attendeeRepository.findAll();
+        Iterable<Admin> admins = adminRepository.findAll();
+        List<UserProfile> userProfiles = new ArrayList<UserProfile>();
+        if (attendees == null) {
+            throw new EscapeException(HttpStatus.NOT_FOUND, "Attendees not found.");
+        }
+        if (admins == null) {
+            throw new EscapeException(HttpStatus.NOT_FOUND, "Admin not found.");
+        }
+        for (Attendee a : attendees){
+            userProfiles.add(a);
+        }
+        for (Admin a2 : admins){
+            userProfiles.add(a2);
+        }
+
+
+        return userProfiles;
     }
     
 }
