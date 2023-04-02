@@ -2,29 +2,33 @@ package ca.mcgill.ecse428.ESCAPE.controller;
 
 import ca.mcgill.ecse428.ESCAPE.dto.TicketResponseDto;
 import ca.mcgill.ecse428.ESCAPE.model.Ticket;
+import ca.mcgill.ecse428.ESCAPE.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import ca.mcgill.ecse428.ESCAPE.dto.EventRequestDto;
 import ca.mcgill.ecse428.ESCAPE.dto.EventResponseDto;
 import ca.mcgill.ecse428.ESCAPE.model.Event;
 import ca.mcgill.ecse428.ESCAPE.service.EventService;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 
 @CrossOrigin(origins = "*")
 @RestController
 public class EventController {
+
+	private final StorageService storageService;
+
+	@Autowired
+	public EventController(StorageService storageService) {
+		this.storageService = storageService;
+	}
 
     @Autowired
     private EventService eventService;
@@ -35,6 +39,27 @@ public class EventController {
  		EventResponseDto response = eventService.createEvent(request);
  		return new ResponseEntity<EventResponseDto>(response, HttpStatus.CREATED);
  	}
+
+	@PostMapping("/eventPicture/{id}")
+	public ResponseEntity<String> uploadPicture(@PathVariable int id, @RequestParam("file") MultipartFile file) {
+		storageService.store(file);
+		if(eventService.set_picture_path(id, file.getOriginalFilename())){
+			return ResponseEntity.ok().header(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*")
+					.body(String.format("Successfully uploaded %s!", file.getOriginalFilename()));
+		}
+		return ResponseEntity.badRequest().body("Event picture upload failed");
+	}
+
+	@GetMapping("/eventPicture/{id}")
+	public ResponseEntity<Resource> serveFile(@PathVariable int id) {
+		String filename = eventService.get_picture_path(id);
+		if(filename == "") {
+			return ResponseEntity.noContent().build();
+		}
+		Resource file = storageService.loadAsResource(filename);
+		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+				"attachment; filename=\"" + file.getFilename() + "\"").body(file);
+	}
     
     @DeleteMapping("/event/{id}")
     public void deleteEvent(@PathVariable int id) {

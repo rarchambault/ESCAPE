@@ -17,6 +17,8 @@ public class Event {
 
 	private String location;
 
+	private String picture_path;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -41,6 +43,7 @@ public class Event {
 		tickets = new ArrayList<Ticket>();
 		photoGalleries = new ArrayList<PhotoGallery>();
 		location = aLocation;
+		picture_path = "";
 	}
 
 	public Event() {
@@ -94,6 +97,13 @@ public class Event {
 		return wasSet;
 	}
 
+	public boolean set_picture_path(String aPicture_path) {
+		boolean wasSet = false;
+		picture_path = aPicture_path;
+		wasSet = true;
+		return wasSet;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -116,6 +126,10 @@ public class Event {
 
 	public LocalDateTime getStartTime() {
 		return startTime;
+	}
+
+	public String get_picture_path() {
+		return picture_path;
 	}
 
 	/* Code from template association_GetMany */
