@@ -13,27 +13,27 @@
   <div class="column">
     <h1 class="title">Event Details</h1>
     <div class="row">
-      <div class="name-box">
-        <div class="name-title">Lauren Smith</div>
-        <div class="subtitle">Event Coordinator</div>
-        <div class="subtitle">lauren.smith@mail.mcgill.ca</div>
+      <div class="event-box">
+        <div class="name-title">Location</div>
+        <div class="subtitle">Blues Pub</div>
+        <div class="subtitle">McConnell Engineering Building, Montreal, QC</div>
       </div>
-      <div class="name-box">
-        <div class="name-title">Ethan Lee</div>
-        <div class="subtitle">Social Media Manager</div>
-        <div class="subtitle">ethan.lee@mail.mcgill.ca</div>
+      <div class="event-box">
+        <div class="name-title">Date and Time</div>
+        <div class="subtitle">Feb. 14, 2023</div>
+        <div class="subtitle">6:00 PM - 12:00 AM EST</div>
       </div>
     </div>
     <div class="row">
-      <div class="name-box">
-        <div class="name-title">Maria Rodriguez</div>
+      <div class="event-box">
+        <div class="name-title">Contact Details</div>
+        <div class="subtitle">Maria Rodriguez</div>
         <div class="subtitle">Volunteer Coordinator</div>
         <div class="subtitle">maria.rodriguez@mail.mcgill.ca</div>
       </div>
-      <div class="name-box">
-        <div class="name-title">James Johnson</div>
-        <div class="subtitle">Fundraising Chair</div>
-        <div class="subtitle">james.johnson@mail.mcgill.ca</div>
+      <div class="event-box">
+        <div class="name-title">Current Capacity</div>
+        <div class="subtitle">48/50 Attendees</div>
       </div>
     </div>
   </div>
@@ -47,13 +47,19 @@
         <input type="email" id="email" name="email"><br><br>
         <label for="description">Event Description:</label>
         <textarea id="description" name="description"></textarea><br><br>
+        <label for="location">Event Location:</label>
+        <textarea id="location" name="location"></textarea><br><br>
+        <label for="start-time">Event Starting Time:</label>
+        <input type="datetime-local" id="start-time" name="start-time"></input><br><br>
+        <label for="end-time">Event Ending Time:</label>
+        <input type="datetime-local" id="end-time" name="end-time"></input><br><br>
+        <label for="description">Event Maximum Capacity:</label>
+        <input type="number" id="capacity" name="capacity"><br><br>
         <button type="submit">Send</button>
       </form>
     </div>
   </div>
-  <div class="edit-page">
-    <button type="submit">Edit Page</button>
-  </div>
+  
 </div>
 </div>
 </template>
@@ -71,7 +77,7 @@
 }
 
 
-.name-box {
+.event-box {
   background-color: #f5f5f5;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   height: 200px;
@@ -97,11 +103,11 @@
 }
 
 
-.name-box:hover {
+.event-box:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
-.name-box:hover {
+.event-box:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }

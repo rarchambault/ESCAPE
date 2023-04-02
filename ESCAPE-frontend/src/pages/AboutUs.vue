@@ -1,6 +1,6 @@
 <template>
 <div class="title-container">
-<div class="top-box" id="background">
+<div class="top-box" id="background2">
   <h1 class="title">About Us</h1>
   <div class="box">
     <p class="desc"> The ESC frequently organizes social events that cater to the needs of the undergraduate engineering students. These events include social activities such as parties, get togethers, fundraisers and much more! Further down on this page you will find a list of all the members of our committee. If you have any concerns, comments or something to report let us know in the Contact Us section below.</p>
@@ -91,7 +91,7 @@
 
 
 
-#background {
+#background2 {
   background-image: url('@/assets/ESC1.jpeg');
 }
 
