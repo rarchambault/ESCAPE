@@ -47,7 +47,7 @@ public class TicketService {
 
 	@Transactional
     public TicketResponseDto createTicket(TicketRequestDto request) throws EscapeException{
-		int price = 0;
+		double price = 0;
 		String name = "";
 		int eventId = 0;
 		// check for required fields in given requestDTO
