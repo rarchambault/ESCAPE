@@ -25,6 +25,13 @@
               <v-card-subtitle>Location: {{ event.event.location}}</v-card-subtitle>
               <v-card-actions>
                 <v-btn color="orange" @click="registerForEvent(event.ticketId)" >Buy Tickets</v-btn>
+                <v-btn
+                  v-if="isAdmin"
+                  color="red"
+                  @click="deleteEvent(event.event.id)"
+                >
+                  Delete
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -71,6 +78,7 @@ export default {
     //     image: require("../assets/ESC10.png")
     //   }
     // ]
+    isAdmin: sessionStorage.getItem("isAdmin") === "true",
     events: [],
   }),
   methods:  {
@@ -81,6 +89,7 @@ export default {
         headers: {
           'Content-Type': 'application/json',
         }
+        
       };
 
       axios.request(options)
@@ -167,9 +176,23 @@ export default {
       return formattedTime;
     }
   },
+  deleteEvent(eventId) {
+      axios.delete(`http://localhost:8080/event/${eventId}`)
+        .then(() => {
+          // Refresh the events list after successful deletion
+          this.getTickets();
+        })
+        .catch(err => console.error(err));
+    },
 
   created() {
     this.getTickets();
   }
 };
 </script>
+
+<!-- I added the isAdmin property in the data to check if the user is an admin. 
+Then, I added a delete button with a v-if="isAdmin" directive so that it is only visible to admin users. 
+The deleteEvent method is responsible for sending a DELETE request to the server to remove the event. 
+After a successful deletion, the events list will be refreshed using the getTickets method.
+Please note that you will need to implement the server-side logic for handling the DELETE request if you haven't already done so. -->

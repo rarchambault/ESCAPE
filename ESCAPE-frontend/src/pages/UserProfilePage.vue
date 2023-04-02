@@ -1,7 +1,7 @@
 <template>
-  <v-app>
-    <v-app-bar app color="black" dark>
-      <v-toolbar-title>Engineering Socials Committee Advanced Programming Environment (ESCAPE)</v-toolbar-title>
+    <v-app>
+      <v-app-bar app color="black" dark>
+        <v-toolbar-title>Engineering Socials Committee Advanced Programming Environment (ESCAPE)</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn color="white" text class="mx-3" href='/about' >About Us</v-btn>
       <v-btn color="white" text class="mx-3" href='/photogalleries'>Photo Galleries</v-btn>
@@ -9,176 +9,132 @@
       <v-btn color="white" text class="mx-3" href='/ticketing'>Buy Tickets</v-btn>
       <v-btn color="white" text class="mx-3" href='/viewtickets'>View My Tickets</v-btn>
       <v-btn align="center" justify="center" color="white" @click="logInOrProfile"> Login  </v-btn>
-    </v-app-bar>
-    <v-card-text>
-        <v-card-title class="headline">User Profile</v-card-title>
-    </v-card-text>
-    <div align="center">
-        <img :src="profilePictureSrc" alt="Profile Picture" width="200" height="200">
-        <div>
-            <input type="file" @change="handleFileUpload" ref="fileInput">
-            <v-btn @click="uploadFile" color="blue">Upload</v-btn>
+      </v-app-bar>
+      <v-container>
+        <v-row>
+          <v-col cols="12" md="4">
+            <v-avatar size="200">
+              <img :src="profilePictureSrc" alt="Profile Picture" />
+            </v-avatar>
+            <div>
+              <input type="file" @change="handleFileUpload" ref="fileInput">
+              <v-btn @click="uploadFile" color="blue">Update Profile Picture</v-btn>
+              <v-btn @click="removeProfilePicture" color="red">Remove Profile Picture</v-btn>
+            </div>
+          </v-col>
+          <v-col cols="12" md="8">
+            <h2>{{ name }}</h2>
+            <p>{{ bio }}</p>
+            <h3>Comments</h3>
+            <v-list>
+              <v-list-item v-for="(comment, index) in comments" :key="index">
+                <v-list-item-content>
+                  <v-list-item-title>{{ comment.content }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-col>
+        </v-row>
+        <v-divider></v-divider>
+        <div class="text-center mt-4">
+          <v-btn color="red" @click="closeAccount">Delete Account</v-btn>
+          <v-btn color="primary" @click="logout">Logout</v-btn>
         </div>
-        <h1>Username: {{ name}}</h1>
-        <p>Email: {{ email }}</p>
-        <p v-if="isAdmin === 'true'">Admin User</p>
-        <div>
-            <v-btn color="primary" @click="closeAccount">Close Account</v-btn>
-            <v-btn color="primary" @click="logout">Logout</v-btn>
-        </div>
-        <div class="red--text"> {{ error }}</div>
-    </div>
-    <div v-if="isAdmin === 'true'">
-        <v-card-text>
-            <v-card-title class="headline">Admin Options</v-card-title>
-        </v-card-text>
-        <div align="center">
-            <h3> Create admin user </h3>
-            <v-card-text> <!--  Main body -->
-                <v-form ref="form">
-                  <v-text-field v-model="name_input" name="name" label="Name" type="text" placeholder="name"
-                                required></v-text-field>
-                  <v-text-field v-model="email_input" name="email" label="Email" type="text" placeholder="email"
-                                required></v-text-field>
-
-                  <v-text-field v-model="password" name="password" label="Password" type="password"
-                                placeholder="password" autocomplete="on" required></v-text-field>
-
-                  <v-text-field v-model="confirmPassword" name="confirmPassword" label="Confirm Password"
-                                type="password" placeholder="confirm password" autocomplete="on" required></v-text-field>
-                  <div class="red--text"> {{ errorAdminCreation }}</div>
-
-                  <v-row>
-                    <v-col>
-                      <v-btn color="primary" value="log in" class="mt-4" @click="createAdmin()"> Create
-                        Account </v-btn>
-                    </v-col>
-                  </v-row>
-                </v-form>
-              </v-card-text>
-        </div>
-    </div>
-  </v-app>
-</template>
-
-<script>
-import axios from 'axios';
-
-export default {
+      </v-container>
+    </v-app>
+  </template>
+  
+  <script>
+  import axios from 'axios';
+  
+  export default {
     name: "UserProfilePage",
-
-    data: () => {
-        return {
-            name: sessionStorage.getItem('name'),
-            email: sessionStorage.getItem('email'),
-            isAdmin: sessionStorage.getItem('isAdmin'),
-            name_input: '',
-            email_input: '',
-            password: '',
-            confirmPassword: '',
-            error: '',
-            errorAdminCreation: '',
-            profilePictureSrc: 'http://localhost:8080/UserProfile/profilePicture/' + sessionStorage.getItem('email'),
-            profilePictureTarget: 'http://localhost:8080/UserProfile/profilePicture/' + sessionStorage.getItem('email'),
-            profilePictureName: "profilePicture_" + sessionStorage.getItem('email'),
-            file: null,
-        }
-    },
-
+  
+    data: () => ({
+      name: sessionStorage.getItem("name"),
+      email: sessionStorage.getItem("email"),
+      isAdmin: sessionStorage.getItem("isAdmin"),
+      profilePictureSrc:
+        "http://localhost:8080/UserProfile/profilePicture/" +
+        sessionStorage.getItem("email"),
+      bio: "Software Engineer with a passion for web development.",
+      comments: [
+        {
+          content: "This is an example comment.",
+        },
+        {
+          content: "Another example comment.",
+        },
+      ],
+      file: null,
+    }),
+  
     methods: {
-        logInOrProfile() {
-            if (sessionStorage.getItem('isLoggedIn') == true) {
-                window.location = '/login';
-            } else {
-                window.location = '/userprofile';
-            }
-        },
-        logout(){
-            sessionStorage.clear();
-            window.location = '/';
-        },
-        closeAccount(){
-            if(sessionStorage.getItem("isAdmin")){
-                this.error = "Admins cannot close their accounts";
-                console.log("admin")
-            }
-            else{
-                var config = {
-                    method: 'delete',
-                    url: 'http://localhost:8080/attendee/' + sessionStorage.getItem('email'),
-                    headers: { }
-                };
-
-                axios(config)
-                .then(function (response) {
-                    console.log(JSON.stringify(response.data));
-                    window.location = '/'
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            }
-        },
-        createAdmin(){
-            this.valid = this.$refs.form.validate();
-
-            if (this.valid) {
-
-                if(this.password !== this.confirmPassword){
-                this.errorAdminCreation = "Your passwords do no match. Please try again.";
-                return;
-                }
-
-                let attendeeOptions = {
-                method: 'POST',
-                url: `http://localhost:8080/admin`,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                data: {
-                    "name": this.name_input,
-                    "email": this.email_input,
-                    "password": this.password,
-                }
-                };
-
-                axios.request(attendeeOptions)
-                    .then(res => res.data)
-                    .then(() => {
-                        this.errorAdminCreation = "Admin created successfully";
-                        this.name_input = "";
-                        this.email_input = "";
-                        this.password = "";
-                        this.confirmPassword = "";
-                    })
-                    .catch(err => {
-                        this.errorAdminCreation = err.response.data
-                    })
-            }
-        },
-        handleFileUpload(event) {
-            this.file = event.target.files[0]
-        },
-        uploadFile() {
-            const formData = new FormData()
-            formData.append('file', this.file)
-        
-            axios.post("http://localhost:8080/UserProfile/profilePicture/" + sessionStorage.getItem('email'), formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
-            .then(response => {
-            // Handle successful upload
-            console.log(response.data)
-            this.$forceUpdate();
-            window.location = '/userprofile';
-            })
-            .catch(error => {
-            // Handle upload error
-            console.error(error)
-            })
+      logInOrProfile() {
+        if (sessionStorage.getItem("isLoggedIn") == true) {
+          window.location = "/login";
+        } else {
+          window.location = "/userprofile";
         }
+      },
+      logout() {
+        sessionStorage.clear();
+        window.location = "/";
+      },
+
+      handleFileUpload(event) {
+        this.file = event.target.files[0];
+      },
+      uploadFile() {
+        const formData = new FormData();
+        formData.append("file", this.file);
+  
+        axios
+          .post(
+            "http://localhost:8080/UserProfile/profilePicture/" +
+              sessionStorage.getItem("email"),
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response.data);
+            this.$forceUpdate();
+            window.location = "/userprofile";
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      },
+      removeProfilePicture(){
+      // Implement the logic to remove the profile picture
+      this.profilePictureSrc = ''; // Set it to a default/placeholder image if needed
     },
-}
+    closeAccount() {
+      if (this.isAdmin === "true") {
+        this.error = "Admins cannot close their accounts";
+        console.log("admin");
+      } else {
+        var config = {
+          method: "delete",
+          url: "http://localhost:8080/attendee/" + sessionStorage.getItem("email"),
+          headers: {},
+        };
+
+        axios(config)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data));
+            window.location = "/";
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    },
+  },
+};
 </script>
+  

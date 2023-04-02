@@ -12,6 +12,8 @@ import LoginPage from "./pages/LoginPage.vue"
 import SignupPage from "./pages/SignupPage.vue"
 import UserProfilePage from "./pages/UserProfilePage.vue"
 import ProfilesGallery from "@/pages/ProfilesGallery.vue"
+
+
 Vue.config.productionTip = false
 
 const routes = {
@@ -25,8 +27,9 @@ const routes = {
   "/viewtickets": ViewTickets,
   "/photogalleries": PhotoGalleries,
   "/gallery/photogallery": PhotoGallery,
-  "/userprofile": UserProfilePage,
+  "/userprofilepage": UserProfilePage,
   "/profilesgallery": ProfilesGallery,
+
   '/events': ViewAllEvents // add a route for the ViewAllEvents component
 }
 
