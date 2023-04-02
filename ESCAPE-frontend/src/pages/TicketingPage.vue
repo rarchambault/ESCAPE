@@ -21,7 +21,8 @@
               <v-card-text>{{ event.event.description }}</v-card-text>
               <v-card-subtitle>Time: {{ formatTime(event.event.startTime) }}</v-card-subtitle>
               <v-card-subtitle>Price: {{ event.price}}$</v-card-subtitle>
-              <v-card-subtitle>Capacity: {{ event.event.capacity}}</v-card-subtitle>
+              <v-card-subtitle>Remaining tickets: {{ event.event.capacity - event.attendeeEmails.length }}</v-card-subtitle>
+              <v-card-subtitle>Location: {{ event.event.location}}</v-card-subtitle>
               <v-card-actions>
                 <v-btn color="orange" @click="registerForEvent(event.ticketId)" >Buy Tickets</v-btn>
               </v-card-actions>

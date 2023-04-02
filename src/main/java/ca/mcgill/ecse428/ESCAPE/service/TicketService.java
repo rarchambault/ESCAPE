@@ -92,6 +92,10 @@ public class TicketService {
             throw new EscapeException(HttpStatus.NOT_FOUND, "Ticket not found.");
         }
 
+        int remainingTickets = ticket.getEvent().getCapacity() - ticket.getAttendees().size();
+        if (remainingTickets <= 0){
+            throw new EscapeException(HttpStatus.BAD_REQUEST, "No more tickets available");
+        }
         // Add ticket to attendee and attendee to ticket
         attendee.addTicket(ticket);
         ticket.addAttendee(attendee);
