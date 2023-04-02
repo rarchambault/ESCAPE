@@ -15,7 +15,7 @@
         <v-row>
           <v-col v-for="(event, index) in events" :key="index" cols="12" md="6" lg="4">
             <v-card elevation="2" class="mx-auto" max-width="400">
-              <v-img :src="event.event.image" height="200"></v-img>
+              <event-picture :event-id="event.event.id"></event-picture>
               <v-card-title class="headline">{{ event.name }}</v-card-title>
               <v-card-title class="headline">Event: {{ event.event.name }}</v-card-title>
               <v-card-text>{{ event.event.description }}</v-card-text>
@@ -37,9 +37,13 @@
 
 <script>
 import axios from "axios";
+import EventPicture from '../components/EventPicture.vue';
 
 export default {
   name: "EventTicketingPage",
+  components: {
+    EventPicture
+  },
   data: () => ({
     // events: [
     //   {
@@ -122,6 +126,25 @@ export default {
             this.dialog = false;
           })
           .catch(err => console.error(err));
+    },
+
+    async getPicture(id) {
+      let options = {
+        method: 'GET',
+        url: `http://localhost:8080/eventPicture/` + id,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+      };
+
+      try {
+        const response = await axios.request(options);
+        const pictureSrc = response.data;
+        return pictureSrc;
+      } catch (err) {
+        console.error(err);
+        throw err;
+      }
     },
 
     logInOrProfile() {
