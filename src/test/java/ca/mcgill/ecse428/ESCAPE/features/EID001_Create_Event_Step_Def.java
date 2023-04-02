@@ -27,8 +27,6 @@ public class EID001_Create_Event_Step_Def {
     private String adminPassword;
     private String eventName;
     private String eventDescription;
-    private Double eventTicketPrice;
-    private Integer eventId;
     private Integer eventCapacity;
     private LocalDateTime eventStartTime;
     private ResponseEntity<EventResponseDto> responseEntity;
@@ -44,17 +42,15 @@ public class EID001_Create_Event_Step_Def {
         adminPassword = password;
     }
 
-    @When("the admin attempts to create an event with name {string}, description {string}, ticket price {double}, ID {int}, capacity {int}, and start time {string}")
-    public void the_admin_attempts_to_create_an_event_with_name_description_ticket_price_ID_capacity_and_start_time(String name, String description, Double ticketPrice, Integer id, Integer capacity, String startTime) {
+    @When("the admin attempts to create an event with name {string}, description {string}, capacity {int}, and start time {string}")
+    public void the_admin_attempts_to_create_an_event_with_name_description_ticket_price_ID_capacity_and_start_time(String name, String description, Integer capacity, String startTime) {
         eventName = name;
         eventDescription = description;
-        eventTicketPrice = ticketPrice;
         eventCapacity = capacity;
         eventStartTime = LocalDateTime.parse(startTime);
         EventRequestDto requestDto = new EventRequestDto();
         requestDto.setName(eventName);
         requestDto.setDescription(eventDescription);
-        requestDto.setTicketPrice(eventTicketPrice);
         requestDto.setCapacity(eventCapacity);
         requestDto.setStartTime(eventStartTime);
         responseEntity = eventController.createEvent(requestDto);

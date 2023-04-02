@@ -9,18 +9,19 @@ public class EventResponseDto {
 	private int id;	
 	private String name;
 	private String description;
-	private double ticketPrice;
 
 	private int capacity;
 	private LocalDateTime startTime;
+
+	private String location;
 	
 	public EventResponseDto(Event event) {
 		this.id = event.getId();
 		this.name = event.getName();
 		this.description = event.getDescription();
-		this.ticketPrice = event.getTicketPrice();
 		this.capacity = event.getCapacity();
 		this.startTime = event.getStartTime();
+		this.location = event.getLocation();
 	}
 
 	public int getId() {
@@ -47,12 +48,12 @@ public class EventResponseDto {
 		this.description = description;
 	}
 
-	public double getTicketPrice() {
-		return ticketPrice;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setTicketPrice(double ticketPrice) {
-		this.ticketPrice = ticketPrice;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public int getCapacity() { return capacity; }

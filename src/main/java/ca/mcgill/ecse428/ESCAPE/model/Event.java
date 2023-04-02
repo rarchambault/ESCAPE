@@ -14,7 +14,8 @@ public class Event {
 	// Event Attributes
 	private String name;
 	private String description;
-	private double ticketPrice;
+
+	private String location;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,14 +33,14 @@ public class Event {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public Event(String aName, String aDescription, double aTicketPrice, int aCapacity, LocalDateTime aStartTime) {
+	public Event(String aName, String aDescription, int aCapacity, LocalDateTime aStartTime, String aLocation) {
 		name = aName;
 		description = aDescription;
-		ticketPrice = aTicketPrice;
 		capacity = aCapacity;
 		startTime = aStartTime;
 		tickets = new ArrayList<Ticket>();
 		photoGalleries = new ArrayList<PhotoGallery>();
+		location = aLocation;
 	}
 
 	public Event() {
@@ -65,9 +66,9 @@ public class Event {
 		return wasSet;
 	}
 
-	public boolean setTicketPrice(double aTicketPrice) {
+	public boolean setLocation(String aLocation) {
 		boolean wasSet = false;
-		ticketPrice = aTicketPrice;
+		location = aLocation;
 		wasSet = true;
 		return wasSet;
 	}
@@ -101,8 +102,8 @@ public class Event {
 		return description;
 	}
 
-	public double getTicketPrice() {
-		return ticketPrice;
+	public String getLocation() {
+		return location;
 	}
 
 	public int getId() {
