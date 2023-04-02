@@ -46,4 +46,30 @@ public class EventController {
 	}
 
 
+<<<<<<< Updated upstream
+=======
+		ArrayList<EventResponseDto> eventResponseDtos = new ArrayList<EventResponseDto>();
+
+		for (var event : events) {
+			eventResponseDtos.add(new EventResponseDto(event));
+		}
+
+		return new ResponseEntity<Iterable<EventResponseDto>>(eventResponseDtos, HttpStatus.OK);
+	}
+	public ResponseEntity<EventResponseDto> updateEvent(@PathVariable int id, @RequestBody EventRequestDto eventRequestDto) {
+		// Fetch the existing event from the database
+		Event existingEvent = eventService.getEventById(id);
+
+		existingEvent.setName(eventRequestDto.getName());
+		existingEvent.setDescription(eventRequestDto.getDescription());
+		existingEvent.setLocation(eventRequestDto.getLocation());
+		existingEvent.setCapacity(eventRequestDto.getCapacity());
+		// Convert the updated event to a response DTO and return it with a success status code
+		EventResponseDto eventResponseDto = new EventResponseDto(existingEvent);
+		return ResponseEntity.ok(eventResponseDto);
+	}
+	
+
+
+>>>>>>> Stashed changes
 }
