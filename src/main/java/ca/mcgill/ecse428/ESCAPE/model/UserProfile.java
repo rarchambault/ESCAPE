@@ -21,6 +21,7 @@ public class UserProfile {
   @Id
   private String email;
   private String password;
+  private String profile_picture_path;
 
 	// ------------------------
 	// CONSTRUCTOR
@@ -31,6 +32,7 @@ public class UserProfile {
     name = aName;
     email = aEmail;
     password = aPassword;
+	profile_picture_path = "";
   }
 
 	public UserProfile() {
@@ -61,6 +63,13 @@ public class UserProfile {
 		return wasSet;
 	}
 
+	public boolean setProfile_picture_path(String aProfile_picture_path) {
+		boolean wasSet = false;
+		profile_picture_path = aProfile_picture_path;
+		wasSet = true;
+		return wasSet;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -71,6 +80,10 @@ public class UserProfile {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public String getProfile_picture_path() {
+		return profile_picture_path;
 	}
 
 	public void delete() {
