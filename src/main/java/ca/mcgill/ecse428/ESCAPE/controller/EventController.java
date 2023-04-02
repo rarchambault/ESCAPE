@@ -1,5 +1,7 @@
 package ca.mcgill.ecse428.ESCAPE.controller;
 
+import ca.mcgill.ecse428.ESCAPE.dto.TicketResponseDto;
+import ca.mcgill.ecse428.ESCAPE.model.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,8 @@ import ca.mcgill.ecse428.ESCAPE.dto.EventRequestDto;
 import ca.mcgill.ecse428.ESCAPE.dto.EventResponseDto;
 import ca.mcgill.ecse428.ESCAPE.model.Event;
 import ca.mcgill.ecse428.ESCAPE.service.EventService;
+
+import java.util.ArrayList;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -45,5 +49,16 @@ public class EventController {
 				HttpStatus.OK);
 	}
 
+	@GetMapping("/event")
+	public ResponseEntity<Iterable<EventResponseDto>> getAllEvents() {
+		Iterable<Event> events = eventService.getAllEvents();
 
+		ArrayList<EventResponseDto> eventResponseDtos = new ArrayList<EventResponseDto>();
+
+		for (var event : events) {
+			eventResponseDtos.add(new EventResponseDto(event));
+		}
+
+		return new ResponseEntity<Iterable<EventResponseDto>>(eventResponseDtos, HttpStatus.OK);
+	}
 }

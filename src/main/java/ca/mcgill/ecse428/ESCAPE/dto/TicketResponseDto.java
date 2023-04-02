@@ -12,23 +12,26 @@ public class TicketResponseDto {
 	private String name;
 	private double price;
 
+	private int eventId;
+
 	private List<String> attendeeEmails;
 	
 	public TicketResponseDto(Ticket ticket) {
 		this.ticketId = ticket.getTicketId();
 		this.name = ticket.getName();
 		this.price = ticket.getPrice();
+		this.eventId = ticket.getEvent() == null? 0: ticket.getEvent().getId();
 		this.attendeeEmails = new ArrayList<String>();
 		for (Attendee attendee : ticket.getAttendees()){
 			attendeeEmails.add(attendee.getEmail());
 		}
 	}
 
-	public TicketResponseDto(int ticketId, String name, double price) {
-		super();
+	public TicketResponseDto(int ticketId, String name, double price, int eventId) {
 		this.ticketId = ticketId;
 		this.name = name;
 		this.price = price;
+		this.eventId = eventId;
 	}
 
 	public int getTicketId() {
@@ -37,6 +40,14 @@ public class TicketResponseDto {
 
 	public void setTicketId(int ticketId) {
 		this.ticketId = ticketId;
+	}
+
+	public int getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(int eventId) {
+		this.eventId = eventId;
 	}
 
 	public String getName() {

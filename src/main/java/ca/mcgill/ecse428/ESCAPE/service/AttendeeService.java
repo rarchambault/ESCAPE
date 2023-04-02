@@ -2,6 +2,7 @@ package ca.mcgill.ecse428.ESCAPE.service;
 
 import java.util.Optional;
 
+import ca.mcgill.ecse428.ESCAPE.model.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,12 @@ public class AttendeeService {
 	@Transactional
     public Iterable<Attendee> getAllAttendees() {
         return attendeeRepository.findAll();
+    }
+
+    @Transactional
+    public Iterable<Ticket> getAllTicketsForAttendee(String attendeeEmail) {
+        Attendee attendee = getAttendeeByEmail(attendeeEmail);
+        return attendee.getTickets();
     }
 
 	@Transactional
