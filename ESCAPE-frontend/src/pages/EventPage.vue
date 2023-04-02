@@ -1,7 +1,7 @@
 <template>
 <div class="title-container">
-<div class="top-box" id="background2">
-  <h1 class="title">About Us</h1>
+<div class="top-box" id="background">
+  <h1 class="title">ESCxNUS - Love Fest</h1>
   <div class="box">
     <p class="desc"> The ESC frequently organizes social events that cater to the needs of the undergraduate engineering students. These events include social activities such as parties, get togethers, fundraisers and much more! Further down on this page you will find a list of all the members of our committee. If you have any concerns, comments or something to report let us know in the Contact Us section below.</p>
   </div>
@@ -11,49 +11,55 @@
 </div>
 <div class="container">
   <div class="column">
-    <h1 class="title">Our Team</h1>
+    <h1 class="title">Event Details</h1>
     <div class="row">
-      <div class="name-box">
-        <div class="name-title">Lauren Smith</div>
-        <div class="subtitle">Event Coordinator</div>
-        <div class="subtitle">lauren.smith@mail.mcgill.ca</div>
+      <div class="event-box">
+        <div class="name-title">Location</div>
+        <div class="subtitle">Blues Pub</div>
+        <div class="subtitle">McConnell Engineering Building, Montreal, QC</div>
       </div>
-      <div class="name-box">
-        <div class="name-title">Ethan Lee</div>
-        <div class="subtitle">Social Media Manager</div>
-        <div class="subtitle">ethan.lee@mail.mcgill.ca</div>
+      <div class="event-box">
+        <div class="name-title">Date and Time</div>
+        <div class="subtitle">Feb. 14, 2023</div>
+        <div class="subtitle">6:00 PM - 12:00 AM EST</div>
       </div>
     </div>
     <div class="row">
-      <div class="name-box">
-        <div class="name-title">Maria Rodriguez</div>
+      <div class="event-box">
+        <div class="name-title">Contact Details</div>
+        <div class="subtitle">Maria Rodriguez</div>
         <div class="subtitle">Volunteer Coordinator</div>
         <div class="subtitle">maria.rodriguez@mail.mcgill.ca</div>
       </div>
-      <div class="name-box">
-        <div class="name-title">James Johnson</div>
-        <div class="subtitle">Fundraising Chair</div>
-        <div class="subtitle">james.johnson@mail.mcgill.ca</div>
+      <div class="event-box">
+        <div class="name-title">Current Capacity</div>
+        <div class="subtitle">48/50 Attendees</div>
       </div>
     </div>
   </div>
   <div class="column">
-    <h1 class="title">Contact Us</h1>
+    <h1 class="title">Edit Event</h1>
     <div class="contact-us-box">
       <form>
-        <label for="name">Name:</label>
+        <label for="name">Event Name:</label>
         <input type="text" id="name" name="name"><br><br>
-        <label for="email">Email:</label>
+        <label for="email">Contact Email:</label>
         <input type="email" id="email" name="email"><br><br>
-        <label for="message">Message:</label>
-        <textarea id="message" name="message"></textarea><br><br>
+        <label for="description">Event Description:</label>
+        <textarea id="description" name="description"></textarea><br><br>
+        <label for="location">Event Location:</label>
+        <textarea id="location" name="location"></textarea><br><br>
+        <label for="start-time">Event Starting Time:</label>
+        <input type="datetime-local" id="start-time" name="start-time"></input><br><br>
+        <label for="end-time">Event Ending Time:</label>
+        <input type="datetime-local" id="end-time" name="end-time"></input><br><br>
+        <label for="description">Event Maximum Capacity:</label>
+        <input type="number" id="capacity" name="capacity"><br><br>
         <button type="submit">Send</button>
       </form>
     </div>
   </div>
-  <div class="edit-page">
-    <button type="submit">Edit Page</button>
-  </div>
+  
 </div>
 </div>
 </template>
@@ -65,13 +71,13 @@
 .image {
   border-radius: 50%;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-  background-image: url('@/assets/ESC1.jpeg');
+  background-image: url('@/assets/love-fest.png');
   background-size: cover;
   background-position: center;
 }
 
 
-.name-box {
+.event-box {
   background-color: #f5f5f5;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   height: 200px;
@@ -91,16 +97,17 @@
 
 
 
-#background2 {
-  background-image: url('@/assets/ESC1.jpeg');
+#background {
+  background-image: url('@/assets/love-fest.png');
+  height: 700px;
 }
 
 
-.name-box:hover {
+.event-box:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
-.name-box:hover {
+.event-box:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }

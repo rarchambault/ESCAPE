@@ -1,6 +1,8 @@
 package ca.mcgill.ecse428.ESCAPE.controller;
 
 import ca.mcgill.ecse428.ESCAPE.dto.RegisterRequestDto;
+import ca.mcgill.ecse428.ESCAPE.dto.UserProfileResponseDto;
+import ca.mcgill.ecse428.ESCAPE.model.Attendee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ import ca.mcgill.ecse428.ESCAPE.dto.TicketRequestDto;
 import ca.mcgill.ecse428.ESCAPE.dto.TicketResponseDto;
 import ca.mcgill.ecse428.ESCAPE.model.Ticket;
 import ca.mcgill.ecse428.ESCAPE.service.TicketService;
+
+import java.util.ArrayList;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -55,5 +59,16 @@ public class TicketController {
 				HttpStatus.OK);
 	}
 
+	@GetMapping("/ticket")
+	public ResponseEntity<Iterable<TicketResponseDto>> getAllTickets() {
+		Iterable<Ticket> tickets = ticketService.getAllTickets();
 
+		ArrayList<TicketResponseDto> ticketResponseDtos = new ArrayList<TicketResponseDto>();
+
+		for (var ticket : tickets) {
+			ticketResponseDtos.add(new TicketResponseDto(ticket));
+		}
+
+		return new ResponseEntity<Iterable<TicketResponseDto>>(ticketResponseDtos, HttpStatus.OK);
+	}
 }

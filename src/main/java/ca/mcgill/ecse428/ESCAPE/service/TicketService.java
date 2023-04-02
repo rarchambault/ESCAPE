@@ -47,7 +47,7 @@ public class TicketService {
 
 	@Transactional
     public TicketResponseDto createTicket(TicketRequestDto request) throws EscapeException{
-		int price = 0;
+		double price = 0;
 		String name = "";
 		int eventId = 0;
 		// check for required fields in given requestDTO
@@ -92,6 +92,10 @@ public class TicketService {
             throw new EscapeException(HttpStatus.NOT_FOUND, "Ticket not found.");
         }
 
+        int remainingTickets = ticket.getEvent().getCapacity() - ticket.getAttendees().size();
+        if (remainingTickets <= 0){
+            throw new EscapeException(HttpStatus.BAD_REQUEST, "No more tickets available");
+        }
         // Add ticket to attendee and attendee to ticket
         attendee.addTicket(ticket);
         ticket.addAttendee(attendee);

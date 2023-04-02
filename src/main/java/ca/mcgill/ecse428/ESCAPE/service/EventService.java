@@ -2,6 +2,8 @@ package ca.mcgill.ecse428.ESCAPE.service;
 
 import java.util.Optional;
 
+import ca.mcgill.ecse428.ESCAPE.model.Admin;
+import ca.mcgill.ecse428.ESCAPE.model.Attendee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -44,10 +46,32 @@ public class EventService {
 			throw new EventException(HttpStatus.BAD_REQUEST, "Invalid event name.");
 		}
 
-    	Event event = new Event(request.getName(), request.getDescription(), request.getTicketPrice(), request.getCapacity(), request.getStartTime());
+    	Event event = new Event(request.getName(), request.getDescription(), request.getCapacity(), request.getStartTime(), request.getLocation());
 
     	eventRepository.save(event);
     	return new EventResponseDto(event);
+    }
+
+    public boolean set_picture_path(int id, String profile_picture_path) {
+        Event event = eventRepository.findEventById(id);
+        event.set_picture_path(profile_picture_path);
+        eventRepository.save(event);
+        return true;
+    }
+
+    public String get_picture_path(int id) {
+        Event event = null;
+        try{
+            event = eventRepository.findEventById(id);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        if (event != null) {
+            return event.get_picture_path();
+        } else {
+            return null;
+        }
     }
 
 	@Transactional

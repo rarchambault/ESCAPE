@@ -4,6 +4,7 @@ import ViewAllEvents from './components/ViewAllEvents.vue' // import the ViewAll
 import vuetify from './plugins/vuetify'
 import AboutUs from './pages/AboutUs.vue'
 import TicketingPage from './pages/TicketingPage'
+import EventPage from "@/pages/EventPage.vue"
 import PostPage from "./pages/PostPage"
 import ViewTickets from "./pages/ViewTickets"
 import PhotoGalleries from "./pages/PhotoGalleries"
@@ -11,7 +12,7 @@ import PhotoGallery from "./pages/PhotoGallery"
 import LoginPage from "./pages/LoginPage.vue"
 import SignupPage from "./pages/SignupPage.vue"
 import UserProfilePage from "./pages/UserProfilePage.vue"
-
+import ProfilesGallery from "@/pages/ProfilesGallery.vue"
 Vue.config.productionTip = false
 
 const routes = {
@@ -26,6 +27,8 @@ const routes = {
   "/photogalleries": PhotoGalleries,
   "/gallery/photogallery": PhotoGallery,
   "/userprofile": UserProfilePage,
+  "/profilesgallery": ProfilesGallery,
+  "/eventpage": EventPage,
   '/events': ViewAllEvents // add a route for the ViewAllEvents component
 }
 
