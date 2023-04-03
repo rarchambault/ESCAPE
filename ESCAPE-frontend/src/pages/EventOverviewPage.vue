@@ -22,6 +22,7 @@
               <event-picture :event-id="event.id"></event-picture>
               <v-card-title class="headline">{{ event.name }}</v-card-title>
               <v-card-text>{{ event.description }}</v-card-text>
+              <v-card-subtitle v-if="isAdmin" style="color: red">Event ID: {{ event.id }}</v-card-subtitle>
               <v-card-subtitle>Time: {{ formatTime(event.startTime) }}</v-card-subtitle>
               <v-card-subtitle>Location: {{ event.location}}</v-card-subtitle>
               <v-card-actions>
@@ -110,6 +111,12 @@ export default {
 
   created() {
     this.getEvents();
+  },
+
+  computed: {
+    isAdmin() {
+      return sessionStorage.getItem('isAdmin') === 'true';
+    }
   }
 };
 </script>
