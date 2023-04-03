@@ -28,7 +28,7 @@ const routes = {
   "/viewtickets": ViewTickets,
   "/photogalleries": PhotoGalleries,
   "/gallery/photogallery": PhotoGallery,
-  "/userprofilepage": UserProfilePage,
+  "/userprofile": UserProfilePage,
   "/profilesgallery": ProfilesGallery,
   "/eventpage": EventPage,
   '/events': ViewAllEvents // add a route for the ViewAllEvents component

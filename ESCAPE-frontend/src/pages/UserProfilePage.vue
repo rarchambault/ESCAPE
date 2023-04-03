@@ -25,14 +25,6 @@
           <v-col cols="12" md="8">
             <h2>{{ name }}</h2>
             <p>{{ bio }}</p>
-            <h3>Comments</h3>
-            <v-list>
-              <v-list-item v-for="(comment, index) in comments" :key="index">
-                <v-list-item-content>
-                  <v-list-item-title>{{ comment.content }}</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
           </v-col>
         </v-row>
         <v-divider></v-divider>
@@ -58,14 +50,6 @@
         "http://localhost:8080/UserProfile/profilePicture/" +
         sessionStorage.getItem("email"),
       bio: "Software Engineer with a passion for web development.",
-      comments: [
-        {
-          content: "This is an example comment.",
-        },
-        {
-          content: "Another example comment.",
-        },
-      ],
       file: null,
     }),
   
@@ -109,10 +93,22 @@
             console.error(error);
           });
       },
-      removeProfilePicture(){
-      // Implement the logic to remove the profile picture
+      removeProfilePicture() {
+  axios
+    .delete(
+      "http://localhost:8080/UserProfile/profilePicture/" +
+        sessionStorage.getItem("email")
+    )
+    .then((response) => {
+      console.log(response.data);
       this.profilePictureSrc = ''; // Set it to a default/placeholder image if needed
-    },
+      this.$forceUpdate();
+      window.location = "/userprofile";
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+},
     closeAccount() {
       if (this.isAdmin === "true") {
         this.error = "Admins cannot close their accounts";
