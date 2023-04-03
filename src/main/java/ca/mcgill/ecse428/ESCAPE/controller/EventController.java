@@ -53,7 +53,7 @@ public class EventController {
 	@GetMapping("/eventPicture/{id}")
 	public ResponseEntity<Resource> serveFile(@PathVariable int id) {
 		String filename = eventService.get_picture_path(id);
-		if(filename == "") {
+		if(filename == "" || filename == null) {
 			return ResponseEntity.noContent().build();
 		}
 		Resource file = storageService.loadAsResource(filename);
