@@ -100,7 +100,6 @@ public class Ticket
     boolean wasAdded = false;
     if (attendees.contains(aAttendee)) { return false; }
     attendees.add(aAttendee);
-    aAttendee.addTicket(this);
     wasAdded = true;
     return wasAdded;
   }
@@ -108,7 +107,6 @@ public class Ticket
   public boolean removeAttendee(Attendee aAttendee)
   {
     boolean wasRemoved = false;
-    aAttendee.delete();
     attendees.remove(aAttendee);
     wasRemoved = true;
     return wasRemoved;

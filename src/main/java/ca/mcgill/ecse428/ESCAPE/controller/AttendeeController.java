@@ -1,5 +1,7 @@
 package ca.mcgill.ecse428.ESCAPE.controller;
 
+import ca.mcgill.ecse428.ESCAPE.dto.TicketResponseDto;
+import ca.mcgill.ecse428.ESCAPE.model.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +46,7 @@ public class AttendeeController{
 				HttpStatus.OK);
 	}
 
-	@GetMapping()
+	@GetMapping("/attendee")
 	public ResponseEntity<Iterable<UserProfileResponseDto>> getAllAttendees() {
 		Iterable<Attendee> attendees = attendeeService.getAllAttendees();
 
@@ -55,5 +57,18 @@ public class AttendeeController{
 		}
 
 		return new ResponseEntity<Iterable<UserProfileResponseDto>>(attendeeResponses, HttpStatus.OK);
+	}
+
+	@GetMapping("/attendee/{email}/tickets")
+	public ResponseEntity<Iterable<TicketResponseDto>> getAllTicketsForAttendee(@PathVariable String email) {
+		Iterable<Ticket> tickets = attendeeService.getAllTicketsForAttendee(email);
+
+		ArrayList<TicketResponseDto> ticketResponses = new ArrayList<TicketResponseDto>();
+
+		for (var ticket : tickets) {
+			ticketResponses.add(new TicketResponseDto(ticket));
+		}
+
+		return new ResponseEntity<Iterable<TicketResponseDto>>(ticketResponses, HttpStatus.OK);
 	}
 }

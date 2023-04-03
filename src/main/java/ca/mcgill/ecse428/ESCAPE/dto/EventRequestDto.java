@@ -7,9 +7,21 @@ public class EventRequestDto {
 	// attributes
 	private String name;
 	private String description;
-	private double ticketPrice;
 	private int capacity;
 	private LocalDateTime startTime;
+
+	private String location;
+
+	public EventRequestDto(String name, String description, int capacity, LocalDateTime startTime, String location) {
+		this.name = name;
+		this.description = description;
+		this.capacity = capacity;
+		this.startTime = startTime;
+		this.location = location;
+	}
+
+	public EventRequestDto(){};
+
 	public String getName() {
 		return name;
 	}
@@ -22,12 +34,6 @@ public class EventRequestDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public double getTicketPrice() {
-		return ticketPrice;
-	}
-	public void setTicketPrice(double ticketPrice) {
-		this.ticketPrice = ticketPrice;
-	}
 	public int getCapacity() {
 		return capacity;
 	}
@@ -39,5 +45,12 @@ public class EventRequestDto {
 	}
 	public void setStartTime(LocalDateTime startTime) {
 		this.startTime = startTime;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
 	}
 }

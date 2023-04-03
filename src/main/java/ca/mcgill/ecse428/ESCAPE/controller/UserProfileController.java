@@ -66,7 +66,7 @@ public class UserProfileController{
     @GetMapping("/profilePicture/{email}")
     public ResponseEntity<Resource> serveFile(@PathVariable String email) {
         String filename = userProfileService.getProfile_picture_path(email);
-        if(filename == "") {
+        if(filename == "" || filename == null) {
             return ResponseEntity.noContent().build();
         }
         Resource file = storageService.loadAsResource(filename);
@@ -85,5 +85,17 @@ public class UserProfileController{
         }
 
         return new ResponseEntity<Iterable<UserProfileResponseDto>>(attendeeResponses, HttpStatus.OK);
+    }
+    @GetMapping()
+    public ResponseEntity<Iterable<UserProfileResponseDto>> getAllUserProfiles() {
+        List<UserProfile> userProfiles = userProfileService.getAllUserProfiles();
+
+        ArrayList<UserProfileResponseDto> userProfileResponses = new ArrayList<UserProfileResponseDto>();
+
+        for (var userProfile : userProfiles) {
+            userProfileResponses.add(new UserProfileResponseDto(userProfile, "userProfile"));
+        }
+
+        return new ResponseEntity<Iterable<UserProfileResponseDto>>(userProfileResponses, HttpStatus.OK);
     }
 }

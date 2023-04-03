@@ -16,7 +16,7 @@
         <v-row>
           <v-col v-for="(event, index) in events" :key="index" cols="12" md="6" lg="4">
             <v-card elevation="2" class="mx-auto" max-width="400">
-              <v-img :src="event.coverPhoto" height="300"></v-img>
+              <event-picture :event-id="event.id"></event-picture>
               <v-card-title class="headline">{{ event.name }}</v-card-title>
               <v-card-text>{{ event.description }}</v-card-text>
               <v-card-subtitle>Time: {{ formatTime(event.startTime) }}</v-card-subtitle>
@@ -35,41 +35,15 @@
 
 <script>
 import axios from "axios";
-// import EventPicture from '../components/EventPicture.vue';
+import EventPicture from '../components/EventPicture.vue';
 
 export default {
   name: "EventTicketingPage",
   components: {
-    // EventPicture,
+    EventPicture,
   },
   data: () => ({
-    events: [
-      {
-        name: "ESCxNUS - Love Fest",
-        coverPhoto: require("../assets/love-fest.png"),
-        description: "See if you can find true love at this event!",
-        startTime: "2023-02-14",
-        id: "love",
-        location: "Blues Pub",
-
-      },
-      {
-        name: "Power Hour",
-        coverPhoto: require("../assets/power-hour.jpg"),
-        description: "Bring your friends in and enjoy 100+ rounds of the Power Hour!",
-        startTime: "2023-09-28",
-        id: "power",
-        location: "Cafe Campus"
-      },
-      {
-        name: "Sugar Shack Visit",
-        coverPhoto: require("../assets/sugar-shack.jpg"),
-        description: "Come check out some sweet treats at the Sugar Shack!",
-        startTime: "2023-04-10",
-        id: "sugar",
-        location: "Sugar Shack"
-      }
-    ],
+    events: [],
   }),
   methods:  {
     getEvents() {

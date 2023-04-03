@@ -15,9 +15,9 @@ Feature: Create Event
     Then a new event "<event_name>" will be created with description "<event_description>", ticket price "<event_ticket_price>", ID "<event_id>", capacity "<event_capacity>", and start time "<event_start_time>"
 
     Examples:
-      | admin_email      | admin_password | event_name     | event_description        | event_ticket_price | event_id | event_capacity | event_start_time |
-      | admin1@mail.ca   | password1      | Event 1        | Event 1 description      | 20.0               | 1        | 100            | 2023-03-01T10:00 |
-      | admin2@mail.ca   | password2      | Conference 2   | Conference 2 description | 50.0               | 2        | 200            | 2023-04-15T14:00 |
+      | admin_email      | admin_password | event_name     | event_description        | event_capacity | event_start_time |
+      | admin1@mail.ca   | password1      | Event 1        | Event 1 description      | 100            | 2023-03-01T10:00 |
+      | admin2@mail.ca   | password2      | Conference 2   | Conference 2 description | 200            | 2023-04-15T14:00 |
 
   Scenario Outline: Create event failed due to missing or invalid parameters
     Given an admin is logged in with email "<admin_email>" and password "<admin_password>"

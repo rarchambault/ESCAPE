@@ -6,6 +6,7 @@
       <v-btn color="white" text class="mx-3" href='/about' >About Us</v-btn>
       <v-btn color="white" text class="mx-3" href='/photogalleries'>Photo Galleries</v-btn>
       <v-btn color="white" text class="mx-3" href='/post' >Social Wall</v-btn>
+      <v-btn color="white" text class="mx-3" href='/events' >Events</v-btn>
       <v-btn color="white" text class="mx-3" href='/ticketing'>Buy Tickets</v-btn>
       <v-btn color="white" text class="mx-3" href='/viewtickets'>View My Tickets</v-btn>
       <v-btn align="center" justify="center" color="white" @click="logInOrProfile"> Login  </v-btn>
@@ -20,14 +21,29 @@
             lg="4"
         >
           <v-img :src="photo.src" :title="photo.title" aspect-ratio="1"></v-img>
+          <v-btn
+            v-if="isAdmin"
+            color="red"
+            @click="deletePhoto(index)"
+            class="mt-n12"
+          >
+            Delete
+          </v-btn>
+          <div class="d-flex justify-center mt-2">
+            <CreatePost />
+          </div>
         </v-col>
       </v-row>
     </v-container>
   </v-app>
 </template>
 <script>
+import CreatePost from "../components/CreatePost.vue";
 export default {
   name: "GalleryPage",
+  components: {
+    CreatePost
+  },
   data: () => ({
     gallery: {
       title: "Engineering Socials Committee Gallery",
@@ -82,7 +98,14 @@ export default {
       } else {
         window.location = "/login";
       }
+    },
+    deletePhoto(index) {
+      this.gallery.photos.splice(index, 1);
     }
   }
 };
 </script>
+
+<!--I added a v-if="isAdmin" directive to the delete button, so it only shows up for admin users.
+The deletePhoto method is responsible for removing the photo from the gallery. 
+Note that this only removes the photo locally, not from the database. -->
