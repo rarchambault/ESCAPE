@@ -6,6 +6,12 @@ public class PostRequestDto {
     private String content;
     private String email;
 
+    public PostRequestDto(String email, String content, String attendeeEmail){
+        this.email = email;
+        this.content = content;
+        this.attendeeEmail = attendeeEmail;
+    }
+
     public String getEmail() {
 		return email;
 	}

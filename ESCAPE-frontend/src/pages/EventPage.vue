@@ -50,7 +50,7 @@
         <label for="location">Event Location:</label>
         <textarea id="location" name="location" v-model="location"></textarea><br><br>
         <label for="start-time">Event Starting Time:</label>
-        <input type="datetime-local" id="start-time" name="start-time" v-model="startTime">
+        <input type="datetime-local" id="start-time" name="start-time" v-model="startTime"><br><br>
         <label for="end-time">Event Ending Time:</label>
         <input type="datetime-local" id="end-time" name="end-time" v-model="endTime"><br><br>
         <label for="description">Event Maximum Capacity:</label>

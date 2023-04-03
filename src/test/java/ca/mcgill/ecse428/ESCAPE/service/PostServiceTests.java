@@ -75,7 +75,7 @@ public class PostServiceTests {
 		when(postRepo.save(any(Post.class))).thenAnswer((InvocationOnMock invocation) -> invocation.getArgument(0));
 
 		// test set up - create a post request
-		PostRequestDto postRequest = new PostRequestDto();
+		PostRequestDto postRequest = new PostRequestDto("murad.gohar@mail.mcgill.ca", "This was a great post!", "nima.hemati@mail.mcgill.ca");
 		String content = "Some content.";
 		postRequest.setContent(content);
 		
