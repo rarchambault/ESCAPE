@@ -24,7 +24,7 @@
               <v-card-subtitle>Remaining tickets: {{ event.event.capacity - event.attendeeEmails.length }}</v-card-subtitle>
               <v-card-subtitle>Location: {{ event.event.location}}</v-card-subtitle>
               <v-card-actions>
-                <v-btn color="orange" @click="registerForEvent(event.ticketId)" >Buy Tickets</v-btn>
+                <payment-button :ticket-id="event.ticketId"></payment-button>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -38,11 +38,13 @@
 <script>
 import axios from "axios";
 import EventPicture from '../components/EventPicture.vue';
+import PaymentButton from '../components/PaymentButton.vue';
 
 export default {
   name: "EventTicketingPage",
   components: {
-    EventPicture
+    EventPicture,
+    PaymentButton
   },
   data: () => ({
     // events: [

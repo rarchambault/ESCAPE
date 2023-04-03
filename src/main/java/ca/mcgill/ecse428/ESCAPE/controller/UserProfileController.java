@@ -66,7 +66,7 @@ public class UserProfileController{
     @GetMapping("/profilePicture/{email}")
     public ResponseEntity<Resource> serveFile(@PathVariable String email) {
         String filename = userProfileService.getProfile_picture_path(email);
-        if(filename == "") {
+        if(filename == "" || filename == null) {
             return ResponseEntity.noContent().build();
         }
         Resource file = storageService.loadAsResource(filename);

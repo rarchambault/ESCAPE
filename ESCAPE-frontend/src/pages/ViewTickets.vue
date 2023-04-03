@@ -21,7 +21,7 @@
               <v-card-text>{{ event.event.description }}</v-card-text>
               <v-card-subtitle>Time: {{ formatTime(event.event.startTime) }}</v-card-subtitle>
               <v-card-subtitle>Price: {{ event.price}}$</v-card-subtitle>
-              <v-card-subtitle>Remaining tickets: {{ event.event.capacity - event.attendees.size }}</v-card-subtitle>
+              <v-card-subtitle>Remaining tickets: {{ event.event.capacity - event.attendeeEmails.length }}</v-card-subtitle>
               <v-card-subtitle>Location: {{ event.event.location}}</v-card-subtitle>
               <v-card-actions>
                 <v-btn color="red" @click="unregisterForEvent(event.ticketId)" >Unregister</v-btn>
