@@ -14,6 +14,9 @@
     <v-main>
       <v-container>
         <v-row>
+          <create-ticket-button/>
+        </v-row>
+        <v-row>
           <v-col v-for="(event, index) in events" :key="index" cols="12" md="6" lg="4">
             <v-card elevation="2" class="mx-auto" max-width="400">
               <event-picture :event-id="event.event.id"></event-picture>
@@ -40,12 +43,14 @@
 import axios from "axios";
 import EventPicture from '../components/EventPicture.vue';
 import PaymentButton from '../components/PaymentButton.vue';
+import CreateTicketButton from "@/components/CreateTicketButton.vue";
 
 export default {
   name: "EventTicketingPage",
   components: {
     EventPicture,
-    PaymentButton
+    PaymentButton,
+    CreateTicketButton
   },
   data: () => ({
     // events: [
