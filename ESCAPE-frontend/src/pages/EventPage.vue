@@ -50,7 +50,7 @@
         <label for="location">Event Location:</label>
         <textarea id="location" name="location"></textarea><br><br>
         <label for="start-time">Event Starting Time:</label>
-        <input type="datetime-local" id="start-time" name="start-time"><br><br>
+        <input type="datetime-local" id="start-time" name="start-time">
         <label for="end-time">Event Ending Time:</label>
         <input type="datetime-local" id="end-time" name="end-time"><br><br>
         <label for="description">Event Maximum Capacity:</label>
