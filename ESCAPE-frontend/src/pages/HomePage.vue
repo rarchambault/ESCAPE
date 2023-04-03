@@ -41,7 +41,7 @@
               <br />
               <br />
             </v-col>
-            <v-col cols="12" sm="4" class="text-center" v-for="(feature, i) in features" :key="i" @click="redirect" style="cursor: pointer;">
+            <v-col cols="12" sm="4" class="text-center" v-for="(feature, i) in features" :key="i" @click="redirect(feature)" style="cursor: pointer;">
               <v-hover v-slot:default="{ hover }"> <!-- hover feature -->
                 <v-card class="card" shaped :elevation="hover ? 10 : 4" :class="{ up: hover }">  <!-- cards being created -->
                   <v-img :src="feature.img" max-width="100px" class="d-block ml-auto mr-auto"
@@ -143,16 +143,19 @@ export default {
           img: require("@/assets/ESC2.jpeg"),
           title: "Our Events",
           text: "Come Explore our Past and Future Events",
+          id: "events"
         },
         {
           img: require("@/assets/ESC3.jpeg"),
           title: "Meet The Team",
           text: "Meet the team that works tirelessly to bring you the best events possibly",
+          id: "about"
         },
         {
           img: require("@/assets/ESC4.jpeg"),
           title: "Photo Gallery",
           text: "Find yourself lost in our events",
+          id: "gallery"
         },
       ],
     };
@@ -184,11 +187,16 @@ export default {
     pause() {
       this.player.pauseVideo();
     },
-    redirect(){
-      window.location = "/about";
-    },
-    redirectEvents(){
-      window.location = "/events";
+    redirect(feature){
+      if (feature.id == "about") {
+        window.location = "/about";
+      }
+      else if (feature.id == "events") {
+        window.location = "/events";
+      }
+      else{
+        window.location = "/photogalleries"
+      }
     }
   },
 };
