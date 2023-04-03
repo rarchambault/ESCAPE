@@ -14,8 +14,8 @@
       <v-container>
         <v-row>
           <v-col cols="12" md="4">
-            <v-avatar size="200">
-  <img :src="profilePictureUrl" alt="Profile Picture" />
+            <v-avatar size="300">
+              <v-img :src="profilePictureSrc" height="300"></v-img>
 </v-avatar>
             <div>
               <input type="file" @change="handleFileUpload" ref="fileInput">
@@ -24,8 +24,10 @@
             </div>
           </v-col>
           <v-col cols="12" md="8">
-            <h2>{{ name }}</h2>
+            <h1>{{ name }}</h1>
             <p>{{ bio }}</p>
+            <p>{{ email }}</p>
+            <v-btn  @click="updateProfile" color="yellow">Update Name, Bio, Email</v-btn>
           </v-col>
         </v-row>
         <v-divider></v-divider>
@@ -44,15 +46,20 @@
     name: "UserProfilePage",
   
     data: () => ({
-      name: sessionStorage.getItem("name"),
-      email: sessionStorage.getItem("email"),
+      name: "Murad Gohar",
+      email: "murad.gohar@mail.mcgill.ca",
       imgTimestamp: '',
       isAdmin: sessionStorage.getItem("isAdmin"),
-      profilePictureSrc:
-        "http://localhost:8080/UserProfile/profilePicture/" +
-        sessionStorage.getItem("email"),
+      profilePictureSrc: require("../assets/murad.jpg"),
       bio: "Software Engineer with a passion for web development.",
       file: null,
+      // name: sessionStorage.getItem("name"),
+      // email: sessionStorage.getItem("email"),
+      // imgTimestamp: '',
+      // isAdmin: sessionStorage.getItem("isAdmin"),
+      // profilePictureSrc: require("../assets/murad.jpg"),
+      // bio: "Software Engineer with a passion for web development.",
+      // file: null,
     }),
     computed: {
   profilePictureUrl() {
