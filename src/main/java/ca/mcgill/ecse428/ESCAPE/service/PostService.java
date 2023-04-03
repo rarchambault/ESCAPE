@@ -1,5 +1,7 @@
 package ca.mcgill.ecse428.ESCAPE.service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,7 +58,7 @@ public class PostService {
 		if (attendee == null) {
 			throw new EscapeException(HttpStatus.NOT_FOUND, "Post creator not found.");
 		}
-		Post post = new Post(content, attendee);
+		Post post = new Post(content, attendee, LocalDateTime.now());
 		postRepository.save(post);
 		return new PostResponseDto(post);
 	}

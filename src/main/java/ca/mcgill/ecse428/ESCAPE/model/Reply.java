@@ -2,6 +2,7 @@ package ca.mcgill.ecse428.ESCAPE.model;
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -25,11 +26,14 @@ public class Reply
   @ManyToOne(optional = false)
   private Post post;
 
+  @ManyToOne(optional = false,cascade = CascadeType.MERGE)
+  private Attendee attendee;
+
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Reply(String aContent, int aReplyId, Post aPost)
+  public Reply(String aContent, int aReplyId, Post aPost, Attendee aAttendee)
   {
     content = aContent;
     replyId = aReplyId;
@@ -37,6 +41,11 @@ public class Reply
     if (!didAddPost)
     {
       throw new RuntimeException("Unable to create reply due to post. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+    }
+    boolean didAddAttendee = setAttendee(aAttendee);
+    if (!didAddAttendee) {
+      throw new RuntimeException(
+              "Unable to create post due to attendee. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
   }
 
@@ -60,6 +69,22 @@ public class Reply
     replyId = aReplyId;
     wasSet = true;
     return wasSet;
+  }
+
+  public boolean setAttendee(Attendee aAttendee) {
+    boolean wasSet = false;
+    if (aAttendee == null) {
+      return wasSet;
+    }
+
+    Attendee existingAttendee = attendee;
+    attendee = aAttendee;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public Attendee getAttendee() {
+    return attendee;
   }
 
   public String getContent()

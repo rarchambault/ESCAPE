@@ -3,7 +3,7 @@
       <v-list-item-avatar>
         <v-icon color="blue">
           {{
-            commentpost.authorName
+            commentpost.attendee.name
               .split(" ")
               .map((word) => word.charAt(0))
               .join("")
@@ -13,7 +13,7 @@
       </v-list-item-avatar>
       <v-list-item-content>
         <v-list-item-title>
-          {{ commentpost.authorName }}
+          {{ commentpost.attendee.name }}
         </v-list-item-title>
         <v-list-item-text>
           {{ commentpost.content }}

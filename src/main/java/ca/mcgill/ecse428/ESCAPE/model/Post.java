@@ -3,6 +3,7 @@ package ca.mcgill.ecse428.ESCAPE.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -17,6 +18,9 @@ public class Post {
 
 	// Post Attributes
 	private String content;
+
+	private LocalDateTime date;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -31,7 +35,7 @@ public class Post {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public Post(String aContent, Attendee aAttendee) {
+	public Post(String aContent, Attendee aAttendee, LocalDateTime aDate) {
 		content = aContent;
 		replies = new ArrayList<Reply>();
 		boolean didAddAttendee = setAttendee(aAttendee);
@@ -39,6 +43,7 @@ public class Post {
 			throw new RuntimeException(
 					"Unable to create post due to attendee. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
 		}
+		date = aDate;
 	}
 
 	public Post() {
@@ -48,6 +53,17 @@ public class Post {
 	// ------------------------
 	// INTERFACE
 	// ------------------------
+
+	public boolean setDate(LocalDateTime aDate) {
+		boolean wasSet = false;
+		date = aDate;
+		wasSet = true;
+		return wasSet;
+	}
+
+	public LocalDateTime getDate() {
+		return date;
+	}
 
 	public boolean setContent(String aContent) {
 		boolean wasSet = false;
@@ -118,8 +134,8 @@ public class Post {
 	}
 
 	/* Code from template association_AddManyToOne */
-	public Reply addReply(String aContent, int aReplyId) {
-		return new Reply(aContent, aReplyId, this);
+	public Reply addReply(String aContent, int aReplyId, Attendee aAttendee) {
+		return new Reply(aContent, aReplyId, this, aAttendee);
 	}
 
 	public boolean addReply(Reply aReply) {

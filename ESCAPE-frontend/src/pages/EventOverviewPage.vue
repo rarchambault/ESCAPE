@@ -20,6 +20,10 @@
           <v-col v-for="(event, index) in events" :key="index" cols="12" md="6" lg="4">
             <v-card elevation="2" class="mx-auto" max-width="400">
               <event-picture :event-id="event.id"></event-picture>
+              <div v-if="isAdmin">
+                <input type="file" @change="handleFileUpload" ref="fileInput">
+                <v-btn @click="uploadFile(event.id)" color="blue">Update Event Picture</v-btn>
+              </div>
               <v-card-title class="headline">{{ event.name }}</v-card-title>
               <v-card-text>{{ event.description }}</v-card-text>
               <v-card-subtitle v-if="isAdmin" style="color: red">Event ID: {{ event.id }}</v-card-subtitle>
@@ -87,6 +91,34 @@ export default {
         console.error(err);
         throw err;
       }
+    },
+
+    handleFileUpload(event) {
+      this.file = event.target.files[0];
+    },
+    uploadFile(id) {
+      const formData = new FormData();
+      formData.append("file", this.file);
+
+      axios
+          .post(
+              "http://localhost:8080/eventPicture/" + id,
+              formData,
+              {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              }
+          )
+          .then((response) => {
+            console.log(response.data);
+            this.imgTimestamp = Date.now();
+            this.$forceUpdate();
+            window.location = "/events";
+          })
+          .catch((error) => {
+            console.error(error);
+          });
     },
 
     logInOrProfile() {

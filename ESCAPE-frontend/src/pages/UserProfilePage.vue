@@ -24,7 +24,7 @@
           </div>
         </v-col>
         <v-col cols="12" md="8">
-          <h2>{{ name }}</h2>
+          <h1>{{ name }}</h1>
           <p>{{ bio }}</p>
         </v-col>
       </v-row>

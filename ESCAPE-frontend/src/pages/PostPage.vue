@@ -21,23 +21,15 @@
           </v-list-item>
           <v-list-item v-for="(post, index) in posts" :key="index">
             <v-list-item-avatar>
-              <v-icon color="red">
-                {{
-                  post.name
-                    .split(" ")
-                    .map((word) => word.charAt(0))
-                    .join("")
-                    .toUpperCase()
-                }}
-              </v-icon>
+              <img :src="profilePictureUrl" alt="Profile Picture" />
             </v-list-item-avatar>
             <v-list-item-content>
             <v-list-item-title>{{ post.name }}</v-list-item-title>
-            <v-list-item-subtitle>Monday, February 27</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ formatTime(post.date) }}</v-list-item-subtitle>
             <v-list-item-text>{{ post.content }}</v-list-item-text>
-            <div v-if="post.comments">
+            <div v-if="post.replies">
               <CommentPost
-                v-for="(comment, commentIndex) in post.comments"
+                v-for="(comment, commentIndex) in post.replies"
                 :key="commentIndex"
                 :comment="comment"
               />
@@ -105,10 +97,30 @@ export default {
         window.location = "/login";
       }
     },
-  },
+
+    formatTime(timeString) {
+      // Convert the time string to a JavaScript Date object
+      const dateTime = new Date(timeString);
+
+      // Format the date and time using the Date object's format() method
+      const formattedTime = dateTime.toLocaleString();
+
+      // Return the formatted time
+      return formattedTime;
+    }  },
 
   created() {
     this.getPosts();
+  },
+  computed: {
+    profilePictureUrl() {
+      return (
+          "http://localhost:8080/UserProfile/profilePicture/" +
+          sessionStorage.getItem("email") +
+          "?" +
+          this.imgTimestamp
+      );
+    },
   },
 };
 </script>
