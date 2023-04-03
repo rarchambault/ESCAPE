@@ -86,4 +86,18 @@ public class EventController {
 
 		return new ResponseEntity<Iterable<EventResponseDto>>(eventResponseDtos, HttpStatus.OK);
 	}
+  
+  @PostMapping("/event/{id}/update")
+  	public ResponseEntity<EventResponseDto> updateEvent(@PathVariable int id, @RequestBody EventRequestDto eventRequestDto) {
+		// Fetch the existing event from the database
+		Event existingEvent = eventService.getEventById(id);
+
+		existingEvent.setName(eventRequestDto.getName());
+		existingEvent.setDescription(eventRequestDto.getDescription());
+		existingEvent.setLocation(eventRequestDto.getLocation());
+		existingEvent.setCapacity(eventRequestDto.getCapacity());
+		// Convert the updated event to a response DTO and return it with a success status code
+		EventResponseDto eventResponseDto = new EventResponseDto(existingEvent);
+		return ResponseEntity.ok(eventResponseDto);
+	}
 }

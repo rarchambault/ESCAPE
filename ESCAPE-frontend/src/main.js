@@ -4,6 +4,7 @@ import ViewAllEvents from './components/ViewAllEvents.vue' // import the ViewAll
 import vuetify from './plugins/vuetify'
 import AboutUs from './pages/AboutUs.vue'
 import TicketingPage from './pages/TicketingPage'
+import EventPage from "@/pages/EventPage.vue"
 import PostPage from "./pages/PostPage"
 import ViewTickets from "./pages/ViewTickets"
 import PhotoGalleries from "./pages/PhotoGalleries"
@@ -29,7 +30,7 @@ const routes = {
   "/gallery/photogallery": PhotoGallery,
   "/userprofilepage": UserProfilePage,
   "/profilesgallery": ProfilesGallery,
-
+  "/eventpage": EventPage,
   '/events': ViewAllEvents // add a route for the ViewAllEvents component
 }
 
