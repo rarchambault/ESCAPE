@@ -1,9 +1,9 @@
 <template>
 <div class="title-container">
 <div class="top-box" id="background">
-  <h1 class="title">ESCxNUS - Love Fest</h1>
+  <h1 class="title">{{features[0].name}}</h1>
   <div class="box">
-    <p class="desc"> The ESC frequently organizes social events that cater to the needs of the undergraduate engineering students. These events include social activities such as parties, get togethers, fundraisers and much more! Further down on this page you will find a list of all the members of our committee. If you have any concerns, comments or something to report let us know in the Contact Us section below.</p>
+    <p class="desc"> {{features[0].description}}</p>
   </div>
 </div>
 <div class="title-container">
@@ -15,7 +15,7 @@
     <div class="row">
       <div class="event-box">
         <div class="name-title">Location</div>
-        <div class="subtitle">Blues Pub</div>
+        <div class="subtitle">{{features[0].location}}</div>
         <div class="subtitle">McConnell Engineering Building, Montreal, QC</div>
       </div>
       <div class="event-box">
@@ -29,33 +29,33 @@
         <div class="name-title">Contact Details</div>
         <div class="subtitle">Maria Rodriguez</div>
         <div class="subtitle">Volunteer Coordinator</div>
-        <div class="subtitle">maria.rodriguez@mail.mcgill.ca</div>
+        <div class="subtitle">{{features[0].email}}</div>
       </div>
       <div class="event-box">
         <div class="name-title">Current Capacity</div>
-        <div class="subtitle">48/50 Attendees</div>
+        <div class="subtitle">48/{{features[0].capacity}} Attendees</div>
       </div>
     </div>
   </div>
   <div class="column">
     <h1 class="title">Edit Event</h1>
     <div class="contact-us-box">
-      <form>
+      <form @submit.prevent="submit(features)">
         <label for="name">Event Name:</label>
-        <input type="text" id="name" name="name"><br><br>
+        <input type="text" id="name" name="name" v-model="name"><br><br>
         <label for="email">Contact Email:</label>
-        <input type="email" id="email" name="email"><br><br>
+        <input type="email" id="email" name="email" v-model="email"><br><br>
         <label for="description">Event Description:</label>
-        <textarea id="description" name="description"></textarea><br><br>
+        <textarea id="description" name="description" v-model="description"></textarea><br><br>
         <label for="location">Event Location:</label>
-        <textarea id="location" name="location"></textarea><br><br>
+        <textarea id="location" name="location" v-model="location"></textarea><br><br>
         <label for="start-time">Event Starting Time:</label>
-        <input type="datetime-local" id="start-time" name="start-time">
+        <input type="datetime-local" id="start-time" name="start-time" v-model="startTime">
         <label for="end-time">Event Ending Time:</label>
-        <input type="datetime-local" id="end-time" name="end-time"><br><br>
+        <input type="datetime-local" id="end-time" name="end-time" v-model="endTime"><br><br>
         <label for="description">Event Maximum Capacity:</label>
-        <input type="number" id="capacity" name="capacity"><br><br>
-        <button type="submit">Send</button>
+        <input type="number" id="capacity" name="capacity" v-model="capacity"><br><br>
+        <button type="submit" @click="submit(features)">Send</button>
       </form>
     </div>
   </div>
@@ -64,7 +64,41 @@
 </div>
 </template>
 
-
+<script>
+export default {
+  data() {
+    return {
+      dialog: false,
+      features: [ //data for cards
+        {
+          name: "ESCxNUS - Love Fest",
+          location: "Blues Pub",
+          description: "Seek out love at this collaborative event between the ESC and NUS!",
+          title: "Our Events",
+          date: "2023-02-14",
+          email: "maria.rodriguez@mail.mcgill.ca",
+          capacity: "50",
+        },
+      ],
+    };
+  },
+  watch: {
+    dialog(value) {
+      if (!value) {
+        this.pause();
+      }
+    },
+  },
+  methods: {
+    submit(features){
+      features[0].name = this.name;
+      features[0].email = this.email;
+      features[0].capacity = this.capacity;
+      features[0].email = this.email;
+    }
+  },
+};
+</script>
 <style>
 
 
