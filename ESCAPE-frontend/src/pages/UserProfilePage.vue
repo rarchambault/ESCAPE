@@ -6,6 +6,7 @@
       <v-btn color="white" text class="mx-3" href='/about' >About Us</v-btn>
       <v-btn color="white" text class="mx-3" href='/photogalleries'>Photo Galleries</v-btn>
       <v-btn color="white" text class="mx-3" href='/post' >Social Wall</v-btn>
+      <v-btn color="white" text class="mx-3" href='/events' >Events</v-btn>
       <v-btn color="white" text class="mx-3" href='/ticketing'>Buy Tickets</v-btn>
       <v-btn color="white" text class="mx-3" href='/viewtickets'>View My Tickets</v-btn>
       <v-btn align="center" justify="center" color="white" @click="logInOrProfile"> Login  </v-btn>
