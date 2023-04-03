@@ -75,11 +75,11 @@ public class EventService {
     }
 
 	@Transactional
-    public void updateEvent(int id, Event event) throws EventException {
+    public void updateEvent(int id) throws EventException {
         Event optionalEvent = eventRepository.findEventById(id);
         if (optionalEvent != null) {
-            event.setEventId(id);
-            eventRepository.save(event);
+            optionalEvent.setEventId(id);
+            eventRepository.save(optionalEvent);
         } else {
             throw new EventException(HttpStatus.NOT_FOUND, "Event not found.");
         }
