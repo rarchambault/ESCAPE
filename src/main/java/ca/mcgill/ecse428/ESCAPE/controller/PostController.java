@@ -1,5 +1,6 @@
 package ca.mcgill.ecse428.ESCAPE.controller;
 
+import ca.mcgill.ecse428.ESCAPE.model.Reply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -69,12 +70,12 @@ public class PostController {
 	}
 
 	@PostMapping("/post/{id}/comment")
-	public ResponseEntity<?> addReply(@PathVariable int id, @RequestBody String comment) {
+	public ResponseEntity<?> addReply(@PathVariable int id, @RequestBody Reply reply) {
     	Post post = postService.getPostById(id);
     	if (post == null) {
     	    return new ResponseEntity<>("Post not found with id " + id, HttpStatus.NOT_FOUND);
     	}
-    	post.addReply(comment, id);
+    	post.addReply(reply.getContent(), id, reply.getAttendee());
     	return ResponseEntity.ok().build();
 	}
 }
