@@ -14,8 +14,8 @@
         <v-row>
           <v-col cols="12" md="4">
             <v-avatar size="200">
-              <img :src="profilePictureSrc" alt="Profile Picture" />
-            </v-avatar>
+  <img :src="profilePictureUrl" alt="Profile Picture" />
+</v-avatar>
             <div>
               <input type="file" @change="handleFileUpload" ref="fileInput">
               <v-btn @click="uploadFile" color="blue">Update Profile Picture</v-btn>
@@ -45,6 +45,7 @@
     data: () => ({
       name: sessionStorage.getItem("name"),
       email: sessionStorage.getItem("email"),
+      imgTimestamp: '',
       isAdmin: sessionStorage.getItem("isAdmin"),
       profilePictureSrc:
         "http://localhost:8080/UserProfile/profilePicture/" +
@@ -52,7 +53,16 @@
       bio: "Software Engineer with a passion for web development.",
       file: null,
     }),
-  
+    computed: {
+  profilePictureUrl() {
+    return (
+      "http://localhost:8080/UserProfile/profilePicture/" +
+      sessionStorage.getItem("email") +
+      "?" +
+      this.imgTimestamp
+    );
+  },
+},
     methods: {
       logInOrProfile() {
         if (sessionStorage.getItem("isLoggedIn") == true) {
@@ -85,10 +95,11 @@
             }
           )
           .then((response) => {
-            console.log(response.data);
-            this.$forceUpdate();
-            window.location = "/userprofile";
-          })
+    console.log(response.data);
+    this.imgTimestamp = Date.now();
+    this.$forceUpdate();
+    window.location = "/userprofile";
+  })
           .catch((error) => {
             console.error(error);
           });
@@ -100,11 +111,11 @@
         sessionStorage.getItem("email")
     )
     .then((response) => {
-      console.log(response.data);
-      this.profilePictureSrc = ''; // Set it to a default/placeholder image if needed
-      this.$forceUpdate();
-      window.location = "/userprofile";
-    })
+    console.log(response.data);
+    this.imgTimestamp = Date.now();
+    this.$forceUpdate();
+    window.location = "/userprofile";
+  })
     .catch((error) => {
       console.error(error);
     });
