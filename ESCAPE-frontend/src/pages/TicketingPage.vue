@@ -6,6 +6,7 @@
       <v-btn color="white" text class="mx-3" href='/about' >About Us</v-btn>
       <v-btn color="white" text class="mx-3" href='/photogalleries'>Photo Galleries</v-btn>
       <v-btn color="white" text class="mx-3" href='/post' >Social Wall</v-btn>
+      <v-btn color="white" text class="mx-3" href='/events' >Events</v-btn>
       <v-btn color="white" text class="mx-3" href='/ticketing'>Buy Tickets</v-btn>
       <v-btn color="white" text class="mx-3" href='/viewtickets'>View My Tickets</v-btn>
       <v-btn align="center" justify="center" color="white" @click="logInOrProfile"> Login  </v-btn>
@@ -24,14 +25,7 @@
               <v-card-subtitle>Remaining tickets: {{ event.event.capacity - event.attendeeEmails.length }}</v-card-subtitle>
               <v-card-subtitle>Location: {{ event.event.location}}</v-card-subtitle>
               <v-card-actions>
-                <v-btn color="orange" @click="registerForEvent(event.ticketId)" >Buy Tickets</v-btn>
-                <v-btn
-                  v-if="isAdmin"
-                  color="red"
-                  @click="deleteEvent(event.event.id)"
-                >
-                  Delete
-                </v-btn>
+                <payment-button :ticket-id="event.ticketId"></payment-button>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -45,11 +39,13 @@
 <script>
 import axios from "axios";
 import EventPicture from '../components/EventPicture.vue';
+import PaymentButton from '../components/PaymentButton.vue';
 
 export default {
   name: "EventTicketingPage",
   components: {
-    EventPicture
+    EventPicture,
+    PaymentButton
   },
   data: () => ({
     // events: [
