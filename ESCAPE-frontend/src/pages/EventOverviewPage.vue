@@ -14,6 +14,9 @@
     <v-main>
       <v-container>
         <v-row>
+          <create-event-button/>
+        </v-row>
+        <v-row>
           <v-col v-for="(event, index) in events" :key="index" cols="12" md="6" lg="4">
             <v-card elevation="2" class="mx-auto" max-width="400">
               <event-picture :event-id="event.id"></event-picture>
@@ -36,11 +39,13 @@
 <script>
 import axios from "axios";
 import EventPicture from '../components/EventPicture.vue';
+import CreateEventButton from "@/components/CreateEventButton.vue";
 
 export default {
   name: "EventTicketingPage",
   components: {
     EventPicture,
+    CreateEventButton
   },
   data: () => ({
     events: [],
