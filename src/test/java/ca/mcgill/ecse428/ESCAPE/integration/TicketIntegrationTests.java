@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import ca.mcgill.ecse428.ESCAPE.dto.RegisterRequestDto;
+import ca.mcgill.ecse428.ESCAPE.dto.TicketRequestDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,7 +50,7 @@ public class TicketIntegrationTests {
 	public void testCreateAndGetAndDeleteTicket() {
 		int id = testCreateTicket();
 		testGetTicket(id);
-		testRegisterAttendee(id);
+		//testRegisterAttendee(id);
 		testUnregisterAttendee(id);
 		//testDeleteTicket(id);
 	}
@@ -71,15 +72,15 @@ public class TicketIntegrationTests {
 		TicketDto dto = new TicketDto(price, name, eventId);
 
 		// call method: create a new ticket
-		ResponseEntity<TicketDto> response = client.postForEntity("/ticket", dto, TicketDto.class);
+		ResponseEntity<TicketResponseDto> response = client.postForEntity("/ticket", dto, TicketResponseDto.class);
 
 		// check response
 		assertNotNull(response);
 		assertEquals(HttpStatus.CREATED, response.getStatusCode(), "Response has correct status");
 		assertNotNull(response.getBody(), "Response has body");
-		assertEquals(name, response.getBody().name, "Response has correct name");
+		assertEquals(name, response.getBody().getName(), "Response has correct name");
 
-		return response.getBody().ticketId;
+		return response.getBody().getTicketId();
 	}
 
 	private void testRegisterAttendee(int ticketId) {

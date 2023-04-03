@@ -27,6 +27,8 @@ import ca.mcgill.ecse428.ESCAPE.repository.AttendeeRepository;
 import ca.mcgill.ecse428.ESCAPE.repository.EventRepository;
 import ca.mcgill.ecse428.ESCAPE.repository.TicketRepository;
 
+import java.time.LocalDateTime;
+
 @ExtendWith(MockitoExtension.class)
 public class TicketServiceTests {
 
@@ -117,6 +119,7 @@ public class TicketServiceTests {
 		int ticketId = 1;
 		Ticket ticket = new Ticket();
 		ticket.setTicketId(ticketId);
+		ticket.setEvent(new Event("name", "desc", 100, LocalDateTime.now(), "location"));
 		when(ticketRepo.findTicketByTicketId(ticketId)).thenAnswer((InvocationOnMock invocation) -> ticket);
 
 		RegisterRequestDto registerRequest = new RegisterRequestDto(attendeeEmail, ticketId);
@@ -145,6 +148,7 @@ public class TicketServiceTests {
 		int ticketId = 1;
 		Ticket ticket = new Ticket();
 		ticket.setTicketId(ticketId);
+		ticket.setEvent(new Event("Power Hour", "Description", 100, LocalDateTime.now(), "Location"));
 		when(ticketRepo.findTicketByTicketId(ticketId)).thenAnswer((InvocationOnMock invocation) -> ticket);
 
 		RegisterRequestDto registerRequest = new RegisterRequestDto(attendeeEmail, ticketId);

@@ -50,9 +50,4 @@ public class TicketRepositoryTests {
         assertEquals(TicketId, aTicket.getTicketId());
     }
     
-    // TO DO implement tests when the relevant classes are done (repositories)
-    @Test
-    public void testTicketToAttendeeReference() {
-    }
-    
 }

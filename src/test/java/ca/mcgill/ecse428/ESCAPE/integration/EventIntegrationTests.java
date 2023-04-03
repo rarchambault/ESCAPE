@@ -48,7 +48,6 @@ public class EventIntegrationTests {
 		event.setName(name);
         event.setDescription("Test Description");
         event.setName("Test name");
-        event.setTicketPrice(12);
 
 		// call method: create a new admin
 		ResponseEntity<EventDto> response = client.postForEntity("/event", new EventDto(name), EventDto.class);
