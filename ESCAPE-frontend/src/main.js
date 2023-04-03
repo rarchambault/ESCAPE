@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import HomePage from './pages/HomePage.vue'
-import ViewAllEvents from './components/ViewAllEvents.vue' // import the ViewAllEvents component
 import vuetify from './plugins/vuetify'
 import AboutUs from './pages/AboutUs.vue'
 import TicketingPage from './pages/TicketingPage'
