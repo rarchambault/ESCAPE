@@ -13,6 +13,7 @@ import SignupPage from "./pages/SignupPage.vue"
 import UserProfilePage from "./pages/UserProfilePage.vue"
 import ProfilesGallery from "@/pages/ProfilesGallery.vue"
 import EventOverviewPage from "@/pages/EventOverviewPage.vue";
+
 Vue.config.productionTip = false
 
 const routes = {
