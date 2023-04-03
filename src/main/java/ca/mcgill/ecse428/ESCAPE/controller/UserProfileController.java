@@ -74,7 +74,7 @@ public class UserProfileController{
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
-    @GetMapping()
+    @GetMapping("/attendees")
     public ResponseEntity<Iterable<UserProfileResponseDto>> getAllAttendees() {
         Iterable<Attendee> attendees = userProfileService.getAllAttendees();
 
@@ -86,7 +86,7 @@ public class UserProfileController{
 
         return new ResponseEntity<Iterable<UserProfileResponseDto>>(attendeeResponses, HttpStatus.OK);
     }
-    @GetMapping()
+    @GetMapping("/all")
     public ResponseEntity<Iterable<UserProfileResponseDto>> getAllUserProfiles() {
         List<UserProfile> userProfiles = userProfileService.getAllUserProfiles();
 

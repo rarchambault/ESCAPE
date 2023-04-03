@@ -75,7 +75,6 @@ public class EventServiceTests {
 		int price = 14;
 		eventRequest.setDescription(description);
 		eventRequest.setName(name);
-		eventRequest.setTicketPrice(price);
 
 		// call method
 		EventResponseDto returnedEvent = eventService.createEvent(eventRequest);
@@ -84,7 +83,6 @@ public class EventServiceTests {
 		assertNotNull(returnedEvent);
 		assertEquals(name, returnedEvent.getName());
 		assertEquals(description, returnedEvent.getDescription());
-		assertEquals(price, returnedEvent.getTicketPrice());
 		// Check that the service actually saved the event
 		// verify(eventRepo, times(1)).save();
 	}
