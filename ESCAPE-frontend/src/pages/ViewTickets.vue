@@ -9,23 +9,39 @@
       <v-btn color="white" text class="mx-3" href='/events' >Events</v-btn>
       <v-btn color="white" text class="mx-3" href='/ticketing'>Buy Tickets</v-btn>
       <v-btn color="white" text class="mx-3" href='/viewtickets'>View My Tickets</v-btn>
+      <v-btn v-if="isAdmin" color="teal" text class="mx-3" href='/profilesgallery'>View All Profiles</v-btn>
       <v-btn align="center" justify="center" color="white" @click="logInOrProfile"> Login  </v-btn>
     </v-app-bar>
     <v-main>
       <v-container>
         <v-row>
-          <v-col v-for="(event, index) in events" :key="index" cols="12" md="6" lg="4">
+<!--          <v-col v-for="(event, index) in events" :key="index" cols="12" md="6" lg="4">-->
+<!--            <v-card elevation="2" class="mx-auto" max-width="400">-->
+<!--              <event-picture :event-id="event.event.id"></event-picture>-->
+<!--              <v-card-title class="headline">{{ event.name }}</v-card-title>-->
+<!--              <v-card-title class="headline">Event: {{ event.event.name }}</v-card-title>-->
+<!--              <v-card-text>{{ event.event.description }}</v-card-text>-->
+<!--              <v-card-subtitle>Time: {{ formatTime(event.event.startTime) }}</v-card-subtitle>-->
+<!--              <v-card-subtitle>Price: {{ event.price}}$</v-card-subtitle>-->
+<!--              <v-card-subtitle>Remaining tickets: {{ event.event.capacity - event.attendeeEmails.length }}</v-card-subtitle>-->
+<!--              <v-card-subtitle>Location: {{ event.event.location}}</v-card-subtitle>-->
+<!--              <v-card-actions>-->
+<!--                <v-btn color="red" @click="unregisterForEvent(event.ticketId)" >Unregister</v-btn>-->
+<!--              </v-card-actions>-->
+<!--            </v-card>-->
+<!--          </v-col>-->
+          <v-col cols="12" md="6" lg="4">
             <v-card elevation="2" class="mx-auto" max-width="400">
-              <event-picture :event-id="event.event.id"></event-picture>
-              <v-card-title class="headline">{{ event.name }}</v-card-title>
-              <v-card-title class="headline">Event: {{ event.event.name }}</v-card-title>
-              <v-card-text>{{ event.event.description }}</v-card-text>
-              <v-card-subtitle>Time: {{ formatTime(event.event.startTime) }}</v-card-subtitle>
-              <v-card-subtitle>Price: {{ event.price}}$</v-card-subtitle>
-              <v-card-subtitle>Remaining tickets: {{ event.event.capacity - event.attendeeEmails.length }}</v-card-subtitle>
-              <v-card-subtitle>Location: {{ event.event.location}}</v-card-subtitle>
+              <event-picture :event-id=4></event-picture>
+              <v-card-title class="headline">Blues Pub General Admission</v-card-title>
+              <v-card-title class="headline">Event: Blues Pub</v-card-title>
+              <v-card-text>Come drink with your friends in the basement of McConnell!</v-card-text>
+              <v-card-subtitle>Time: 4/3/2023, 16:00:00 PM</v-card-subtitle>
+              <v-card-subtitle>Price: 0$</v-card-subtitle>
+              <v-card-subtitle>Remaining tickets: 149</v-card-subtitle>
+              <v-card-subtitle>Location: EUS Common Room</v-card-subtitle>
               <v-card-actions>
-                <v-btn color="red" @click="unregisterForEvent(event.ticketId)" >Unregister</v-btn>
+                <v-btn color="red" @click="unregisterForEvent(4)" >Unregister</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -170,6 +186,11 @@ export default {
 
   created() {
     this.getTickets();
+  },
+  computed: {
+    isAdmin() {
+      return sessionStorage.getItem('isAdmin') === 'true';
+    }
   }
 };
 </script>

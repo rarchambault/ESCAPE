@@ -1,9 +1,6 @@
 package ca.mcgill.ecse428.ESCAPE;
 
-import ca.mcgill.ecse428.ESCAPE.controller.AdminController;
-import ca.mcgill.ecse428.ESCAPE.controller.EventController;
-import ca.mcgill.ecse428.ESCAPE.controller.TicketController;
-import ca.mcgill.ecse428.ESCAPE.controller.PostController;
+import ca.mcgill.ecse428.ESCAPE.controller.*;
 import ca.mcgill.ecse428.ESCAPE.dto.*;
 import ca.mcgill.ecse428.ESCAPE.exception.EscapeException;
 import jakarta.annotation.PostConstruct;
@@ -34,6 +31,9 @@ public class EscapeApplication {
 
 	@Autowired
 	AdminController adminController;
+
+	@Autowired
+	AttendeeController attendeeController;
 
 	@Autowired
 	EventController eventController;
@@ -104,13 +104,15 @@ public class EscapeApplication {
 
 			ticketController.createTicket(ticketRequest3);
 
+			UserProfileRequestDto userRequest = new UserProfileRequestDto("Nima Hemati", "nima.hemati@mail.mcgill.ca", "password");
+			attendeeController.createAttendeeProfile(userRequest);
+
 			PostRequestDto postRequest = new PostRequestDto(
-					"murad.gohar@mail.mcgill.ca",
-					"This was a great post!",
+					"This was a great event!",
 					"nima.hemati@mail.mcgill.ca"
 					);
 
-			postController.createPost(postRequest);
+			//postController.createPost(postRequest);
 		}
 	}
 

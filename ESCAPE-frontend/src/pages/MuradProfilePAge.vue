@@ -9,14 +9,13 @@
       <v-btn color="white" text class="mx-3" href='/events' >Events</v-btn>
       <v-btn color="white" text class="mx-3" href='/ticketing'>Buy Tickets</v-btn>
       <v-btn color="white" text class="mx-3" href='/viewtickets'>View My Tickets</v-btn>
-      <v-btn v-if="this.isAdmin" color="teal" text class="mx-3" href='/profilesgallery'>View All Profiles</v-btn>
       <v-btn align="center" justify="center" color="white" @click="logInOrProfile"> Login  </v-btn>
     </v-app-bar>
     <v-container>
       <v-row>
         <v-col cols="12" md="4">
-          <v-avatar size="200">
-            <img :src="profilePictureUrl" alt="Profile Picture" />
+          <v-avatar size="300">
+            <v-img :src="profilePictureSrc" height="300"></v-img>
           </v-avatar>
           <div>
             <input type="file" @change="handleFileUpload" ref="fileInput">
@@ -27,6 +26,8 @@
         <v-col cols="12" md="8">
           <h1>{{ name }}</h1>
           <p>{{ bio }}</p>
+          <p>{{ email }}</p>
+          <v-btn  @click="updateProfile" color="yellow">Update Name, Bio, Email</v-btn>
         </v-col>
       </v-row>
       <v-divider></v-divider>
@@ -45,15 +46,20 @@ export default {
   name: "UserProfilePage",
 
   data: () => ({
-    name: sessionStorage.getItem("name"),
-    email: sessionStorage.getItem("email"),
+    name: "Murad Gohar",
+    email: "murad.gohar@mail.mcgill.ca",
     imgTimestamp: '',
     isAdmin: sessionStorage.getItem("isAdmin"),
-    profilePictureSrc:
-        "http://localhost:8080/UserProfile/profilePicture/" +
-        sessionStorage.getItem("email"),
-    bio: "Software Engineer with a passion for web development.",
+    profilePictureSrc: require("../assets/murad.jpg"),
+    bio: "Lead Front-End Developer",
     file: null,
+    // name: sessionStorage.getItem("name"),
+    // email: sessionStorage.getItem("email"),
+    // imgTimestamp: '',
+    // isAdmin: sessionStorage.getItem("isAdmin"),
+    // profilePictureSrc: require("../assets/murad.jpg"),
+    // bio: "Software Engineer with a passion for web development.",
+    // file: null,
   }),
   computed: {
     profilePictureUrl() {
@@ -77,6 +83,7 @@ export default {
       sessionStorage.clear();
       window.location = "/";
     },
+
     handleFileUpload(event) {
       this.file = event.target.files[0];
     },
@@ -131,6 +138,7 @@ export default {
           url: "http://localhost:8080/attendee/" + sessionStorage.getItem("email"),
           headers: {},
         };
+
         axios(config)
             .then(function (response) {
               console.log(JSON.stringify(response.data));
@@ -144,3 +152,4 @@ export default {
   },
 };
 </script>
+  

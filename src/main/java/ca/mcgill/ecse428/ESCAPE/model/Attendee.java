@@ -16,7 +16,7 @@ public class Attendee extends UserProfile {
 	// Attendee Associations
 	@OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Post> posts;
-	@ManyToMany()
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Ticket> tickets;
 
 	// ------------------------

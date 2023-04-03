@@ -6,10 +6,9 @@ public class PostRequestDto {
     private String content;
     private String email;
 
-    public PostRequestDto(String email, String content, String attendeeEmail){
+    public PostRequestDto(String content, String email){
         this.email = email;
         this.content = content;
-        this.attendeeEmail = attendeeEmail;
     }
 
     public String getEmail() {
@@ -18,14 +17,6 @@ public class PostRequestDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-    private String attendeeEmail;
-
-    public String getAttendeeEmail() {
-        return attendeeEmail;
-    }
-    public void setAttendeeEmail(String attendeeEmail) {
-        this.attendeeEmail = attendeeEmail;
-    }
     public String getContent() {
         return content;
     }

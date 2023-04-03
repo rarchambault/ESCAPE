@@ -10,6 +10,7 @@
         <v-btn color="white" text class="mx-3" href='/events' >Events</v-btn>
         <v-btn color="white" text class="mx-3" href='/ticketing'>Buy Tickets</v-btn>
         <v-btn color="white" text class="mx-3" href='/viewtickets'>View My Tickets</v-btn>
+        <v-btn v-if="isAdmin" color="teal" text class="mx-3" href='/profilesgallery'>View All Profiles</v-btn>
         <v-btn align="center" justify="center" color="white" @click="logInOrProfile"> Login  </v-btn>
       </v-app-bar>
     </v-app-bar>
@@ -121,6 +122,9 @@ export default {
           this.imgTimestamp
       );
     },
+      isAdmin() {
+        return sessionStorage.getItem('isAdmin') === 'true';
+      }
   },
 };
 </script>

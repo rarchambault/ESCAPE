@@ -13,6 +13,7 @@ import SignupPage from "./pages/SignupPage.vue"
 import UserProfilePage from "./pages/UserProfilePage.vue"
 import ProfilesGallery from "@/pages/ProfilesGallery.vue"
 import EventOverviewPage from "@/pages/EventOverviewPage.vue";
+import MuradProfilePage from "@/pages/MuradProfilePage.vue";
 
 Vue.config.productionTip = false
 
@@ -30,7 +31,8 @@ const routes = {
   "/userprofile": UserProfilePage,
   "/profilesgallery": ProfilesGallery,
   "/eventpage": EventPage,
-  '/events': EventOverviewPage
+  '/events': EventOverviewPage,
+  "/muradgohar": MuradProfilePage
 }
 
 new Vue({
